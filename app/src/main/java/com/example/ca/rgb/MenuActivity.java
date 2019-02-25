@@ -19,19 +19,30 @@ public class MenuActivity extends AppCompatActivity {
         Button exitBtn = findViewById(R.id.exitBtn);
 
 
-        MenuActionListeners menuActionListeners = new MenuActionListeners();
-        playBtn.setOnClickListener(menuActionListeners);
-        scoreBtn.setOnClickListener(menuActionListeners);
-        exitBtn.setOnClickListener(exitListener);
+        playBtn.setOnClickListener(menuActionListener);
+        scoreBtn.setOnClickListener(menuActionListener);
+        exitBtn.setOnClickListener(menuActionListener);
 
     }
 
 
-   View.OnClickListener exitListener = new View.OnClickListener() {
+   View.OnClickListener menuActionListener = new View.OnClickListener() {
+
        @Override
        public void onClick(View v) {
-           //finish();
-           startActivity(new Intent(MenuActivity.this, PlayActivity.class));
+           Button button = (Button)v;
+           String action = String.valueOf(button.getTag());
+           switch (action){
+               case "playBtn":
+                   startActivity(new Intent(MenuActivity.this, PlayActivity.class));
+                   break;
+               case "scoreBtn":
+                   button.setText("radi2");
+                   break;
+               case "exitBtn":
+                   finish();
+                   break;
+           }
        }
    };
 }
