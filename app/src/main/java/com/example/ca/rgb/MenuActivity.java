@@ -8,12 +8,11 @@ import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private  static MenuActivity application;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        application = this;
+
         Button playBtn = findViewById(R.id.playBtn);
         Button scoreBtn = findViewById(R.id.scoreBtn);
         Button exitBtn = findViewById(R.id.exitBtn);
