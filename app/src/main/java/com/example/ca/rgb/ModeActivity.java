@@ -29,6 +29,7 @@ public class ModeActivity extends AppCompatActivity {
 
             switch (action){
                 case "mode1":
+                    finish();
                     startActivity(new Intent(ModeActivity.this, PlayActivity.class));
                     break;
                 case "mode2":
@@ -37,4 +38,10 @@ public class ModeActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(ModeActivity.this, MenuActivity.class));
+    }
 }

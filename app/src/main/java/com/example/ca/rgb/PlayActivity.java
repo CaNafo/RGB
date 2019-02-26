@@ -18,15 +18,34 @@ import java.util.Random;
 public class PlayActivity extends AppCompatActivity {
     private int score = 0;
     private CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-        final TextView textView3 = findViewById(R.id.textView3);
-        ((TextView)(findViewById(R.id.textView2))).setText("0");
+        final TextView textView4 = findViewById(R.id.textView4);
 
+        countDownTimer2 = new CountDownTimer(4000, 1000) {
+            @Override
+            public void onTick(long l) {
+                if(l / 1000 != 0){
+                    textView4.setText(String.valueOf(l / 1000));
+                }else{
+                    textView4.setText("START!");
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                textView4.setText("");
+                startGame();
+            }
+        }.start();
+    }
+
+    private void startGame(){
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -35,22 +54,46 @@ public class PlayActivity extends AppCompatActivity {
         greenBtn.setOnClickListener(playActionListener);
         blueBtn.setOnClickListener(playActionListener);
 
-        changeText();
+        final TextView textView3 = findViewById(R.id.textView3);
+        TextView textView2 = findViewById(R.id.textView2);
 
+        changeText();
+        textView2.setText(String.valueOf(score));
+        textView3.setText("10");
         countDownTimer = new CountDownTimer(10000, 1000) {
             @Override
-            public void onTick(long l) {
-                textView3.setText(String.valueOf(l / 1000));
+            public void onTick(long l2) {
+                textView3.setText(String.valueOf(l2 / 1000));
             }
 
             @Override
             public void onFinish() {
-                textView3.setText("Ende");
+                //countDownTimer.cancel();
+                showAlertDialogButtonClicked("Time's up");
             }
         }.start();
     }
 
+    private void restartGame(){
+        score = 0;
+        TextView textView = findViewById(R.id.textView);
+        TextView textView2 = findViewById(R.id.textView2);
+        TextView textView3 = findViewById(R.id.textView3);
 
+        textView.setText("");
+        textView2.setText("");
+        textView3.setText("");
+
+        Button redBtn = findViewById(R.id.redBtn);
+        Button greenBtn = findViewById(R.id.greenBtn);
+        Button blueBtn = findViewById(R.id.blueBtn);
+
+        redBtn.setOnClickListener(null);
+        greenBtn.setOnClickListener(null);
+        blueBtn.setOnClickListener(null);
+
+        countDownTimer2.start();
+    }
 
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -67,7 +110,7 @@ public class PlayActivity extends AppCompatActivity {
                 changeText();
             }else{
                 countDownTimer.cancel();
-                showAlertDialogButtonClicked();
+                showAlertDialogButtonClicked("GAME OVER");
             }
         }
     };
@@ -80,12 +123,11 @@ public class PlayActivity extends AppCompatActivity {
         random2 = random2 % 3;
 
         TextView textView = findViewById(R.id.textView);
-
-        TranslateAnimation animObj= new TranslateAnimation(0,textView.getWidth(), 0, 0);
+        /*TranslateAnimation animObj= new TranslateAnimation(0,textView.getWidth(), 0, 0);
         animObj.setDuration(1000);
         animObj.setFillAfter(true);
 
-        textView.setAnimation(animObj);
+        textView.setAnimation(animObj);*/
 
         switch(random){
             case 0:
@@ -112,30 +154,38 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    public void showAlertDialogButtonClicked() {
+    public void showAlertDialogButtonClicked(String s) {
 
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("GAME OVER");
+        builder.setTitle(s);
         builder.setMessage("You scored " + score + ".");
 
         // add a button
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(PlayActivity.this, PlayActivity.class));
+                restartGame();
             }
         });
         builder.setNegativeButton("Main Menu", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                finish();
                 startActivity(new Intent(PlayActivity.this, MenuActivity.class));
             }
         });
 
+        builder.setCancelable(false);
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(PlayActivity.this, ModeActivity.class));
     }
 
 }

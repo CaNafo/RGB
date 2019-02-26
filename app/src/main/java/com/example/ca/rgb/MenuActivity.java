@@ -47,6 +47,7 @@ public class MenuActivity extends AppCompatActivity {
            switch (action){
                case "playBtn":
                    startActivity(new Intent(MenuActivity.this, ModeActivity.class));
+                   finish();
                    break;
                case "scoreBtn":
                    Call<String> call;
@@ -103,6 +104,11 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
 }
