@@ -1,29 +1,27 @@
 package com.example.ca.rgb;
 
+import com.example.ca.rgb.Interfaces.APIogovor;
+import com.example.ca.rgb.R;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Console;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.example.ca.rgb.Interfaces.APIservisi;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Query;
+
 
 public class MenuActivity extends AppCompatActivity {
-
+    protected APIogovor api =  RetrofitOdgovor.getApi();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +50,30 @@ public class MenuActivity extends AppCompatActivity {
                    startActivity(new Intent(MenuActivity.this, PlayActivity.class));
                    break;
                case "scoreBtn":
-                   List<Map<String,String>> MyData = null;
-                   GetData mydata =new GetData();
-                   MyData= mydata.doInBackground();
-                   String[] fromwhere = { "ID","name","score" };
+                   Call<String> call;
+                   call = api.setQuery("",0);
 
-                   //int[] viewswhere = {R.id.lblID , R.id.lblcountryname,R.id.lblCapitalCity};
+                   call.enqueue(new Callback<String>()
+                   {
+                       @Override
+                       public void onResponse(Call<String> call, Response<String> response)
+                       {
+                           System.out.println("AAAAAAAAAAAAAAAAAAAAAAaa");
+                           if(response.isSuccessful())
+                           {
+                               System.out.println("dadsadasdas");
+                           }else{
+                               System.out.println("NIJEdadsadasdas");
+                           }
+                       }
 
-                  /* ADAhere = new SimpleAdapter(MenuActivity.this, MyData,R.layout.listtemplate, fromwhere, viewswhere);
+                       @Override
+                       public void onFailure(Call<String> call, Throwable t)
+                       {
+                           System.out.println("NIJEdadsadasdas");
 
-                   LV_Country.setAdapter(ADAhere);*/
+                       }
+                   });
                    break;
                case "exitBtn":
                    finish();
@@ -70,14 +82,28 @@ public class MenuActivity extends AppCompatActivity {
        }
    };
 
-   /* LV_Country.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            HashMap<String,Object> obj=(HashMap<String,Object>)ADAhere.getItem(position);
-            String ID=(String)obj.get("A");
-            Toast.makeText(MainActivity.this, ID, Toast.LENGTH_SHORT).show();
+    private void addNewScore(){
+        Call<String> call;
+        call = api.setQuery("Neko",15);
+        call.enqueue(new Callback<String>()
+        {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response)
+            {
+                if(response.isSuccessful())
+                {
+                    System.out.println("dadsadasdas");
+                }else{
+                    System.out.println("NIJEdadsadasdas");
+                }
+            }
 
-        }
-    });*/
+            @Override
+            public void onFailure(Call<String> call, Throwable t)
+            {
+
+            }
+        });
+    }
 
 }
