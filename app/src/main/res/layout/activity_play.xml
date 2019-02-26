@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="205dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@drawable/buttonred"
         android:tag="red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_marginEnd="49dp"
         android:layout_marginRight="49dp"
         android:layout_marginBottom="205dp"
-        android:background="@android:color/holo_green_light"
+        android:background="@drawable/buttongreen"
         android:tag="green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/blueBtn"
@@ -40,7 +40,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="205dp"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@drawable/buttonblue"
         android:tag="blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
