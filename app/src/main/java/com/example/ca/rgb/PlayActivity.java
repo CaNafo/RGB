@@ -34,6 +34,8 @@ public class PlayActivity extends AppCompatActivity {
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
+                fadeOutAnimation(textView4, 750);
+                fadeInAnimation(textView4, 750);
                 if(l / 1000 != 0){
                     textView4.setText(String.valueOf(l / 1000));
                 }else{
