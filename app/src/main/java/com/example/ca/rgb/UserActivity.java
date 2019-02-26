@@ -84,7 +84,7 @@ public class UserActivity extends AppCompatActivity {
                             // Apply the edits!
                             editor.apply();
 
-                            System.out.println(ID);
+                            System.out.println(ID+ "AJDIIII");
                         }
 
                     } catch (JSONException e) {

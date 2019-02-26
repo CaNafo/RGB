@@ -20,7 +20,9 @@ import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIservisi;
+import com.example.ca.rgb.Interfaces.APIupdateServisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,7 +139,9 @@ public class PlayActivity extends AppCompatActivity {
                     int myID = settings.getInt("ID", 0);
                     if (myID == 0) {
                         setID();
-                        addNewScore(myName,score);
+                        settings = getApplicationContext().getSharedPreferences("ID", 0);
+                        myID = settings.getInt("ID", 0);
+                        updateScore(myID,score);
                     }
                     settings = getApplicationContext().getSharedPreferences("name", 0);
                     SharedPreferences.Editor editor = settings.edit();
@@ -150,7 +154,9 @@ public class PlayActivity extends AppCompatActivity {
                 }
 
                 if (myScore < score) {
-                    addNewScore(myName, score);
+                    settings = getApplicationContext().getSharedPreferences("ID", 0);
+                    int myID = settings.getInt("ID", 0);
+                    updateScore(myID, score);
                     settings = getApplicationContext().getSharedPreferences("score", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putInt("score", score);
@@ -278,7 +284,9 @@ public class PlayActivity extends AppCompatActivity {
                     int myID = settings.getInt("ID", 0);
                     if (myID == 0) {
                         setID();
-                        addNewScore(myName,score);
+                        settings = getApplicationContext().getSharedPreferences("ID", 0);
+                        myID = settings.getInt("ID", 0);
+                        updateScore(myID,score);
                     }
                     setID();
                     settings = getApplicationContext().getSharedPreferences("name", 0);
@@ -292,8 +300,9 @@ public class PlayActivity extends AppCompatActivity {
                 }
 
                 if (myScore < score) {
-                    System.out.println("SKOR "+score);
-                    addNewScore(myName, myScore);
+                    settings = getApplicationContext().getSharedPreferences("ID", 0);
+                    int myID = settings.getInt("ID", 0);
+                    updateScore(myID, score);
                     settings = getApplicationContext().getSharedPreferences("score", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putInt("score", score);
@@ -421,10 +430,11 @@ public class PlayActivity extends AppCompatActivity {
         view.startAnimation(fadeOut);
     }
 
-    private void addNewScore(String name, int score) {
-        APIservisi api = RetrofitCall.getApi();
+    private void updateScore(int ID, int score) {
+        APIupdateServisi api = RetrofitUpdateCall.getApi();
         Call<String> call;
-        call = api.setQuery(name, score);
+        System.out.println(ID+" AJDU");
+        call = api.setQuery(ID, score);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
