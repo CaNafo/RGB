@@ -5,6 +5,7 @@ import com.example.ca.rgb.R;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
@@ -25,7 +26,17 @@ public class ScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-        getRetrofitObject();
+        getRetrofitObject();// Get from the SharedPreferences
+
+        TextView textView = findViewById(R.id.myScoreTxt);
+
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+        int myScore = settings.getInt("score", 0);
+
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+        textView.setText(myName+":       "+myScore);
+
     }
 
     void getRetrofitObject() {
@@ -56,15 +67,6 @@ public class ScoreActivity extends AppCompatActivity {
                         textView.setText(name);
                         textView = findViewById(R.id.scoreTxt);
                         textView.setText(score);
-                        textView = findViewById(R.id.myScoreTxt);
-
-                        // Get from the SharedPreferences
-                        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-                        int myScore = settings.getInt("score", 0);
-
-                        settings = getApplicationContext().getSharedPreferences("name", 0);
-                        String myName = settings.getString("name", "");
-                        textView.setText(myName+":       "+myScore);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
