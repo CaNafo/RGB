@@ -1,16 +1,11 @@
 package com.example.ca.rgb.Interfaces;
 
-import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
-import com.example.ca.rgb.RetrofitResponse;
-
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
+import retrofit2.http.Url;
 
 public interface APIogovor {
-    @FormUrlEncoded
-    @POST("/RGB/score_read.php")
-    Call<RetrofitResponse> getDistrictDetails(@Field("name") String target, @Field("score") String action);
+    @GET()
+    Call<String> getStringResponse(@Url String url);
 
 }

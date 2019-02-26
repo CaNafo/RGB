@@ -1,32 +1,30 @@
 package com.example.ca.rgb;
 
 
-import com.example.ca.rgb.Interfaces.APIogovor;
-import com.example.ca.rgb.R;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.R;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -62,7 +60,9 @@ public class MenuActivity extends AppCompatActivity {
                    finish();
                    break;
                case "scoreBtn":
-                    getRetrofitObject();
+                   startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
+                   finish();
+                    //addNewScore();
                    break;
                case "exitBtn":
                    finish();
@@ -72,28 +72,10 @@ public class MenuActivity extends AppCompatActivity {
    };
 
 
-    void getRetrofitObject() {
-        APIogovor apiService =  RetrofitOdgovor.getClient().create(APIogovor.class);
-        Call<RetrofitResponse> call = apiService.getDistrictDetails("","");
-        call.enqueue(new Callback<RetrofitResponse>() {
-            @Override
-            public void onResponse(Call<RetrofitResponse> call, Response<RetrofitResponse> response) {
-                ArrayList<HashMap<String, String>> tmpList = response.body().getDatat();
-                Log.e("tmpList---", tmpList.toString());
-
-            }
-
-            @Override
-            public void onFailure(Call<RetrofitResponse> call, Throwable t) {
-                Log.e(TAG+"--", t.toString());
-            }
-
-        });
-    }
 
 
     private void addNewScore(){
-        APIservisi api = null;
+        APIservisi api = RetrofitCall.getApi();
         Call<String> call;
         call = api.setQuery("Neko",15);
         call.enqueue(new Callback<String>()

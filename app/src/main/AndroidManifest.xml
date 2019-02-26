@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ModeActivity"></activity>
+        <activity android:name=".ModeActivity" />
         <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlayActivity" />
+        <activity android:name=".ScoreActivity"></activity>
     </application>
 
 </manifest>

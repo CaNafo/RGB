@@ -21,6 +21,8 @@ public class RetrofitResponse {
     }
 
     public void setStatus(String name) {
+        System.out.println("ALOOOOOOOOOOOOOO");
+
         this.name = name;
     }
 
