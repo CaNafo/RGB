@@ -1,12 +1,22 @@
 package com.example.ca.rgb;
 
+<<<<<<< HEAD
+=======
+import com.example.ca.rgb.Interfaces.APIogovor;
+import com.example.ca.rgb.R;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
+
+>>>>>>> 0832911ea15c4a6de8c9f4e28200e51c377016bd
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+<<<<<<< HEAD
 import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.R;
@@ -19,6 +29,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+=======
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+>>>>>>> 0832911ea15c4a6de8c9f4e28200e51c377016bd
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -43,13 +58,15 @@ public class MenuActivity extends AppCompatActivity {
 
    View.OnClickListener menuActionListener = new View.OnClickListener() {
 
+       @RequiresApi(api = Build.VERSION_CODES.M)
        @Override
        public void onClick(View v) {
            Button button = (Button)v;
            String action = String.valueOf(button.getTag());
            switch (action){
                case "playBtn":
-                   startActivity(new Intent(MenuActivity.this, PlayActivity.class));
+                   startActivity(new Intent(MenuActivity.this, ModeActivity.class));
+                   finish();
                    break;
                case "scoreBtn":
                     getRetrofitObject();
@@ -105,6 +122,11 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
 }
