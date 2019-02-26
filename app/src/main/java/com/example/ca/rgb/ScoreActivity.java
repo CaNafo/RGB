@@ -1,5 +1,8 @@
 package com.example.ca.rgb;
 
+import com.example.ca.rgb.Interfaces.APIgetID;
+import com.example.ca.rgb.Interfaces.APIgetPosition;
+import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.R;
 
 import android.content.SharedPreferences;
@@ -9,6 +12,7 @@ import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +31,7 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         getRetrofitObject();// Get from the SharedPreferences
-
+        getUserPosition();
         TextView textView = findViewById(R.id.myScoreTxt);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
@@ -77,6 +81,51 @@ public class ScoreActivity extends AppCompatActivity {
                         textView.setText(name);
                         textView = findViewById(R.id.scoreTxt);
                         textView.setText(score);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    // todo: do something with the response string
+                } else {
+                    //System.out.println(response.body() + "ETOOOOO");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    void getUserPosition() {
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
+        int myID = settings.getInt("ID", 0);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .baseUrl("http://192.168.1.5/")
+                .build();
+
+        APIgetPosition scalarService = retrofit.create(APIgetPosition.class);
+        APIgetPosition api = scalarService;
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/getUserPosition.php", myID);
+
+
+        stringCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    String responseString = response.body();
+                    try {
+
+                        JSONObject object = new JSONObject(responseString);
+                        JSONArray Jarray = object.getJSONArray("data");
+                        for (int i = 0; i < Jarray.length(); i++) {
+                            JSONObject Jasonobject = Jarray.getJSONObject(i);
+                            System.out.print(Jasonobject.get("position")+" EVOGA");
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
