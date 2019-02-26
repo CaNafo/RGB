@@ -35,7 +35,18 @@ public class ScoreActivity extends AppCompatActivity {
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
-        textView.setText(myName+":       "+myScore);
+        if (!(myName.length() > 0)) {
+            textView.setText("DefaultUser" + ":       " + myScore);
+
+            settings = getApplicationContext().getSharedPreferences("name", 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString("name", "DefaultUser");
+            // Apply the edits!
+            editor.apply();
+        } else {
+            textView.setText(myName + ":       " + myScore);
+        }
 
     }
 
@@ -54,14 +65,13 @@ public class ScoreActivity extends AppCompatActivity {
                     String responseString = response.body();
                     try {
                         JSONObject object = new JSONObject(responseString);
-                        JSONArray Jarray  = object.getJSONArray("data");
+                        JSONArray Jarray = object.getJSONArray("data");
                         String name = "";
                         String score = "";
-                        for (int i = 0; i < Jarray.length(); i++)
-                        {
+                        for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
                             name += Jasonobject.get("name") + "\n";
-                            score += Jasonobject.get("score")+"\n";
+                            score += Jasonobject.get("score") + "\n";
                         }
                         TextView textView = findViewById(R.id.nameTxt);
                         textView.setText(name);
@@ -72,7 +82,7 @@ public class ScoreActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     // todo: do something with the response string
-                }else{
+                } else {
                     //System.out.println(response.body() + "ETOOOOO");
                 }
 

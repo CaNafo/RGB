@@ -18,14 +18,21 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
+import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class PlayActivity extends AppCompatActivity {
     private int score = 0;
@@ -124,6 +131,21 @@ public class PlayActivity extends AppCompatActivity {
 
                 settings = getApplicationContext().getSharedPreferences("name", 0);
                 String myName = settings.getString("name", "");
+
+                if (!(myName.length() > 0)) {
+                    settings = getApplicationContext().getSharedPreferences("ID", 0);
+                    String myID = settings.getString("ID", "");
+                    if (!(myID.length() > 0))
+                        setID();
+                    settings = getApplicationContext().getSharedPreferences("name", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+
+                    editor.putString("name", "DefaultUser");
+                    // Apply the edits!
+                    editor.apply();
+
+                    myName="DefaultUser";
+                }
 
                 if(myScore<score) {
                     addNewScore(myName,score);
@@ -248,6 +270,22 @@ public class PlayActivity extends AppCompatActivity {
 
                 settings = getApplicationContext().getSharedPreferences("name", 0);
                 String myName = settings.getString("name", "");
+
+                if (!(myName.length() > 0)) {
+                    settings = getApplicationContext().getSharedPreferences("ID", 0);
+                    String myID = settings.getString("ID", "");
+                    if (!(myID.length() > 0))
+                        setID();
+                    setID();
+                    settings = getApplicationContext().getSharedPreferences("name", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+
+                    editor.putString("name", "DefaultUser");
+                    // Apply the edits!
+                    editor.apply();
+
+                    myName="DefaultUser";
+                }
 
                 if(myScore<score) {
                     addNewScore(myName,myScore);
@@ -394,6 +432,53 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<String> call, Throwable t)
             {
+
+            }
+        });
+    }
+
+    void setID() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .baseUrl("http://192.168.1.5/")
+                .build();
+
+        APIgetID scalarService = retrofit.create(APIgetID.class);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/getID.php");
+        stringCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    String responseString = response.body();
+                    try {
+                        JSONObject object = new JSONObject(responseString);
+                        JSONArray Jarray = object.getJSONArray("data");
+                        for (int i = 0; i < Jarray.length(); i++) {
+                            JSONObject Jasonobject = Jarray.getJSONObject(i);
+
+                            int ID = Integer.parseInt(Jasonobject.get("ID").toString());
+                            ID++;
+
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+
+                            editor.putInt("ID", ID);
+                            // Apply the edits!
+                            editor.apply();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    // todo: do something with the response string
+                } else {
+                    //System.out.println(response.body() + "ETOOOOO");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });
