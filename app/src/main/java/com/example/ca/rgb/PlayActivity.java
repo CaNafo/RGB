@@ -127,42 +127,7 @@ public class PlayActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                // Get from the SharedPreferences
-                SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-                int myScore = settings.getInt("score", 0);
-
-                settings = getApplicationContext().getSharedPreferences("name", 0);
-                String myName = settings.getString("name", "");
-
-                if (!(myName.length() > 0)) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    if (myID == 0) {
-                        setID();
-                        settings = getApplicationContext().getSharedPreferences("ID", 0);
-                        myID = settings.getInt("ID", 0);
-                        updateScore(myID,score);
-                    }
-                    settings = getApplicationContext().getSharedPreferences("name", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-
-                    editor.putString("name", "DefaultUser");
-                    // Apply the edits!
-                    editor.apply();
-
-                    myName = "DefaultUser";
-                }
-
-                if (myScore < score) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    updateScore(myID, score);
-                    settings = getApplicationContext().getSharedPreferences("score", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("score", score);
-                    // Apply the edits!
-                    editor.apply();
-                }
+                finishUpdate();
                 showAlertDialogButtonClicked("Time's up");
             }
         }.start();
@@ -272,43 +237,7 @@ public class PlayActivity extends AppCompatActivity {
                     case 4:
                         break;
                 }
-                // Get from the SharedPreferences
-                SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-                int myScore = settings.getInt("score", 0);
-
-                settings = getApplicationContext().getSharedPreferences("name", 0);
-                String myName = settings.getString("name", "");
-
-                if (!(myName.length() > 0)) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    if (myID == 0) {
-                        setID();
-                        settings = getApplicationContext().getSharedPreferences("ID", 0);
-                        myID = settings.getInt("ID", 0);
-                        updateScore(myID,score);
-                    }
-                    setID();
-                    settings = getApplicationContext().getSharedPreferences("name", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-
-                    editor.putString("name", "DefaultUser");
-                    // Apply the edits!
-                    editor.apply();
-
-                    myName = "DefaultUser";
-                }
-
-                if (myScore < score) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    updateScore(myID, score);
-                    settings = getApplicationContext().getSharedPreferences("score", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("score", score);
-                    // Apply the edits!
-                    editor.apply();
-                }
+                finishUpdate();
                 showAlertDialogButtonClicked("GAME OVER");
             }
         }
@@ -497,6 +426,46 @@ public class PlayActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void finishUpdate(){
+        // Get from the SharedPreferences
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+        int myScore = settings.getInt("score", 0);
+
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+
+        if (!(myName.length() > 0)) {
+            settings = getApplicationContext().getSharedPreferences("ID", 0);
+            int myID = settings.getInt("ID", 0);
+            if (myID == 0) {
+                setID();
+                settings = getApplicationContext().getSharedPreferences("ID", 0);
+                myID = settings.getInt("ID", 0);
+                updateScore(myID,score);
+            }
+            setID();
+            settings = getApplicationContext().getSharedPreferences("name", 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString("name", "DefaultUser");
+            // Apply the edits!
+            editor.apply();
+
+            myName = "DefaultUser";
+        }
+
+        if (myScore < score) {
+            settings = getApplicationContext().getSharedPreferences("ID", 0);
+            int myID = settings.getInt("ID", 0);
+            updateScore(myID, score);
+            settings = getApplicationContext().getSharedPreferences("score", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("score", score);
+            // Apply the edits!
+            editor.apply();
+        }
     }
 }
 
