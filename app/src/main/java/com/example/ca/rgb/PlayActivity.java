@@ -1,8 +1,11 @@
 package com.example.ca.rgb;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -63,8 +66,8 @@ public class PlayActivity extends AppCompatActivity {
                 textView2.setText(String.valueOf(score));
                 changeText();
             }else{
-                --score;
-                textView2.setText(String.valueOf(score));
+                countDownTimer.cancel();
+                showAlertDialogButtonClicked();
             }
         }
     };
@@ -108,6 +111,33 @@ public class PlayActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    public void showAlertDialogButtonClicked() {
+
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("GAME OVER");
+        builder.setMessage("You scored " + score + ".");
+
+        // add a button
+        builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(PlayActivity.this, PlayActivity.class));
+            }
+        });
+        builder.setNegativeButton("Main Menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(PlayActivity.this, MenuActivity.class));
+            }
+        });
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }
 
 

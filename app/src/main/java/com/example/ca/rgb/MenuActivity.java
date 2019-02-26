@@ -2,22 +2,20 @@ package com.example.ca.rgb;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.R;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.ca.rgb.Interfaces.APIservisi;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -41,13 +39,14 @@ public class MenuActivity extends AppCompatActivity {
 
    View.OnClickListener menuActionListener = new View.OnClickListener() {
 
+       @RequiresApi(api = Build.VERSION_CODES.M)
        @Override
        public void onClick(View v) {
            Button button = (Button)v;
            String action = String.valueOf(button.getTag());
            switch (action){
                case "playBtn":
-                   startActivity(new Intent(MenuActivity.this, PlayActivity.class));
+                   startActivity(new Intent(MenuActivity.this, ModeActivity.class));
                    break;
                case "scoreBtn":
                    Call<String> call;
