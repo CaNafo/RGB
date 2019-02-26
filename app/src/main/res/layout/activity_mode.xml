@@ -29,4 +29,28 @@
         android:text="Classic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mode1Btn" />
+
+    <Button
+        android:id="@+id/mode3Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="127dp"
+        android:layout_marginLeft="127dp"
+        android:layout_marginTop="99dp"
+        android:tag="mode3"
+        android:text="TimeAttack Hard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mode1Btn" />
+
+    <Button
+        android:id="@+id/mode4Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="151dp"
+        android:layout_marginLeft="151dp"
+        android:layout_marginTop="188dp"
+        android:tag="mode4"
+        android:text="Classic Hard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mode1Btn" />
 </android.support.constraint.ConstraintLayout>
