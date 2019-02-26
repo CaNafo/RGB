@@ -23,11 +23,17 @@ public class PlayActivity extends AppCompatActivity {
     private int score = 0;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
+    private int mode = -1;
+    private int speed = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+
+        Bundle b = getIntent().getExtras();
+        if(b != null)
+            mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
 

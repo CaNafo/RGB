@@ -26,14 +26,30 @@ public class ModeActivity extends AppCompatActivity {
         public void onClick(View v) {
             Button button = (Button)v;
             String action = String.valueOf(button.getTag());
+            Intent intent = new Intent(ModeActivity.this, PlayActivity.class);
+            Bundle b;
 
             switch (action){
                 case "mode1":
+                    b = new Bundle();
+                    b.putInt("mode", 1); //Your id
+                    intent.putExtras(b); //Put your id to your next Intent
+                    startActivity(intent);
                     finish();
-                    startActivity(new Intent(ModeActivity.this, PlayActivity.class));
                     break;
                 case "mode2":
-
+                    b = new Bundle();
+                    b.putInt("mode", 2); //Your id
+                    intent.putExtras(b); //Put your id to your next Intent
+                    startActivity(intent);
+                    finish();
+                    break;
+                case "mode3":
+                    b = new Bundle();
+                    b.putInt("mode", 3); //Your id
+                    intent.putExtras(b); //Put your id to your next Intent
+                    startActivity(intent);
+                    finish();
                     break;
             }
         }
