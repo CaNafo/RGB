@@ -32,26 +32,6 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
         getRetrofitObject();// Get from the SharedPreferences
         getUserPosition();
-        TextView textView = findViewById(R.id.myScoreTxt);
-
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-        int myScore = settings.getInt("score", 0);
-
-        settings = getApplicationContext().getSharedPreferences("name", 0);
-        String myName = settings.getString("name", "");
-        if (!(myName.length() > 0)) {
-            textView.setText("DefaultUser" + ":       " + myScore);
-
-            settings = getApplicationContext().getSharedPreferences("name", 0);
-            SharedPreferences.Editor editor = settings.edit();
-
-            editor.putString("name", "DefaultUser");
-            // Apply the edits!
-            editor.apply();
-        } else {
-            textView.setText(myName + ":       " + myScore);
-        }
-
     }
 
     void getRetrofitObject() {
@@ -74,7 +54,7 @@ public class ScoreActivity extends AppCompatActivity {
                         String score = "";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            name += Jasonobject.get("name") + "\n";
+                            name += (i+1)+". "+Jasonobject.get("name") + "\n";
                             score += Jasonobject.get("score") + "\n";
                         }
                         TextView textView = findViewById(R.id.nameTxt);
@@ -124,7 +104,27 @@ public class ScoreActivity extends AppCompatActivity {
                         JSONArray Jarray = object.getJSONArray("data");
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            System.out.print(Jasonobject.get("position")+" EVOGA");
+
+
+                            TextView textView = findViewById(R.id.myScoreTxt);
+
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+                            int myScore = settings.getInt("score", 0);
+
+                            settings = getApplicationContext().getSharedPreferences("name", 0);
+                            String myName = settings.getString("name", "");
+                            if (!(myName.length() > 0)) {
+                                textView.setText(Jasonobject.get("position")+". DefaultUser" + ":       " + myScore);
+
+                                settings = getApplicationContext().getSharedPreferences("name", 0);
+                                SharedPreferences.Editor editor = settings.edit();
+
+                                editor.putString("name", "DefaultUser");
+                                // Apply the edits!
+                                editor.apply();
+                            } else {
+                                textView.setText(Jasonobject.get("position")+". "+myName + ":       " + myScore);
+                            }
                         }
 
                     } catch (JSONException e) {
