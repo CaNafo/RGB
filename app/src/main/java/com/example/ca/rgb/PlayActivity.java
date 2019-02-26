@@ -2,22 +2,28 @@ package com.example.ca.rgb;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ca.rgb.Interfaces.APIservisi;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlayActivity extends AppCompatActivity {
     private int score = 0;
@@ -80,7 +86,21 @@ public class PlayActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                //countDownTimer.cancel();
+                // Get from the SharedPreferences
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+                int myScore = settings.getInt("score", 0);
+
+                settings = getApplicationContext().getSharedPreferences("name", 0);
+                String myName = settings.getString("name", "");
+
+                if(myScore<score) {
+                    addNewScore(myName,score);
+                    settings = getApplicationContext().getSharedPreferences("score", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("score", score);
+                    // Apply the edits!
+                    editor.apply();
+                }
                 showAlertDialogButtonClicked("Time's up");
             }
         }.start();
@@ -122,6 +142,21 @@ public class PlayActivity extends AppCompatActivity {
                 changeText();
             }else{
                 countDownTimer.cancel();
+                // Get from the SharedPreferences
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+                int myScore = settings.getInt("score", 0);
+
+                settings = getApplicationContext().getSharedPreferences("name", 0);
+                String myName = settings.getString("name", "");
+
+                if(myScore<score) {
+                    addNewScore(myName,myScore);
+                    settings = getApplicationContext().getSharedPreferences("score", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("score", score);
+                    // Apply the edits!
+                    editor.apply();
+                }
                 showAlertDialogButtonClicked("GAME OVER");
             }
         }
@@ -237,6 +272,31 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         view.startAnimation(fadeOut);
+    }
+
+    private void addNewScore(String name, int score){
+        APIservisi api = RetrofitCall.getApi();
+        Call<String> call;
+        call = api.setQuery(name,score);
+        call.enqueue(new Callback<String>()
+        {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response)
+            {
+                if(response.isSuccessful())
+                {
+                    System.out.println("dadsadasdas");
+                }else{
+                    System.out.println("NIJEdadsadasdas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t)
+            {
+
+            }
+        });
     }
 }
 

@@ -2,6 +2,7 @@ package com.example.ca.rgb;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -38,11 +39,19 @@ public class MenuActivity extends AppCompatActivity {
         Button playBtn = findViewById(R.id.playBtn);
         Button scoreBtn = findViewById(R.id.scoreBtn);
         Button exitBtn = findViewById(R.id.exitBtn);
+        Button editBtn = findViewById(R.id.editNameBtn);
 
+
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+
+        if(!(myName.length() > 0))
+             startActivity(new Intent(MenuActivity.this, UserActivity.class));
 
         playBtn.setOnClickListener(menuActionListener);
         scoreBtn.setOnClickListener(menuActionListener);
         exitBtn.setOnClickListener(menuActionListener);
+        editBtn.setOnClickListener(editNameListener);
 
     }
 
@@ -61,7 +70,6 @@ public class MenuActivity extends AppCompatActivity {
                    break;
                case "scoreBtn":
                    startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
-                   finish();
                     //addNewScore();
                    break;
                case "exitBtn":
@@ -71,33 +79,12 @@ public class MenuActivity extends AppCompatActivity {
        }
    };
 
-
-
-
-    private void addNewScore(){
-        APIservisi api = RetrofitCall.getApi();
-        Call<String> call;
-        call = api.setQuery("Neko",15);
-        call.enqueue(new Callback<String>()
-        {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response)
-            {
-                if(response.isSuccessful())
-                {
-                    System.out.println("dadsadasdas");
-                }else{
-                    System.out.println("NIJEdadsadasdas");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t)
-            {
-
-            }
-        });
-    }
+    View.OnClickListener editNameListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(MenuActivity.this, UserActivity.class));
+        }
+    };
 
     @Override
     public void onBackPressed() {

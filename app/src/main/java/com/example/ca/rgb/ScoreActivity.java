@@ -1,6 +1,8 @@
 package com.example.ca.rgb;
 
 import com.example.ca.rgb.R;
+
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -54,12 +56,22 @@ public class ScoreActivity extends AppCompatActivity {
                         textView.setText(name);
                         textView = findViewById(R.id.scoreTxt);
                         textView.setText(score);
+                        textView = findViewById(R.id.myScoreTxt);
+
+                        // Get from the SharedPreferences
+                        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+                        int myScore = settings.getInt("score", 0);
+
+                        settings = getApplicationContext().getSharedPreferences("name", 0);
+                        String myName = settings.getString("name", "");
+                        textView.setText(myName+":       "+myScore);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     // todo: do something with the response string
                 }else{
-                    System.out.println(response.body() + "ETOOOOO");
+                    //System.out.println(response.body() + "ETOOOOO");
                 }
 
             }

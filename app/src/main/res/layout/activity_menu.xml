@@ -53,4 +53,15 @@
         app:layout_constraintBottom_toTopOf="@+id/scoreBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/editNameBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="66dp"
+        android:text="Edit Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
