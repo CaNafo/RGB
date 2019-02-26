@@ -1,12 +1,10 @@
 package com.example.ca.rgb;
 
-<<<<<<< HEAD
-=======
+
 import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.R;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitOdgovor;
 
->>>>>>> 0832911ea15c4a6de8c9f4e28200e51c377016bd
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-<<<<<<< HEAD
 import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.R;
@@ -29,11 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-=======
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
->>>>>>> 0832911ea15c4a6de8c9f4e28200e51c377016bd
+
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -86,7 +79,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RetrofitResponse> call, Response<RetrofitResponse> response) {
                 ArrayList<HashMap<String, String>> tmpList = response.body().getDatat();
-                Log.e(TAG+"tmpList---", tmpList.toString());
+                Log.e("tmpList---", tmpList.toString());
 
             }
 

@@ -11,6 +11,6 @@ import retrofit2.http.POST;
 public interface APIogovor {
     @FormUrlEncoded
     @POST("/RGB/score_read.php")
-    Call<RetrofitResponse> getDistrictDetails(@Field("target") String target, @Field("action") String action);
+    Call<RetrofitResponse> getDistrictDetails(@Field("name") String target, @Field("score") String action);
 
 }
