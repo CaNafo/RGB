@@ -2,9 +2,11 @@ package com.example.ca.rgb;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,20 +14,40 @@ import java.util.Random;
 
 public class PlayActivity extends AppCompatActivity {
     private int score = 0;
+    private CountDownTimer countDownTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
+        final TextView textView3 = findViewById(R.id.textView3);
+        ((TextView)(findViewById(R.id.textView2))).setText("0");
+
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
 
-
         redBtn.setOnClickListener(playActionListener);
         greenBtn.setOnClickListener(playActionListener);
         blueBtn.setOnClickListener(playActionListener);
+
+        changeText();
+
+        countDownTimer = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long l) {
+                textView3.setText(String.valueOf(l / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                textView3.setText("Ende");
+            }
+        }.start();
     }
+
+
 
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -55,6 +77,12 @@ public class PlayActivity extends AppCompatActivity {
         random2 = random2 % 3;
 
         TextView textView = findViewById(R.id.textView);
+
+        TranslateAnimation animObj= new TranslateAnimation(0,textView.getWidth(), 0, 0);
+        animObj.setDuration(1000);
+        animObj.setFillAfter(true);
+
+        textView.setAnimation(animObj);
 
         switch(random){
             case 0:
