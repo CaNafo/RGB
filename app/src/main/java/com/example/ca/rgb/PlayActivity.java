@@ -20,9 +20,7 @@ import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIservisi;
-import com.example.ca.rgb.Interfaces.APIupdateServisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +38,13 @@ public class PlayActivity extends AppCompatActivity {
     private int score = 0;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
-    private Chronometer chronometer;
+    private CountDownTimer countDownTimer3;
+    private boolean classicMode = true;
     private int mode = -1;
-    private int speed = 10;
+    private int time = 0;
+    private int speed = 7;
+    private int tempSpeed = 7;
+    private int lives = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +52,19 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         Bundle b = getIntent().getExtras();
-        if (b != null)
+        if(b != null)
             mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
-        ((Chronometer) findViewById(R.id.chronometer)).setText("");
 
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
                 fadeOutAnimation(textView4, 750);
                 fadeInAnimation(textView4, 750);
-                if (l / 1000 != 0) {
+                if(l / 1000 != 0){
                     textView4.setText(String.valueOf(l / 1000));
-                } else {
+                }else{
                     textView4.setText("START!");
                 }
             }
@@ -76,9 +77,17 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void startGame() {
+    private void startGame(){
         score = 0;
-        switch (mode) {
+        time = 0;
+        speed = 7;
+        tempSpeed = 7;
+        lives = 3;
+        classicMode = true;
+        ((TextView)findViewById(R.id.textView)).setText("");
+        ((TextView)findViewById(R.id.textView2)).setText("");
+        ((TextView)findViewById(R.id.textView3)).setText("");
+        switch (mode){
             case 1:
                 startGameTimeAttack();
                 break;
@@ -90,9 +99,17 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    private void restartGame() {
+    private void restartGame(){
         score = 0;
-        switch (mode) {
+        time = 0;
+        speed = 7;
+        tempSpeed = 7;
+        lives = 3;
+        classicMode = true;
+        ((TextView)findViewById(R.id.textView)).setText("");
+        ((TextView)findViewById(R.id.textView2)).setText("");
+        ((TextView)findViewById(R.id.textView3)).setText("");
+        switch (mode){
             case 1:
                 restartGameTimeAttack();
                 break;
@@ -104,7 +121,7 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    private void startGameTimeAttack() {
+    private void startGameTimeAttack(){
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -117,12 +134,12 @@ public class PlayActivity extends AppCompatActivity {
         TextView textView2 = findViewById(R.id.textView2);
 
         changeText();
-        textView2.setText(String.valueOf(score));
-        textView3.setText("10");
-        countDownTimer = new CountDownTimer(10000, 1000) {
+        textView2.setText("Score\n" + String.valueOf(score));
+        textView3.setText("Time\n30");
+        countDownTimer = new CountDownTimer(31000, 1000) {
             @Override
             public void onTick(long l2) {
-                textView3.setText(String.valueOf(l2 / 1000));
+                textView3.setText("Time\n" + String.valueOf(l2 / 1000));
             }
 
             @Override
@@ -136,13 +153,9 @@ public class PlayActivity extends AppCompatActivity {
 
                 if (!(myName.length() > 0)) {
                     settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    if (myID == 0) {
+                    String myID = settings.getString("ID", "");
+                    if (!(myID.length() > 0))
                         setID();
-                        settings = getApplicationContext().getSharedPreferences("ID", 0);
-                        myID = settings.getInt("ID", 0);
-                        updateScore(myID,score);
-                    }
                     settings = getApplicationContext().getSharedPreferences("name", 0);
                     SharedPreferences.Editor editor = settings.edit();
 
@@ -150,13 +163,11 @@ public class PlayActivity extends AppCompatActivity {
                     // Apply the edits!
                     editor.apply();
 
-                    myName = "DefaultUser";
+                    myName="DefaultUser";
                 }
 
-                if (myScore < score) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    updateScore(myID, score);
+                if(myScore<score) {
+                    addNewScore(myName,score);
                     settings = getApplicationContext().getSharedPreferences("score", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putInt("score", score);
@@ -168,15 +179,7 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void restartGameTimeAttack() {
-        TextView textView = findViewById(R.id.textView);
-        TextView textView2 = findViewById(R.id.textView2);
-        TextView textView3 = findViewById(R.id.textView3);
-
-        textView.setText("");
-        textView2.setText("");
-        textView3.setText("");
-
+    private void restartGameTimeAttack(){
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -188,7 +191,7 @@ public class PlayActivity extends AppCompatActivity {
         countDownTimer2.start();
     }
 
-    private void startGameClassic() {
+    private void startGameClassic(){
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -201,28 +204,42 @@ public class PlayActivity extends AppCompatActivity {
         TextView textView2 = findViewById(R.id.textView2);
 
         changeText();
-        textView2.setText(String.valueOf(score));
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.setText("");
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+        textView2.setText("Score\n" + String.valueOf(score));
+        countDownTimer3 = new CountDownTimer(10000,1000) {
             @Override
-            public void onChronometerTick(Chronometer cArg) {
-                long time = SystemClock.elapsedRealtime() - cArg.getBase();
-                int s = (int) time / 1000;
-                cArg.setText(String.valueOf(s));
+            public void onTick(long l) {
+                ++time;
+                --tempSpeed;
+                textView3.setText("Time\n" + String.valueOf(time));
+
+                if(speed > 1 && time % 10 == 0){
+                    --speed;
+                }
+
+                if(tempSpeed == 0){
+                    changeText();
+                    --lives;
+                    tempSpeed = speed;
+                }
+
+                if(lives == 0){
+                    classicMode = false;
+                    countDownTimer3.cancel();
+                    showAlertDialogButtonClicked("GAME OVER");
+                }
             }
-        });
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
+
+            @Override
+            public void onFinish() {
+                if(classicMode){
+                    countDownTimer3.cancel();
+                    countDownTimer3.start();
+                }
+            }
+        }.start();
     }
 
-    private void restartGameClassic() {
-        TextView textView = findViewById(R.id.textView);
-        TextView textView2 = findViewById(R.id.textView2);
-
-        textView.setText("");
-        textView2.setText("");
-
+    private void restartGameClassic(){
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -236,85 +253,37 @@ public class PlayActivity extends AppCompatActivity {
 
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
-            Button button = (Button) v;
+            Button button = (Button)v;
             TextView textView = findViewById(R.id.textView);
             TextView textView2 = findViewById(R.id.textView2);
 
             String colorName = String.valueOf(textView.getText());
             String action = String.valueOf(button.getTag());
 
-            if (colorName.equalsIgnoreCase(action)) {
+            if(colorName.equalsIgnoreCase(action)){
                 ++score;
-                textView2.setText(String.valueOf(score));
+                tempSpeed = speed;
+                textView2.setText("Score\n" + String.valueOf(score));
                 changeText();
-                switch (mode) {
+            }else{
+                switch (mode){
                     case 1:
                         countDownTimer.cancel();
+                        showAlertDialogButtonClicked("GAME OVER");
                         break;
                     case 2:
-                        chronometer.stop();
+                        --lives;
                         break;
                     case 3:
                         break;
                     case 4:
                         break;
                 }
-            } else {
-                switch (mode) {
-                    case 1:
-                        countDownTimer.cancel();
-                        break;
-                    case 2:
-                        chronometer.stop();
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                }
-                // Get from the SharedPreferences
-                SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-                int myScore = settings.getInt("score", 0);
-
-                settings = getApplicationContext().getSharedPreferences("name", 0);
-                String myName = settings.getString("name", "");
-
-                if (!(myName.length() > 0)) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    if (myID == 0) {
-                        setID();
-                        settings = getApplicationContext().getSharedPreferences("ID", 0);
-                        myID = settings.getInt("ID", 0);
-                        updateScore(myID,score);
-                    }
-                    setID();
-                    settings = getApplicationContext().getSharedPreferences("name", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-
-                    editor.putString("name", "DefaultUser");
-                    // Apply the edits!
-                    editor.apply();
-
-                    myName = "DefaultUser";
-                }
-
-                if (myScore < score) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    int myID = settings.getInt("ID", 0);
-                    updateScore(myID, score);
-                    settings = getApplicationContext().getSharedPreferences("score", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("score", score);
-                    // Apply the edits!
-                    editor.apply();
-                }
-                showAlertDialogButtonClicked("GAME OVER");
             }
         }
     };
 
-    private void changeText() {
+    private void changeText(){
         int random = new Random().nextInt(50);
         int random2 = new Random().nextInt(50);
 
@@ -326,7 +295,7 @@ public class PlayActivity extends AppCompatActivity {
         fadeOutAnimation(textView, 1500);
         fadeInAnimation(textView, 1500);
 
-        switch (random) {
+        switch(random){
             case 0:
                 textView.setText("RED");
                 break;
@@ -338,7 +307,7 @@ public class PlayActivity extends AppCompatActivity {
                 break;
         }
 
-        switch (random2) {
+        switch(random2){
             case 0:
                 textView.setTextColor(Color.parseColor("Red"));
                 break;
@@ -352,6 +321,37 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
+        // Get from the SharedPreferences
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+        int myScore = settings.getInt("score", 0);
+
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+
+        if (!(myName.length() > 0)) {
+            settings = getApplicationContext().getSharedPreferences("ID", 0);
+            String myID = settings.getString("ID", "");
+            if (!(myID.length() > 0))
+                setID();
+            setID();
+            settings = getApplicationContext().getSharedPreferences("name", 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString("name", "DefaultUser");
+            // Apply the edits!
+            editor.apply();
+
+            myName="DefaultUser";
+        }
+
+        if(myScore<score) {
+            addNewScore(myName,myScore);
+            settings = getApplicationContext().getSharedPreferences("score", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("score", score);
+            // Apply the edits!
+            editor.apply();
+        }
 
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -393,12 +393,10 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animation animation) {
             }
-
             @Override
             public void onAnimationEnd(Animation animation) {
                 view.setVisibility(View.VISIBLE);
             }
-
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
@@ -416,12 +414,10 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animation animation) {
             }
-
             @Override
             public void onAnimationEnd(Animation animation) {
                 view.setVisibility(View.INVISIBLE);
             }
-
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
@@ -430,23 +426,26 @@ public class PlayActivity extends AppCompatActivity {
         view.startAnimation(fadeOut);
     }
 
-    private void updateScore(int ID, int score) {
-        APIupdateServisi api = RetrofitUpdateCall.getApi();
+    private void addNewScore(String name, int score){
+        APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        System.out.println(ID+" AJDU");
-        call = api.setQuery(ID, score);
-        call.enqueue(new Callback<String>() {
+        call = api.setQuery(name,score);
+        call.enqueue(new Callback<String>()
+        {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    System.out.println("");
-                } else {
-                    System.out.println("");
+            public void onResponse(Call<String> call, Response<String> response)
+            {
+                if(response.isSuccessful())
+                {
+                    System.out.println("dadsadasdas");
+                }else{
+                    System.out.println("NIJEdadsadasdas");
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t)
+            {
 
             }
         });
