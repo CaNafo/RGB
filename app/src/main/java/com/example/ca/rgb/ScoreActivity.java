@@ -123,7 +123,7 @@ public class ScoreActivity extends AppCompatActivity {
                                 // Apply the edits!
                                 editor.apply();
                             } else {
-                                textView.setText(Jasonobject.get("position")+". "+myName + ":       " + myScore);
+                                textView.setText("Position: "+Jasonobject.get("position")+", Name: "+myName + ", Score: " + myScore);
                             }
                         }
 
