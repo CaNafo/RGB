@@ -9,6 +9,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
@@ -123,11 +127,9 @@ public class PlayActivity extends AppCompatActivity {
         random2 = random2 % 3;
 
         TextView textView = findViewById(R.id.textView);
-        /*TranslateAnimation animObj= new TranslateAnimation(0,textView.getWidth(), 0, 0);
-        animObj.setDuration(1000);
-        animObj.setFillAfter(true);
 
-        textView.setAnimation(animObj);*/
+        fadeOutAnimation(textView, 1500);
+        fadeInAnimation(textView, 1500);
 
         switch(random){
             case 0:
@@ -188,6 +190,46 @@ public class PlayActivity extends AppCompatActivity {
         startActivity(new Intent(PlayActivity.this, ModeActivity.class));
     }
 
+    public static void fadeInAnimation(final View view, long animationDuration) {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(animationDuration);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        view.startAnimation(fadeIn);
+    }
+
+    public static void fadeOutAnimation(final View view, long animationDuration) {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setStartOffset(animationDuration);
+        fadeOut.setDuration(animationDuration);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.INVISIBLE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        view.startAnimation(fadeOut);
+    }
 }
 
 
