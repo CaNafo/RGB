@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIservisi;
@@ -29,8 +31,9 @@ public class PlayActivity extends AppCompatActivity {
     private int score = 0;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
+    private Chronometer chronometer;
     private int mode = -1;
-    private int speed = 1;
+    private int speed = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class PlayActivity extends AppCompatActivity {
             mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
+        ((Chronometer)findViewById(R.id.chronometer)).setText("");
 
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
@@ -64,6 +68,34 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     private void startGame(){
+        score = 0;
+        switch (mode){
+            case 1:
+                startGameTimeAttack();
+                break;
+            case 2:
+                startGameClassic();
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    private void restartGame(){
+        score = 0;
+        switch (mode){
+            case 1:
+                restartGameTimeAttack();
+                break;
+            case 2:
+                restartGameClassic();
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    private void startGameTimeAttack(){
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -106,8 +138,7 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void restartGame(){
-        score = 0;
+    private void restartGameTimeAttack(){
         TextView textView = findViewById(R.id.textView);
         TextView textView2 = findViewById(R.id.textView2);
         TextView textView3 = findViewById(R.id.textView3);
@@ -115,6 +146,52 @@ public class PlayActivity extends AppCompatActivity {
         textView.setText("");
         textView2.setText("");
         textView3.setText("");
+
+        Button redBtn = findViewById(R.id.redBtn);
+        Button greenBtn = findViewById(R.id.greenBtn);
+        Button blueBtn = findViewById(R.id.blueBtn);
+
+        redBtn.setOnClickListener(null);
+        greenBtn.setOnClickListener(null);
+        blueBtn.setOnClickListener(null);
+
+        countDownTimer2.start();
+    }
+
+    private void startGameClassic(){
+        Button redBtn = findViewById(R.id.redBtn);
+        Button greenBtn = findViewById(R.id.greenBtn);
+        Button blueBtn = findViewById(R.id.blueBtn);
+
+        redBtn.setOnClickListener(playActionListener);
+        greenBtn.setOnClickListener(playActionListener);
+        blueBtn.setOnClickListener(playActionListener);
+
+        final TextView textView3 = findViewById(R.id.textView3);
+        TextView textView2 = findViewById(R.id.textView2);
+
+        changeText();
+        textView2.setText(String.valueOf(score));
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setText("");
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+            @Override
+            public void onChronometerTick(Chronometer cArg) {
+                long time = SystemClock.elapsedRealtime() - cArg.getBase();
+                int s = (int)time/1000;
+                cArg.setText(String.valueOf(s));
+            }
+        });
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+    }
+
+    private void restartGameClassic(){
+        TextView textView = findViewById(R.id.textView);
+        TextView textView2 = findViewById(R.id.textView2);
+
+        textView.setText("");
+        textView2.setText("");
 
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
@@ -140,8 +217,31 @@ public class PlayActivity extends AppCompatActivity {
                 ++score;
                 textView2.setText(String.valueOf(score));
                 changeText();
+                switch (mode){
+                    case 1:
+                        countDownTimer.cancel();
+                        break;
+                    case 2:
+                        chronometer.stop();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
             }else{
-                countDownTimer.cancel();
+                switch (mode){
+                    case 1:
+                        countDownTimer.cancel();
+                        break;
+                    case 2:
+                        chronometer.stop();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
                 // Get from the SharedPreferences
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
                 int myScore = settings.getInt("score", 0);
