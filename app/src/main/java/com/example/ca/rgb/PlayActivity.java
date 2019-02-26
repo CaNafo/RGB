@@ -48,20 +48,20 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         Bundle b = getIntent().getExtras();
-        if(b != null)
+        if (b != null)
             mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
-        ((Chronometer)findViewById(R.id.chronometer)).setText("");
+        ((Chronometer) findViewById(R.id.chronometer)).setText("");
 
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
                 fadeOutAnimation(textView4, 750);
                 fadeInAnimation(textView4, 750);
-                if(l / 1000 != 0){
+                if (l / 1000 != 0) {
                     textView4.setText(String.valueOf(l / 1000));
-                }else{
+                } else {
                     textView4.setText("START!");
                 }
             }
@@ -74,9 +74,9 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void startGame(){
+    private void startGame() {
         score = 0;
-        switch (mode){
+        switch (mode) {
             case 1:
                 startGameTimeAttack();
                 break;
@@ -88,9 +88,9 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    private void restartGame(){
+    private void restartGame() {
         score = 0;
-        switch (mode){
+        switch (mode) {
             case 1:
                 restartGameTimeAttack();
                 break;
@@ -102,7 +102,7 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    private void startGameTimeAttack(){
+    private void startGameTimeAttack() {
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -134,9 +134,11 @@ public class PlayActivity extends AppCompatActivity {
 
                 if (!(myName.length() > 0)) {
                     settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    String myID = settings.getString("ID", "");
-                    if (!(myID.length() > 0))
+                    int myID = settings.getInt("ID", 0);
+                    if (myID == 0) {
                         setID();
+                        addNewScore(myName,score);
+                    }
                     settings = getApplicationContext().getSharedPreferences("name", 0);
                     SharedPreferences.Editor editor = settings.edit();
 
@@ -144,11 +146,11 @@ public class PlayActivity extends AppCompatActivity {
                     // Apply the edits!
                     editor.apply();
 
-                    myName="DefaultUser";
+                    myName = "DefaultUser";
                 }
 
-                if(myScore<score) {
-                    addNewScore(myName,score);
+                if (myScore < score) {
+                    addNewScore(myName, score);
                     settings = getApplicationContext().getSharedPreferences("score", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putInt("score", score);
@@ -160,7 +162,7 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void restartGameTimeAttack(){
+    private void restartGameTimeAttack() {
         TextView textView = findViewById(R.id.textView);
         TextView textView2 = findViewById(R.id.textView2);
         TextView textView3 = findViewById(R.id.textView3);
@@ -180,7 +182,7 @@ public class PlayActivity extends AppCompatActivity {
         countDownTimer2.start();
     }
 
-    private void startGameClassic(){
+    private void startGameClassic() {
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -196,11 +198,11 @@ public class PlayActivity extends AppCompatActivity {
         textView2.setText(String.valueOf(score));
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         chronometer.setText("");
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer cArg) {
                 long time = SystemClock.elapsedRealtime() - cArg.getBase();
-                int s = (int)time/1000;
+                int s = (int) time / 1000;
                 cArg.setText(String.valueOf(s));
             }
         });
@@ -208,7 +210,7 @@ public class PlayActivity extends AppCompatActivity {
         chronometer.start();
     }
 
-    private void restartGameClassic(){
+    private void restartGameClassic() {
         TextView textView = findViewById(R.id.textView);
         TextView textView2 = findViewById(R.id.textView2);
 
@@ -228,18 +230,18 @@ public class PlayActivity extends AppCompatActivity {
 
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
-            Button button = (Button)v;
+            Button button = (Button) v;
             TextView textView = findViewById(R.id.textView);
             TextView textView2 = findViewById(R.id.textView2);
 
             String colorName = String.valueOf(textView.getText());
             String action = String.valueOf(button.getTag());
 
-            if(colorName.equalsIgnoreCase(action)){
+            if (colorName.equalsIgnoreCase(action)) {
                 ++score;
                 textView2.setText(String.valueOf(score));
                 changeText();
-                switch (mode){
+                switch (mode) {
                     case 1:
                         countDownTimer.cancel();
                         break;
@@ -251,8 +253,8 @@ public class PlayActivity extends AppCompatActivity {
                     case 4:
                         break;
                 }
-            }else{
-                switch (mode){
+            } else {
+                switch (mode) {
                     case 1:
                         countDownTimer.cancel();
                         break;
@@ -273,9 +275,11 @@ public class PlayActivity extends AppCompatActivity {
 
                 if (!(myName.length() > 0)) {
                     settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    String myID = settings.getString("ID", "");
-                    if (!(myID.length() > 0))
+                    int myID = settings.getInt("ID", 0);
+                    if (myID == 0) {
                         setID();
+                        addNewScore(myName,score);
+                    }
                     setID();
                     settings = getApplicationContext().getSharedPreferences("name", 0);
                     SharedPreferences.Editor editor = settings.edit();
@@ -284,11 +288,12 @@ public class PlayActivity extends AppCompatActivity {
                     // Apply the edits!
                     editor.apply();
 
-                    myName="DefaultUser";
+                    myName = "DefaultUser";
                 }
 
-                if(myScore<score) {
-                    addNewScore(myName,myScore);
+                if (myScore < score) {
+                    System.out.println("SKOR "+score);
+                    addNewScore(myName, myScore);
                     settings = getApplicationContext().getSharedPreferences("score", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putInt("score", score);
@@ -300,7 +305,7 @@ public class PlayActivity extends AppCompatActivity {
         }
     };
 
-    private void changeText(){
+    private void changeText() {
         int random = new Random().nextInt(50);
         int random2 = new Random().nextInt(50);
 
@@ -312,7 +317,7 @@ public class PlayActivity extends AppCompatActivity {
         fadeOutAnimation(textView, 1500);
         fadeInAnimation(textView, 1500);
 
-        switch(random){
+        switch (random) {
             case 0:
                 textView.setText("RED");
                 break;
@@ -324,7 +329,7 @@ public class PlayActivity extends AppCompatActivity {
                 break;
         }
 
-        switch(random2){
+        switch (random2) {
             case 0:
                 textView.setTextColor(Color.parseColor("Red"));
                 break;
@@ -379,10 +384,12 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animation animation) {
             }
+
             @Override
             public void onAnimationEnd(Animation animation) {
                 view.setVisibility(View.VISIBLE);
             }
+
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
@@ -400,10 +407,12 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animation animation) {
             }
+
             @Override
             public void onAnimationEnd(Animation animation) {
                 view.setVisibility(View.INVISIBLE);
             }
+
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
@@ -412,26 +421,22 @@ public class PlayActivity extends AppCompatActivity {
         view.startAnimation(fadeOut);
     }
 
-    private void addNewScore(String name, int score){
+    private void addNewScore(String name, int score) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name,score);
-        call.enqueue(new Callback<String>()
-        {
+        call = api.setQuery(name, score);
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response)
-            {
-                if(response.isSuccessful())
-                {
-                    System.out.println("dadsadasdas");
-                }else{
-                    System.out.println("NIJEdadsadasdas");
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("");
+                } else {
+                    System.out.println("");
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t)
-            {
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });

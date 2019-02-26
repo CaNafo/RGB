@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIogovor;
+import com.example.ca.rgb.Interfaces.APIservisi;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,9 +45,11 @@ public class UserActivity extends AppCompatActivity {
             editor.apply();
 
             settings = getApplicationContext().getSharedPreferences("ID", 0);
-            String myID = settings.getString("ID", "");
-            if (!(myID.length() > 0))
+            int myID = settings.getInt("ID", 0);
+            if (myID == 0) {
                 setID();
+                addNewScore(textView.getText().toString(),0);
+            }
 
             finish();
         }
@@ -79,6 +83,8 @@ public class UserActivity extends AppCompatActivity {
                             editor.putInt("ID", ID);
                             // Apply the edits!
                             editor.apply();
+
+                            System.out.println(ID);
                         }
 
                     } catch (JSONException e) {
@@ -97,4 +103,26 @@ public class UserActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void addNewScore(String name, int score) {
+        APIservisi api = RetrofitCall.getApi();
+        Call<String> call;
+        call = api.setQuery(name, score);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("dadsadasdas");
+                } else {
+                    System.out.println("NIJEdadsadasdas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
