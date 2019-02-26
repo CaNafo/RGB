@@ -38,9 +38,13 @@ public class PlayActivity extends AppCompatActivity {
     private int score = 0;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
-    private Chronometer chronometer;
+    private CountDownTimer countDownTimer3;
+    private boolean classicMode = true;
     private int mode = -1;
-    private int speed = 10;
+    private int time = 0;
+    private int speed = 7;
+    private int tempSpeed = 7;
+    private int lives = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,6 @@ public class PlayActivity extends AppCompatActivity {
             mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
-        ((Chronometer)findViewById(R.id.chronometer)).setText("");
 
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
@@ -76,6 +79,14 @@ public class PlayActivity extends AppCompatActivity {
 
     private void startGame(){
         score = 0;
+        time = 0;
+        speed = 7;
+        tempSpeed = 7;
+        lives = 3;
+        classicMode = true;
+        ((TextView)findViewById(R.id.textView)).setText("");
+        ((TextView)findViewById(R.id.textView2)).setText("");
+        ((TextView)findViewById(R.id.textView3)).setText("");
         switch (mode){
             case 1:
                 startGameTimeAttack();
@@ -90,6 +101,14 @@ public class PlayActivity extends AppCompatActivity {
 
     private void restartGame(){
         score = 0;
+        time = 0;
+        speed = 7;
+        tempSpeed = 7;
+        lives = 3;
+        classicMode = true;
+        ((TextView)findViewById(R.id.textView)).setText("");
+        ((TextView)findViewById(R.id.textView2)).setText("");
+        ((TextView)findViewById(R.id.textView3)).setText("");
         switch (mode){
             case 1:
                 restartGameTimeAttack();
@@ -115,12 +134,12 @@ public class PlayActivity extends AppCompatActivity {
         TextView textView2 = findViewById(R.id.textView2);
 
         changeText();
-        textView2.setText(String.valueOf(score));
-        textView3.setText("10");
-        countDownTimer = new CountDownTimer(10000, 1000) {
+        textView2.setText("Score\n" + String.valueOf(score));
+        textView3.setText("Time\n30");
+        countDownTimer = new CountDownTimer(31000, 1000) {
             @Override
             public void onTick(long l2) {
-                textView3.setText(String.valueOf(l2 / 1000));
+                textView3.setText("Time\n" + String.valueOf(l2 / 1000));
             }
 
             @Override
@@ -161,14 +180,6 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     private void restartGameTimeAttack(){
-        TextView textView = findViewById(R.id.textView);
-        TextView textView2 = findViewById(R.id.textView2);
-        TextView textView3 = findViewById(R.id.textView3);
-
-        textView.setText("");
-        textView2.setText("");
-        textView3.setText("");
-
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -193,28 +204,42 @@ public class PlayActivity extends AppCompatActivity {
         TextView textView2 = findViewById(R.id.textView2);
 
         changeText();
-        textView2.setText(String.valueOf(score));
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.setText("");
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+        textView2.setText("Score\n" + String.valueOf(score));
+        countDownTimer3 = new CountDownTimer(10000,1000) {
             @Override
-            public void onChronometerTick(Chronometer cArg) {
-                long time = SystemClock.elapsedRealtime() - cArg.getBase();
-                int s = (int)time/1000;
-                cArg.setText(String.valueOf(s));
+            public void onTick(long l) {
+                ++time;
+                --tempSpeed;
+                textView3.setText("Time\n" + String.valueOf(time));
+
+                if(speed > 1 && time % 10 == 0){
+                    --speed;
+                }
+
+                if(tempSpeed == 0){
+                    changeText();
+                    --lives;
+                    tempSpeed = speed;
+                }
+
+                if(lives == 0){
+                    classicMode = false;
+                    countDownTimer3.cancel();
+                    showAlertDialogButtonClicked("GAME OVER");
+                }
             }
-        });
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
+
+            @Override
+            public void onFinish() {
+                if(classicMode){
+                    countDownTimer3.cancel();
+                    countDownTimer3.start();
+                }
+            }
+        }.start();
     }
 
     private void restartGameClassic(){
-        TextView textView = findViewById(R.id.textView);
-        TextView textView2 = findViewById(R.id.textView2);
-
-        textView.setText("");
-        textView2.setText("");
-
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -237,65 +262,23 @@ public class PlayActivity extends AppCompatActivity {
 
             if(colorName.equalsIgnoreCase(action)){
                 ++score;
-                textView2.setText(String.valueOf(score));
+                tempSpeed = speed;
+                textView2.setText("Score\n" + String.valueOf(score));
                 changeText();
-                switch (mode){
-                    case 1:
-                        countDownTimer.cancel();
-                        break;
-                    case 2:
-                        chronometer.stop();
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                }
             }else{
                 switch (mode){
                     case 1:
                         countDownTimer.cancel();
+                        showAlertDialogButtonClicked("GAME OVER");
                         break;
                     case 2:
-                        chronometer.stop();
+                        --lives;
                         break;
                     case 3:
                         break;
                     case 4:
                         break;
                 }
-                // Get from the SharedPreferences
-                SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-                int myScore = settings.getInt("score", 0);
-
-                settings = getApplicationContext().getSharedPreferences("name", 0);
-                String myName = settings.getString("name", "");
-
-                if (!(myName.length() > 0)) {
-                    settings = getApplicationContext().getSharedPreferences("ID", 0);
-                    String myID = settings.getString("ID", "");
-                    if (!(myID.length() > 0))
-                        setID();
-                    setID();
-                    settings = getApplicationContext().getSharedPreferences("name", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-
-                    editor.putString("name", "DefaultUser");
-                    // Apply the edits!
-                    editor.apply();
-
-                    myName="DefaultUser";
-                }
-
-                if(myScore<score) {
-                    addNewScore(myName,myScore);
-                    settings = getApplicationContext().getSharedPreferences("score", 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("score", score);
-                    // Apply the edits!
-                    editor.apply();
-                }
-                showAlertDialogButtonClicked("GAME OVER");
             }
         }
     };
@@ -338,6 +321,37 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
+        // Get from the SharedPreferences
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+        int myScore = settings.getInt("score", 0);
+
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+
+        if (!(myName.length() > 0)) {
+            settings = getApplicationContext().getSharedPreferences("ID", 0);
+            String myID = settings.getString("ID", "");
+            if (!(myID.length() > 0))
+                setID();
+            setID();
+            settings = getApplicationContext().getSharedPreferences("name", 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString("name", "DefaultUser");
+            // Apply the edits!
+            editor.apply();
+
+            myName="DefaultUser";
+        }
+
+        if(myScore<score) {
+            addNewScore(myName,myScore);
+            settings = getApplicationContext().getSharedPreferences("score", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("score", score);
+            // Apply the edits!
+            editor.apply();
+        }
 
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
