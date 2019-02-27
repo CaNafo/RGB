@@ -34,8 +34,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ScoreActivity extends AppCompatActivity {
-    JSONArray Jarray = null;
-    JSONObject object = null;
     int mode = 1;
     boolean btnClicked = false;
     String responseString;
@@ -106,8 +104,8 @@ public class ScoreActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     responseString = response.body();
                     try {
-                        object = new JSONObject(responseString);
-                        Jarray = object.getJSONArray("data");
+                        JSONObject object = new JSONObject(responseString);
+                        JSONArray Jarray = object.getJSONArray("data");
                         String name = "";
                         String number = "";
                         String score = "";
@@ -288,7 +286,7 @@ public class ScoreActivity extends AppCompatActivity {
                     String responseString = response.body();
                     try {
                         JSONObject object = new JSONObject(responseString);
-                        Jarray = object.getJSONArray("data");
+                        JSONArray Jarray = object.getJSONArray("data");
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
