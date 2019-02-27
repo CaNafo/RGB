@@ -35,8 +35,31 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        offlineLoad();
         getRetrofitObject();// Get from the SharedPreferences
         getUserPosition();
+    }
+
+    void offlineLoad(){
+        TextView textView = findViewById(R.id.myScoreTxt);
+
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
+        int myScore = settings.getInt("score", 0);
+
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+        if (!(myName.length() > 0)) {
+            textView.setText("    Name:  "+myName + ",    Score:  " + myScore);
+
+            settings = getApplicationContext().getSharedPreferences("name", 0);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString("name", "DefaultUser");
+            // Apply the edits!
+            editor.apply();
+        } else {
+            textView.setText("    Name:  "+myName + ",    Score:  " + myScore);
+        }
     }
 
     void getRetrofitObject() {
@@ -132,7 +155,7 @@ public class ScoreActivity extends AppCompatActivity {
                             settings = getApplicationContext().getSharedPreferences("name", 0);
                             String myName = settings.getString("name", "");
                             if (!(myName.length() > 0)) {
-                                textView.setText(Jasonobject.get("position")+". DefaultUser" + ":       " + myScore);
+                                textView.setText("Position:  "+Jasonobject.get("position")+" ,    Name:  "+myName + ",    Score:  " + myScore);
 
                                 settings = getApplicationContext().getSharedPreferences("name", 0);
                                 SharedPreferences.Editor editor = settings.edit();
@@ -150,7 +173,7 @@ public class ScoreActivity extends AppCompatActivity {
                     }
                     // todo: do something with the response string
                 } else {
-                    //System.out.println(response.body() + "ETOOOOO");
+
                 }
 
             }

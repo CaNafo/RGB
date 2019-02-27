@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background"
     tools:context=".ScoreActivity">
 
     <TextView
@@ -23,7 +24,7 @@
         android:scrollbars="horizontal"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+        android:text="Loading..."
         android:textColor="@color/design_default_color_primary"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -76,7 +77,7 @@
                         android:layout_width="208dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="TextView"
+                        android:text="Loading..."
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -85,7 +86,7 @@
                         android:layout_width="177dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="TextView"
+                        android:text="Loading..."
                         android:textSize="24sp"
                         android:textStyle="bold" />
                 </LinearLayout>
