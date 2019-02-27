@@ -20,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +34,12 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        File f = new File("/data/data/" + getPackageName() +  "/shared_prefs/" + getPackageName()+ "ID.xml");
 
+        if(!f.exists())
+        {
+            System.out.println("NE POSOJI");
+        }
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(onClickListener);
     }
@@ -50,8 +57,15 @@ public class UserActivity extends AppCompatActivity {
 
             settings = getApplicationContext().getSharedPreferences("ID", 0);
             int myID = settings.getInt("ID", 0);
+
             if (myID == 0) {
                 setID();
+                File f = new File("/data/data/" + getPackageName() +  "/shared_prefs/" + getPackageName()+ "ID.xml");
+
+                if(f.exists())
+                {
+                    System.out.println("SADA POSTOJI");
+                }
                 addNewScore(textView.getText().toString(),0);
             }else{
                 updateName(myID,textView.getText().toString());
@@ -80,7 +94,9 @@ public class UserActivity extends AppCompatActivity {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
                             int ID = Integer.parseInt(Jasonobject.get("ID").toString());
-                            ID++;
+
+                            ID = ID + 1;
+                            System.out.println(ID+ "AJDIIII");
 
                             SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
                             SharedPreferences.Editor editor = settings.edit();
@@ -89,7 +105,6 @@ public class UserActivity extends AppCompatActivity {
                             // Apply the edits!
                             editor.apply();
 
-                            System.out.println(ID+ "AJDIIII");
                         }
 
                     } catch (JSONException e) {

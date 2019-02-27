@@ -80,7 +80,6 @@ public class ScoreActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     String responseString = response.body();
-                    ArrayList<ScoreClass> scoreActivities = new ArrayList<>();
                     try {
                         JSONObject object = new JSONObject(responseString);
                         JSONArray Jarray = object.getJSONArray("data");
