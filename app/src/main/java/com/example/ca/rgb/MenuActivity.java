@@ -71,7 +71,6 @@ public class MenuActivity extends AppCompatActivity {
                case "scoreBtn":
                    startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
                     //addNewScore();
-                   finish();
                    break;
                case "exitBtn":
                    finish();
