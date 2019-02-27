@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -32,17 +34,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ScoreActivity extends AppCompatActivity {
-
+    JSONArray Jarray = null;
+    JSONObject object = null;
+    static int mode = 2;
+    String responseString;
+    TextView tittleTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+        tittleTxt = findViewById(R.id.titleTxt);
+        tittleTxt.setText("Top 10 Time Attack players");
+
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myScore = settings.getInt("ID", 0);
-
+        Button nextBtn = findViewById(R.id.nextBtn);
+        nextBtn.setOnClickListener(nextListener);
         offlineLoad();
-        getRetrofitObject();// Get from the SharedPreferences
-        getUserPosition();
+        getRetrofitObject("score");// Get from the SharedPreferences
+        getUserPosition("score");
     }
 
     void offlineLoad() {
@@ -67,35 +77,36 @@ public class ScoreActivity extends AppCompatActivity {
         }
     }
 
-    void getRetrofitObject() {
+    void getRetrofitObject(String mode) {
+        final String jsonMode = mode;
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .baseUrl("http://rgb.dx.am/")
                 .build();
 
         APIogovor scalarService = retrofit.create(APIogovor.class);
-        Call<String> stringCall = scalarService.getStringResponse("/RGB/score_read.php");
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/score_read.php",mode);
         stringCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    String responseString = response.body();
+                    responseString = response.body();
                     try {
-                        JSONObject object = new JSONObject(responseString);
-                        JSONArray Jarray = object.getJSONArray("data");
+                        object = new JSONObject(responseString);
+                        Jarray = object.getJSONArray("data");
                         String name = "";
                         String number = "";
                         String score = "";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            if (i != 9) {
+                            if (i != (Jarray.length()-1)) {
                                 number += (i + 1) + ".\n\n";
                                 name += Jasonobject.getString("name") + "\n\n";
-                                score += Jasonobject.getString("score") + "\n\n";
+                                score += Jasonobject.getString(jsonMode) + "\n\n";
                             } else {
                                 number += (i + 1);
                                 name += Jasonobject.getString("name");
-                                score += Jasonobject.getString("score");
+                                score += Jasonobject.getString(jsonMode);
                             }
 
                         }
@@ -124,12 +135,29 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
-    void getUserPosition() {
+    void getUserPosition(String mode) {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myID = settings.getInt("ID", 0);
 
-        settings = getApplicationContext().getSharedPreferences("score", 0);
-        int myScore = settings.getInt("score", 0);
+        int myScore = 0;
+        switch (mode){
+            case "score":
+                settings = getApplicationContext().getSharedPreferences("score", 0);
+                myScore = settings.getInt("score", 0);
+                break;
+            case "classic":
+                settings = getApplicationContext().getSharedPreferences("score", 0);
+                myScore = settings.getInt("classic", 0);
+                break;
+            case "timeattackHard":
+                settings = getApplicationContext().getSharedPreferences("score", 0);
+                myScore = settings.getInt("timeattackHard", 0);
+                break;
+            case "classicHard":
+                settings = getApplicationContext().getSharedPreferences("score", 0);
+                myScore = settings.getInt("classicHard", 0);
+                break;
+        }
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
@@ -227,7 +255,7 @@ public class ScoreActivity extends AppCompatActivity {
                     String responseString = response.body();
                     try {
                         JSONObject object = new JSONObject(responseString);
-                        JSONArray Jarray = object.getJSONArray("data");
+                        Jarray = object.getJSONArray("data");
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
@@ -240,8 +268,6 @@ public class ScoreActivity extends AppCompatActivity {
                             editor.putInt("ID", ID);
                             // Apply the edits!
                             editor.apply();
-
-                            System.out.println(ID + "AJDIIII");
                         }
 
                     } catch (JSONException e) {
@@ -269,9 +295,9 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("dadsadasdas");
+                    System.out.println("");
                 } else {
-                    System.out.println("NIJEdadsadasdas");
+                    System.out.println("");
                 }
             }
 
@@ -281,4 +307,33 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
     }
+
+    View.OnClickListener nextListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            offlineLoad();
+            switch (mode){
+                case 1:
+                    tittleTxt.setText("Top 10 Time Attack players");
+                    getRetrofitObject("score");
+                    mode++;
+                    break;
+                case 2:
+                    tittleTxt.setText("Top 10 Classic players");
+                    getRetrofitObject("classic");
+                    mode++;
+                    break;
+                case 3:
+                    tittleTxt.setText("Top 10 Time Attack Hard players");
+                    getRetrofitObject("timeattackHard");
+                    mode++;
+                    break;
+                case 4:
+                    tittleTxt.setText("Top 10 Classic Hard players");
+                    getRetrofitObject("classicHard");
+                    mode = 1;
+                    break;
+            }
+        }
+    };
 }

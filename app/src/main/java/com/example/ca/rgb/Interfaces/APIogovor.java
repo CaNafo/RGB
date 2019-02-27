@@ -7,6 +7,6 @@ import retrofit2.http.Url;
 
 public interface APIogovor {
     @GET()
-    Call<String> getStringResponse(@Url String url);
+    Call<String> getStringResponse(@Url String url, @Query("mode") String mode);
 
 }

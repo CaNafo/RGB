@@ -552,12 +552,12 @@ public class PlayActivity extends AppCompatActivity {
             case 3:
                 //timeattack hard
                 settings = getApplicationContext().getSharedPreferences("timeattack_hard", 0);
-                myScore = settings.getInt("timeattack_hard", 0);
+                myScore = settings.getInt("timeattackHard", 0);
                 break;
             case 4:
                 //classic hard
                 settings = getApplicationContext().getSharedPreferences("classic_hard", 0);
-                myScore = settings.getInt("classic_hard", 0);
+                myScore = settings.getInt("classicHard", 0);
                 break;
         }
         // Get from the SharedPreferences
