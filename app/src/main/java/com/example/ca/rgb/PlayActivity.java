@@ -14,6 +14,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ public class PlayActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private CountDownTimer countDownTimer3;
+    private boolean started = false;
     private int mode = -1;
     private int time = 0;
     private int speed = 7;
@@ -80,6 +82,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 textView4.setText("");
+                started = true;
                 startGame();
             }
         }.start();
@@ -223,12 +226,12 @@ public class PlayActivity extends AppCompatActivity {
         if(lives == 0){
             disableButtons();
             countDownTimer3.cancel();
-            ((ImageView)findViewById(R.id.imageView1)).setVisibility(View.GONE);
+            scaleView(((ImageView)findViewById(R.id.imageView1)), 1, 0);
             showAlertDialogButtonClicked("GAME OVER");
         }else if(lives == 1){
-            ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.GONE);
+            scaleView(((ImageView)findViewById(R.id.imageView2)), 1, 0);
         }else if(lives == 2){
-            ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.GONE);
+            scaleView(((ImageView)findViewById(R.id.imageView3)), 1, 0);
         }
     }
 
@@ -298,8 +301,8 @@ public class PlayActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView);
 
-        fadeOutAnimation(textView, 1500);
-        fadeInAnimation(textView, 1500);
+        fadeOutAnimation(textView, 750);
+        fadeInAnimation(textView, 750);
 
         switch (random) {
             case 0:
@@ -339,7 +342,26 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
-        finishUpdate();
+        switch (mode){
+            case 1:
+                //timeattack
+                finishUpdate();
+                break;
+            case 2:
+                //classic
+                finishUpdate();
+                break;
+            case 3:
+                //timeattack hard
+                finishUpdate();
+                break;
+            case 4:
+                //classic hard
+                finishUpdate();
+                break;
+        }
+
+
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(s);
@@ -351,14 +373,15 @@ public class PlayActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 disableButtons();
                 resetOnStart();
+                started = false;
                 countDownTimer2.start();
             }
         });
-        builder.setNegativeButton("Main Menu", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Change Mode", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
-                startActivity(new Intent(PlayActivity.this, MenuActivity.class));
+                startActivity(new Intent(PlayActivity.this, ModeActivity.class));
             }
         });
 
@@ -372,7 +395,19 @@ public class PlayActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        showAlertDialogButtonClicked("GAME OVER");
+        if(started){
+            if(mode == 1 || mode == 3){
+                countDownTimer.cancel();
+            }else{
+                countDownTimer3.cancel();
+            }
+            showAlertDialogButtonClicked("GAME OVER");
+        }else{
+            countDownTimer2.cancel();
+
+            finish();
+            startActivity(new Intent(PlayActivity.this, ModeActivity.class));
+        }
     }
 
     public static void fadeInAnimation(final View view, long animationDuration) {
@@ -418,6 +453,17 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         view.startAnimation(fadeOut);
+    }
+
+    public void scaleView(View v, float startScale, float endScale) {
+        Animation anim = new ScaleAnimation(
+                1f, 1f, // Start and end values for the X axis scaling
+                startScale, endScale, // Start and end values for the Y axis scaling
+                Animation.RELATIVE_TO_SELF, 0f, // Pivot point of X scaling
+                Animation.RELATIVE_TO_SELF, 1f); // Pivot point of Y scaling
+        anim.setFillAfter(true); // Needed to keep the result of the animation
+        anim.setDuration(1000);
+        v.startAnimation(anim);
     }
 
     private void updateScore(int ID, int score) {
