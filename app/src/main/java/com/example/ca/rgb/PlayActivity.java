@@ -423,7 +423,7 @@ public class PlayActivity extends AppCompatActivity {
     private void updateScore(int ID, int score) {
         APIupdateServisi api = RetrofitUpdateCall.getApi();
         Call<String> call;
-        System.out.println(ID+" AJDU");
+
         call = api.setQuery(ID, score);
         call.enqueue(new Callback<String>() {
             @Override
@@ -504,7 +504,7 @@ public class PlayActivity extends AppCompatActivity {
                 setID();
                 settings = getApplicationContext().getSharedPreferences("ID", 0);
                 myID = settings.getInt("ID", 0);
-                updateScore(myID,score);
+                addNewScore(myName,score);
             }
             setID();
             settings = getApplicationContext().getSharedPreferences("name", 0);
@@ -527,6 +527,27 @@ public class PlayActivity extends AppCompatActivity {
             // Apply the edits!
             editor.apply();
         }
+    }
+
+    private void addNewScore(String name, int score) {
+        APIservisi api = RetrofitCall.getApi();
+        Call<String> call;
+        call = api.setQuery(name, score);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("dadsadasdas");
+                } else {
+                    System.out.println("NIJEdadsadasdas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }
 
