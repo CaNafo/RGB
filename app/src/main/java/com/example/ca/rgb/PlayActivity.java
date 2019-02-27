@@ -365,13 +365,14 @@ public class PlayActivity extends AppCompatActivity {
         builder.setCancelable(false);
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
-        dialog.show();
+        if (this.hasWindowFocus()) {
+            dialog.show();
+        }
     }
 
     @Override
     public void onBackPressed() {
-        finish();
-        startActivity(new Intent(PlayActivity.this, ModeActivity.class));
+        showAlertDialogButtonClicked("GAME OVER");
     }
 
     public static void fadeInAnimation(final View view, long animationDuration) {
