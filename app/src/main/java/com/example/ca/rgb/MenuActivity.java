@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity {
         Button scoreBtn = findViewById(R.id.scoreBtn);
         Button exitBtn = findViewById(R.id.exitBtn);
         Button editBtn = findViewById(R.id.editNameBtn);
-
+        Button helpBtn = findViewById(R.id.helpBtn);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
@@ -52,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         scoreBtn.setOnClickListener(menuActionListener);
         exitBtn.setOnClickListener(menuActionListener);
         editBtn.setOnClickListener(editNameListener);
-
+        helpBtn.setOnClickListener(menuActionListener);
     }
 
 
@@ -71,8 +71,13 @@ public class MenuActivity extends AppCompatActivity {
                case "scoreBtn":
                    startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
                     //addNewScore();
+                   finish();
                    break;
                case "exitBtn":
+                   finish();
+                   break;
+               case "helpBtn":
+                   startActivity(new Intent(MenuActivity.this, HelpActivity.class));
                    finish();
                    break;
            }

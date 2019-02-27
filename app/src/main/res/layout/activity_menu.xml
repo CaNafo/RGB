@@ -60,6 +60,7 @@
             android:id="@+id/helpBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="helpBtn"
             android:text="Help"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonYellow"
