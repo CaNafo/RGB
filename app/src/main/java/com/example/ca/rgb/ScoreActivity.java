@@ -61,9 +61,15 @@ public class ScoreActivity extends AppCompatActivity {
                         String score = "";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            number += (i+1)+".\n\n";
-                            name += Jasonobject.getString("name")+"\n\n";
-                            score += Jasonobject.getString("score")+"\n\n";
+                            if(i!=9){
+                                number += (i+1)+".\n\n";
+                                name += Jasonobject.getString("name")+"\n\n";
+                                score += Jasonobject.getString("score")+"\n\n";
+                            }else{
+                                number += (i+1);
+                                name += Jasonobject.getString("name");
+                                score += Jasonobject.getString("score");
+                            }
 
                         }
 
@@ -118,7 +124,7 @@ public class ScoreActivity extends AppCompatActivity {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
 
-                           // TextView textView = findViewById(R.id.myScoreTxt);
+                            TextView textView = findViewById(R.id.myScoreTxt);
 
                             SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
                             int myScore = settings.getInt("score", 0);
@@ -126,7 +132,7 @@ public class ScoreActivity extends AppCompatActivity {
                             settings = getApplicationContext().getSharedPreferences("name", 0);
                             String myName = settings.getString("name", "");
                             if (!(myName.length() > 0)) {
-                              //  textView.setText(Jasonobject.get("position")+". DefaultUser" + ":       " + myScore);
+                                textView.setText(Jasonobject.get("position")+". DefaultUser" + ":       " + myScore);
 
                                 settings = getApplicationContext().getSharedPreferences("name", 0);
                                 SharedPreferences.Editor editor = settings.edit();
@@ -135,7 +141,7 @@ public class ScoreActivity extends AppCompatActivity {
                                 // Apply the edits!
                                 editor.apply();
                             } else {
-                               // textView.setText("Position: "+Jasonobject.get("position")+", Name: "+myName + ", Score: " + myScore);
+                                textView.setText("Position:  "+Jasonobject.get("position")+" ,    Name:  "+myName + ",    Score:  " + myScore);
                             }
                         }
 

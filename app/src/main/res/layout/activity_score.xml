@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ScoreActivity">
 
+    <TextView
+        android:id="@+id/myScoreTxt"
+        android:layout_width="378dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:isScrollContainer="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+        android:textColor="@color/design_default_color_primary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/almendra_sc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
     <TableLayout
         android:id="@+id/scoreTable"
         android:layout_width="match_parent"
@@ -47,7 +73,7 @@
 
                     <TextView
                         android:id="@+id/nameTxt"
-                        android:layout_width="213dp"
+                        android:layout_width="208dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="TextView"
@@ -58,6 +84,7 @@
                         android:id="@+id/scoreTxt"
                         android:layout_width="177dp"
                         android:layout_height="match_parent"
+                        android:gravity="center"
                         android:text="TextView"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -85,13 +112,13 @@
         android:id="@+id/textView13"
         android:layout_width="85dp"
         android:layout_height="45dp"
-        android:layout_marginStart="296dp"
-        android:layout_marginLeft="296dp"
         android:layout_marginTop="88dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="Score"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Score" />
 
@@ -111,5 +138,23 @@
         app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="126dp"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginRight="126dp"
+        android:text="Your Score:"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTable"
+        tools:text="Your Score:" />
 
 </android.support.constraint.ConstraintLayout>
