@@ -17,4 +17,45 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MyButtonRed" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/darkred</item>
+        <item name="colorButtonNormal">@color/red</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">3</item>
+        <item name="dialogCornerRadius">10dp</item>
+    </style>
+
+    <style name="MyButtonGreen" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/darkgreen</item>
+        <item name="colorButtonNormal">@color/green</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
+    <style name="MyButtonBlue" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/darkblue</item>
+        <item name="colorButtonNormal">@color/blue</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
+    <style name="MyButtonPurple" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/darkpurple</item>
+        <item name="colorButtonNormal">@color/purple</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
+    <style name="MyButtonYellow" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/darkyellow</item>
+        <item name="colorButtonNormal">@color/yellow</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
 </resources>

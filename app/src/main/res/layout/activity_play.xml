@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background"
     tools:context=".PlayActivity">
 
     <Button
@@ -76,6 +77,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="298dp"
+        android:shadowRadius="3"
+        android:shadowColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textAlignment="center"
