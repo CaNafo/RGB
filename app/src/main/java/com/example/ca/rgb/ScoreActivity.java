@@ -81,6 +81,14 @@ public class ScoreActivity extends AppCompatActivity {
         } else {
             textView.setText("    Name:  " + myName + ",    Score:  " + myScore);
         }
+
+        textView = findViewById(R.id.nameTxt);
+        textView.setText("Loading...");
+        textView = findViewById(R.id.scoreTxt);
+        textView.setText("Loading...");
+        textView = findViewById(R.id.numberTxt);
+        textView.setText("1.");
+
     }
 
     void getRetrofitObject(String mode) {
