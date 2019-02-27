@@ -36,7 +36,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ScoreActivity extends AppCompatActivity {
     JSONArray Jarray = null;
     JSONObject object = null;
-    static int mode = 2;
+    int mode = 1;
+    boolean btnClicked = false;
     String responseString;
     TextView tittleTxt;
     @Override
@@ -48,8 +49,13 @@ public class ScoreActivity extends AppCompatActivity {
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myScore = settings.getInt("ID", 0);
+
         Button nextBtn = findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(nextListener);
+
+        Button previousBtn = findViewById(R.id.previousBtn);
+        previousBtn.setOnClickListener(backListener);
+
         offlineLoad();
         getRetrofitObject("score");// Get from the SharedPreferences
         getUserPosition("score");
@@ -331,30 +337,70 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             offlineLoad();
+            btnClicked = true;
+            if(mode == 4)
+                mode = 1;
+            else
+                mode++;
             switch (mode){
                 case 1:
                     tittleTxt.setText("Top 10 Time Attack players");
                     getRetrofitObject("score");
                     getUserPosition("score");
-                    mode++;
                     break;
                 case 2:
                     tittleTxt.setText("Top 10 Classic players");
                     getRetrofitObject("classic");
                     getUserPosition("classic");
-                    mode++;
                     break;
                 case 3:
                     tittleTxt.setText("Top 10 Time Attack Hard players");
                     getRetrofitObject("timeattackHard");
                     getUserPosition("timeattackHard");
-                    mode++;
                     break;
                 case 4:
                     tittleTxt.setText("Top 10 Classic Hard players");
                     getRetrofitObject("classicHard");
                     getUserPosition("classicHard");
-                    mode = 1;
+                    mode = 0;
+                    break;
+            }
+        }
+    };
+
+    View.OnClickListener backListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            offlineLoad();
+            if(!btnClicked){
+                mode = 4;
+                btnClicked = true;
+            }else {
+                if(mode == 1)
+                    mode = 4;
+                else
+                    mode--;
+            }
+            switch (mode){
+                case 1:
+                    tittleTxt.setText("Top 10 Time Attack players");
+                    getRetrofitObject("score");
+                    getUserPosition("score");
+                    break;
+                case 2:
+                    tittleTxt.setText("Top 10 Classic players");
+                    getRetrofitObject("classic");
+                    getUserPosition("classic");
+                    break;
+                case 3:
+                    tittleTxt.setText("Top 10 Time Attack Hard players");
+                    getRetrofitObject("timeattackHard");
+                    getUserPosition("timeattackHard");
+                    break;
+                case 4:
+                    tittleTxt.setText("Top 10 Classic Hard players");
+                    getRetrofitObject("classicHard");
+                    getUserPosition("classicHard");
                     break;
             }
         }
