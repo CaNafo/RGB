@@ -342,7 +342,26 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
-        finishUpdate();
+        switch (mode){
+            case 1:
+                //timeattack
+                finishUpdate();
+                break;
+            case 2:
+                //classic
+                finishUpdate();
+                break;
+            case 3:
+                //timeattack hard
+                finishUpdate();
+                break;
+            case 4:
+                //classic hard
+                finishUpdate();
+                break;
+        }
+
+
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(s);
