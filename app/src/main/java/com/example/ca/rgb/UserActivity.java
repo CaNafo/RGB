@@ -58,7 +58,7 @@ public class UserActivity extends AppCompatActivity {
     void setID() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl("http://192.168.1.5/")
+                .baseUrl("http://rgb.dx.am/")
                 .build();
 
         APIgetID scalarService = retrofit.create(APIgetID.class);
