@@ -1,22 +1,26 @@
 package com.example.ca.rgb;
 
-import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIgetPosition;
-import com.example.ca.rgb.Interfaces.APIservisi;
-import com.example.ca.rgb.R;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextClock;
+import android.view.Gravity;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +34,7 @@ public class ScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
         getRetrofitObject();// Get from the SharedPreferences
         getUserPosition();
     }
@@ -47,20 +52,27 @@ public class ScoreActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     String responseString = response.body();
+                    ArrayList<ScoreClass> scoreActivities = new ArrayList<>();
                     try {
                         JSONObject object = new JSONObject(responseString);
                         JSONArray Jarray = object.getJSONArray("data");
                         String name = "";
+                        String number = "";
                         String score = "";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            name += (i+1)+". "+Jasonobject.get("name") + "\n";
-                            score += Jasonobject.get("score") + "\n";
+                            number += (i+1)+".\n\n";
+                            name += Jasonobject.getString("name")+"\n\n";
+                            score += Jasonobject.getString("score")+"\n\n";
+
                         }
+
                         TextView textView = findViewById(R.id.nameTxt);
                         textView.setText(name);
                         textView = findViewById(R.id.scoreTxt);
                         textView.setText(score);
+                        textView = findViewById(R.id.numberTxt);
+                        textView.setText(number);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -106,7 +118,7 @@ public class ScoreActivity extends AppCompatActivity {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
 
-                            TextView textView = findViewById(R.id.myScoreTxt);
+                           // TextView textView = findViewById(R.id.myScoreTxt);
 
                             SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
                             int myScore = settings.getInt("score", 0);
@@ -114,7 +126,7 @@ public class ScoreActivity extends AppCompatActivity {
                             settings = getApplicationContext().getSharedPreferences("name", 0);
                             String myName = settings.getString("name", "");
                             if (!(myName.length() > 0)) {
-                                textView.setText(Jasonobject.get("position")+". DefaultUser" + ":       " + myScore);
+                              //  textView.setText(Jasonobject.get("position")+". DefaultUser" + ":       " + myScore);
 
                                 settings = getApplicationContext().getSharedPreferences("name", 0);
                                 SharedPreferences.Editor editor = settings.edit();
@@ -123,7 +135,7 @@ public class ScoreActivity extends AppCompatActivity {
                                 // Apply the edits!
                                 editor.apply();
                             } else {
-                                textView.setText("Position: "+Jasonobject.get("position")+", Name: "+myName + ", Score: " + myScore);
+                               // textView.setText("Position: "+Jasonobject.get("position")+", Name: "+myName + ", Score: " + myScore);
                             }
                         }
 
