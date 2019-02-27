@@ -271,6 +271,8 @@ public class PlayActivity extends AppCompatActivity {
                         lostLife();
                         break;
                     case 3:
+                        countDownTimer.cancel();
+                        showAlertDialogButtonClicked("GAME OVER");
                         break;
                     case 4:
                         --lives;
@@ -442,7 +444,7 @@ public class PlayActivity extends AppCompatActivity {
     void setID() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl("http://192.168.1.5/")
+                .baseUrl("http://rgb.dx.am/")
                 .build();
 
         APIgetID scalarService = retrofit.create(APIgetID.class);

@@ -37,7 +37,7 @@ public class ScoreActivity extends AppCompatActivity {
     void getRetrofitObject() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl("http://192.168.1.5/")
+                .baseUrl("http://rgb.dx.am/")
                 .build();
 
         APIogovor scalarService = retrofit.create(APIogovor.class);
@@ -85,7 +85,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl("http://192.168.1.5/")
+                .baseUrl("http://rgb.dx.am/")
                 .build();
 
         APIgetPosition scalarService = retrofit.create(APIgetPosition.class);

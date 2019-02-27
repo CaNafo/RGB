@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitOdgovor {
 
-    private static final String ROOT_URL = "192.168.1.5/";
+    private static final String ROOT_URL = "rgb.dx.am5/";
 
     static OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)
