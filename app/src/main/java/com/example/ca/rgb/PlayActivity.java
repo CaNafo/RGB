@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIgetID;
@@ -57,12 +58,14 @@ public class PlayActivity extends AppCompatActivity {
             mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
+        disableButtons();
 
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
                 if(l / 1000 == 3){
                     btnVisibility();
+                    livesVisibility();
                 }
 
                 fadeOutAnimation(textView4, 750);
@@ -113,26 +116,6 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
-    private void restartGame(){
-        resetOnStart();
-        switch (mode){
-            case 1:
-                restartGameTimeAttack();
-                break;
-            case 2:
-                restartGameClassic();
-                break;
-            case 3:
-                restartHardMode();
-                restartGameTimeAttack();
-                break;
-            case 4:
-                restartHardMode();
-                restartGameClassic();
-                break;
-        }
-    }
-
     private void startGameTimeAttack() {
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
@@ -159,18 +142,6 @@ public class PlayActivity extends AppCompatActivity {
                 showAlertDialogButtonClicked("Time's up");
             }
         }.start();
-    }
-
-    private void restartGameTimeAttack(){
-        Button redBtn = findViewById(R.id.redBtn);
-        Button greenBtn = findViewById(R.id.greenBtn);
-        Button blueBtn = findViewById(R.id.blueBtn);
-
-        redBtn.setOnClickListener(null);
-        greenBtn.setOnClickListener(null);
-        blueBtn.setOnClickListener(null);
-
-        countDownTimer2.start();
     }
 
     private void startGameClassic(){
@@ -201,12 +172,8 @@ public class PlayActivity extends AppCompatActivity {
                 if(tempSpeed == 0){
                     changeText();
                     --lives;
+                    lostLife();
                     tempSpeed = speed;
-                }
-
-                if(lives == 0){
-                    countDownTimer3.cancel();
-                    showAlertDialogButtonClicked("GAME OVER");
                 }
             }
 
@@ -218,32 +185,12 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void restartGameClassic(){
-        Button redBtn = findViewById(R.id.redBtn);
-        Button greenBtn = findViewById(R.id.greenBtn);
-        Button blueBtn = findViewById(R.id.blueBtn);
-
-        redBtn.setOnClickListener(null);
-        greenBtn.setOnClickListener(null);
-        blueBtn.setOnClickListener(null);
-
-        countDownTimer2.start();
-    }
-
     private void startHardMode(){
         Button purpleBtn = findViewById(R.id.purpleBtn);
         Button yellowBtn = findViewById(R.id.yellowBtn);
 
         purpleBtn.setOnClickListener(playActionListener);
         yellowBtn.setOnClickListener(playActionListener);
-    }
-
-    private void restartHardMode(){
-        Button purpleBtn = findViewById(R.id.purpleBtn);
-        Button yellowBtn = findViewById(R.id.yellowBtn);
-
-        purpleBtn.setOnClickListener(null);
-        yellowBtn.setOnClickListener(null);
     }
 
     private void btnVisibility(){
@@ -257,6 +204,46 @@ public class PlayActivity extends AppCompatActivity {
             purpleBtn.setVisibility(View.GONE);
             yellowBtn.setVisibility(View.GONE);
         }
+    }
+
+    private void livesVisibility(){
+        if(mode == 2 || mode == 4){
+            ((ImageView)findViewById(R.id.imageView1)).setVisibility(View.VISIBLE);
+            ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.VISIBLE);
+            ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.VISIBLE);
+        }else{
+
+            ((ImageView)findViewById(R.id.imageView1)).setVisibility(View.GONE);
+            ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.GONE);
+            ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.GONE);
+        }
+    }
+
+    private void lostLife(){
+        if(lives == 0){
+            disableButtons();
+            countDownTimer3.cancel();
+            ((ImageView)findViewById(R.id.imageView1)).setVisibility(View.GONE);
+            showAlertDialogButtonClicked("GAME OVER");
+        }else if(lives == 1){
+            ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.GONE);
+        }else if(lives == 2){
+            ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.GONE);
+        }
+    }
+
+    private void disableButtons(){
+        Button redBtn = findViewById(R.id.redBtn);
+        Button greenBtn = findViewById(R.id.greenBtn);
+        Button blueBtn = findViewById(R.id.blueBtn);
+        Button purpleBtn = findViewById(R.id.purpleBtn);
+        Button yellowBtn = findViewById(R.id.yellowBtn);
+
+        redBtn.setOnClickListener(null);
+        greenBtn.setOnClickListener(null);
+        blueBtn.setOnClickListener(null);
+        purpleBtn.setOnClickListener(null);
+        yellowBtn.setOnClickListener(null);
     }
 
     View.OnClickListener playActionListener = new View.OnClickListener() {
@@ -281,10 +268,13 @@ public class PlayActivity extends AppCompatActivity {
                         break;
                     case 2:
                         --lives;
+                        lostLife();
                         break;
                     case 3:
                         break;
                     case 4:
+                        --lives;
+                        lostLife();
                         break;
                 }
             }
@@ -357,7 +347,9 @@ public class PlayActivity extends AppCompatActivity {
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                restartGame();
+                disableButtons();
+                resetOnStart();
+                countDownTimer2.start();
             }
         });
         builder.setNegativeButton("Main Menu", new DialogInterface.OnClickListener() {
