@@ -345,19 +345,19 @@ public class PlayActivity extends AppCompatActivity {
         switch (mode){
             case 1:
                 //timeattack
-                finishUpdate();
+                finishUpdate(1);
                 break;
             case 2:
                 //classic
-                finishUpdate();
+                finishUpdate(2);
                 break;
             case 3:
                 //timeattack hard
-                finishUpdate();
+                finishUpdate(3);
                 break;
             case 4:
                 //classic hard
-                finishUpdate();
+                finishUpdate(4);
                 break;
         }
 
@@ -466,11 +466,11 @@ public class PlayActivity extends AppCompatActivity {
         v.startAnimation(anim);
     }
 
-    private void updateScore(int ID, int score) {
+    private void updateScore(int ID, int score, int mode) {
         APIupdateServisi api = RetrofitUpdateCall.getApi();
         Call<String> call;
 
-        call = api.setQuery(ID, score);
+        call = api.setQuery(ID, score, mode);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -535,10 +535,33 @@ public class PlayActivity extends AppCompatActivity {
         });
     }
 
-    private void finishUpdate(){
+    private void finishUpdate(int mode){
+        SharedPreferences settings;
+        int myScore = 0;
+        switch (mode){
+            case 1:
+                //timeattack
+                settings = getApplicationContext().getSharedPreferences("score", 0);
+                myScore = settings.getInt("score", 0);
+                break;
+            case 2:
+                //classic
+                settings = getApplicationContext().getSharedPreferences("classic", 0);
+                myScore = settings.getInt("classic", 0);
+                break;
+            case 3:
+                //timeattack hard
+                settings = getApplicationContext().getSharedPreferences("timeattack_hard", 0);
+                myScore = settings.getInt("timeattack_hard", 0);
+                break;
+            case 4:
+                //classic hard
+                settings = getApplicationContext().getSharedPreferences("classic_hard", 0);
+                myScore = settings.getInt("classic_hard", 0);
+                break;
+        }
         // Get from the SharedPreferences
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-        int myScore = settings.getInt("score", 0);
+
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
@@ -566,7 +589,7 @@ public class PlayActivity extends AppCompatActivity {
         if (myScore < score) {
             settings = getApplicationContext().getSharedPreferences("ID", 0);
             int myID = settings.getInt("ID", 0);
-            updateScore(myID, score);
+            updateScore(myID, score, mode);
             settings = getApplicationContext().getSharedPreferences("score", 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putInt("score", score);
