@@ -16,10 +16,13 @@ public class ModeActivity extends AppCompatActivity {
 
         Button mode1Btn = findViewById(R.id.mode1Btn);
         Button mode2Btn = findViewById(R.id.mode2Btn);
-
+        Button mode3Btn = findViewById(R.id.mode3Btn);
+        Button mode4Btn = findViewById(R.id.mode4Btn);
 
         mode1Btn.setOnClickListener(modeActionListener);
         mode2Btn.setOnClickListener(modeActionListener);
+        mode3Btn.setOnClickListener(modeActionListener);
+        mode4Btn.setOnClickListener(modeActionListener);
     }
 
     View.OnClickListener modeActionListener = new View.OnClickListener() {
@@ -47,6 +50,13 @@ public class ModeActivity extends AppCompatActivity {
                 case "mode3":
                     b = new Bundle();
                     b.putInt("mode", 3); //Your id
+                    intent.putExtras(b); //Put your id to your next Intent
+                    startActivity(intent);
+                    finish();
+                    break;
+                case "mode4":
+                    b = new Bundle();
+                    b.putInt("mode", 4); //Your id
                     intent.putExtras(b); //Put your id to your next Intent
                     startActivity(intent);
                     finish();
