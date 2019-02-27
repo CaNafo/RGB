@@ -215,7 +215,6 @@ public class PlayActivity extends AppCompatActivity {
             ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.VISIBLE);
             ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.VISIBLE);
 
-
             ((ImageView)findViewById(R.id.imageView1)).setScaleY(1);
             ((ImageView)findViewById(R.id.imageView2)).setScaleY(1);
             ((ImageView)findViewById(R.id.imageView3)).setScaleY(1);
@@ -378,6 +377,7 @@ public class PlayActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 disableButtons();
                 resetOnStart();
+                livesVisibility();
                 started = false;
                 countDownTimer2.start();
             }
