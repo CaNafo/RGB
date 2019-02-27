@@ -1,5 +1,6 @@
 package com.example.ca.rgb;
 
+import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIgetPosition;
 
 import android.content.SharedPreferences;
@@ -15,6 +16,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
+import com.example.ca.rgb.Interfaces.APIservisi;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,13 +37,15 @@ public class ScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
+        int myScore = settings.getInt("ID", 0);
 
         offlineLoad();
         getRetrofitObject();// Get from the SharedPreferences
         getUserPosition();
     }
 
-    void offlineLoad(){
+    void offlineLoad() {
         TextView textView = findViewById(R.id.myScoreTxt);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
@@ -49,7 +54,7 @@ public class ScoreActivity extends AppCompatActivity {
         settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
         if (!(myName.length() > 0)) {
-            textView.setText("    Name:  "+myName + ",    Score:  " + myScore);
+            textView.setText("    Name:  " + myName + ",    Score:  " + myScore);
 
             settings = getApplicationContext().getSharedPreferences("name", 0);
             SharedPreferences.Editor editor = settings.edit();
@@ -58,7 +63,7 @@ public class ScoreActivity extends AppCompatActivity {
             // Apply the edits!
             editor.apply();
         } else {
-            textView.setText("    Name:  "+myName + ",    Score:  " + myScore);
+            textView.setText("    Name:  " + myName + ",    Score:  " + myScore);
         }
     }
 
@@ -84,12 +89,12 @@ public class ScoreActivity extends AppCompatActivity {
                         String score = "";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            if(i!=9){
-                                number += (i+1)+".\n\n";
-                                name += Jasonobject.getString("name")+"\n\n";
-                                score += Jasonobject.getString("score")+"\n\n";
-                            }else{
-                                number += (i+1);
+                            if (i != 9) {
+                                number += (i + 1) + ".\n\n";
+                                name += Jasonobject.getString("name") + "\n\n";
+                                score += Jasonobject.getString("score") + "\n\n";
+                            } else {
+                                number += (i + 1);
                                 name += Jasonobject.getString("name");
                                 score += Jasonobject.getString("score");
                             }
@@ -124,6 +129,30 @@ public class ScoreActivity extends AppCompatActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myID = settings.getInt("ID", 0);
 
+        settings = getApplicationContext().getSharedPreferences("score", 0);
+        int myScore = settings.getInt("score", 0);
+
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+
+        if (myID == 0) {
+            setID();
+            settings = getApplicationContext().getSharedPreferences("ID", 0);
+            myID = settings.getInt("ID", 0);
+
+            if (!(myName.length() > 0)) {
+                settings = getApplicationContext().getSharedPreferences("name", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("name", "DefaultUser");
+                // Apply the edits!
+                editor.apply();
+                addNewScore("DefaultUser",myScore);
+
+            } else {
+                addNewScore(myName, myScore);
+            }
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .baseUrl("http://rgb.dx.am/")
@@ -146,7 +175,6 @@ public class ScoreActivity extends AppCompatActivity {
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
-
                             TextView textView = findViewById(R.id.myScoreTxt);
 
                             SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
@@ -155,7 +183,7 @@ public class ScoreActivity extends AppCompatActivity {
                             settings = getApplicationContext().getSharedPreferences("name", 0);
                             String myName = settings.getString("name", "");
                             if (!(myName.length() > 0)) {
-                                textView.setText("Position:  "+Jasonobject.get("position")+" ,    Name:  "+myName + ",    Score:  " + myScore);
+                                textView.setText("Position:  " + Jasonobject.get("position") + " ,    Name:  " + myName + ",    Score:  " + myScore);
 
                                 settings = getApplicationContext().getSharedPreferences("name", 0);
                                 SharedPreferences.Editor editor = settings.edit();
@@ -164,7 +192,7 @@ public class ScoreActivity extends AppCompatActivity {
                                 // Apply the edits!
                                 editor.apply();
                             } else {
-                                textView.setText("Position:  "+Jasonobject.get("position")+" ,    Name:  "+myName + ",    Score:  " + myScore);
+                                textView.setText("Position:  " + Jasonobject.get("position") + " ,    Name:  " + myName + ",    Score:  " + myScore);
                             }
                         }
 
@@ -185,4 +213,73 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
+    void setID() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .baseUrl("http://rgb.dx.am/")
+                .build();
+
+        APIgetID scalarService = retrofit.create(APIgetID.class);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/getID.php");
+        stringCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    String responseString = response.body();
+                    try {
+                        JSONObject object = new JSONObject(responseString);
+                        JSONArray Jarray = object.getJSONArray("data");
+                        for (int i = 0; i < Jarray.length(); i++) {
+                            JSONObject Jasonobject = Jarray.getJSONObject(i);
+
+                            int ID = Integer.parseInt(Jasonobject.get("ID").toString());
+                            ID++;
+
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+
+                            editor.putInt("ID", ID);
+                            // Apply the edits!
+                            editor.apply();
+
+                            System.out.println(ID + "AJDIIII");
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    // todo: do something with the response string
+                } else {
+                    //System.out.println(response.body() + "ETOOOOO");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void addNewScore(String name, int score) {
+        APIservisi api = RetrofitCall.getApi();
+        Call<String> call;
+        call = api.setQuery(name, score);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("dadsadasdas");
+                } else {
+                    System.out.println("NIJEdadsadasdas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
 }

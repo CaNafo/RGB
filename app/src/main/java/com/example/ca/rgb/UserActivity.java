@@ -10,7 +10,11 @@ import android.widget.TextView;
 import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.Interfaces.APIservisi;
+import com.example.ca.rgb.Interfaces.APIupdateName;
+import com.example.ca.rgb.Interfaces.APIupdateServisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateCall;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateName;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,8 +53,9 @@ public class UserActivity extends AppCompatActivity {
             if (myID == 0) {
                 setID();
                 addNewScore(textView.getText().toString(),0);
+            }else{
+                updateName(myID,textView.getText().toString());
             }
-
             finish();
         }
     };
@@ -115,6 +120,28 @@ public class UserActivity extends AppCompatActivity {
                     System.out.println("dadsadasdas");
                 } else {
                     System.out.println("NIJEdadsadasdas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void updateName(int ID, String name) {
+        APIupdateName api = RetrofitUpdateName.getApi();
+        Call<String> call;
+
+        call = api.setQuery(ID, name);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("");
+                } else {
+                    System.out.println("");
                 }
             }
 
