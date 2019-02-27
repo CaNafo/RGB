@@ -7,5 +7,6 @@ import retrofit2.http.Url;
 
 public interface APIgetPosition {
     @GET()
-    Call<String> getStringResponse(@Url String url,@Query("ID") int ID);
+    Call<String> getStringResponse(@Url String url,@Query("ID") int ID,
+                                   @Query("mode") String mode);
 }

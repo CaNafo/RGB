@@ -146,15 +146,15 @@ public class ScoreActivity extends AppCompatActivity {
                 myScore = settings.getInt("score", 0);
                 break;
             case "classic":
-                settings = getApplicationContext().getSharedPreferences("score", 0);
+                settings = getApplicationContext().getSharedPreferences("classic", 0);
                 myScore = settings.getInt("classic", 0);
                 break;
             case "timeattackHard":
-                settings = getApplicationContext().getSharedPreferences("score", 0);
+                settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
                 myScore = settings.getInt("timeattackHard", 0);
                 break;
             case "classicHard":
-                settings = getApplicationContext().getSharedPreferences("score", 0);
+                settings = getApplicationContext().getSharedPreferences("classicHard", 0);
                 myScore = settings.getInt("classicHard", 0);
                 break;
         }
@@ -187,8 +187,9 @@ public class ScoreActivity extends AppCompatActivity {
 
         APIgetPosition scalarService = retrofit.create(APIgetPosition.class);
         APIgetPosition api = scalarService;
-        Call<String> stringCall = scalarService.getStringResponse("/RGB/getUserPosition.php", myID);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/getUserPosition.php", myID,mode);
 
+        final String modeJson = mode;
 
         stringCall.enqueue(new Callback<String>() {
             @Override
@@ -203,9 +204,27 @@ public class ScoreActivity extends AppCompatActivity {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
                             TextView textView = findViewById(R.id.myScoreTxt);
+                            SharedPreferences settings;
+                            int myScore = 0;
+                            switch (modeJson){
+                                case "score":
+                                    settings = getApplicationContext().getSharedPreferences("score", 0);
+                                    myScore = settings.getInt("score", 0);
+                                    break;
+                                case "classic":
+                                    settings = getApplicationContext().getSharedPreferences("classic", 0);
+                                    myScore = settings.getInt("classic", 0);
+                                    break;
+                                case "timeattackHard":
+                                    settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
+                                    myScore = settings.getInt("timeattackHard", 0);
+                                    break;
+                                case "classicHard":
+                                    settings = getApplicationContext().getSharedPreferences("classicHard", 0);
+                                    myScore = settings.getInt("classicHard", 0);
+                                    break;
+                            }
 
-                            SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-                            int myScore = settings.getInt("score", 0);
 
                             settings = getApplicationContext().getSharedPreferences("name", 0);
                             String myName = settings.getString("name", "");
@@ -316,21 +335,25 @@ public class ScoreActivity extends AppCompatActivity {
                 case 1:
                     tittleTxt.setText("Top 10 Time Attack players");
                     getRetrofitObject("score");
+                    getUserPosition("score");
                     mode++;
                     break;
                 case 2:
                     tittleTxt.setText("Top 10 Classic players");
                     getRetrofitObject("classic");
+                    getUserPosition("classic");
                     mode++;
                     break;
                 case 3:
                     tittleTxt.setText("Top 10 Time Attack Hard players");
                     getRetrofitObject("timeattackHard");
+                    getUserPosition("timeattackHard");
                     mode++;
                     break;
                 case 4:
                     tittleTxt.setText("Top 10 Classic Hard players");
                     getRetrofitObject("classicHard");
+                    getUserPosition("classicHard");
                     mode = 1;
                     break;
             }

@@ -595,9 +595,42 @@ public class PlayActivity extends AppCompatActivity {
             settings = getApplicationContext().getSharedPreferences("ID", 0);
             int myID = settings.getInt("ID", 0);
             updateScore(myID, score, mode);
-            settings = getApplicationContext().getSharedPreferences("score", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("score", score);
+
+            SharedPreferences.Editor editor;
+
+            switch (mode){
+                case 1:
+                    //timeattack
+                    settings = getApplicationContext().getSharedPreferences("score", 0);
+                    editor = settings.edit();
+                    editor.putInt("score", score);
+                    break;
+                case 2:
+                    //classic
+                    settings = getApplicationContext().getSharedPreferences("classic", 0);
+                    editor = settings.edit();
+                    editor.putInt("classic", score);
+                    break;
+                case 3:
+                    //timeattack hard
+                    settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
+                    editor = settings.edit();
+                    editor.putInt("timeattackHard", score);
+                    break;
+                case 4:
+                    //classic hard
+                    settings = getApplicationContext().getSharedPreferences("classicHard", 0);
+                    editor = settings.edit();
+                    editor.putInt("classicHard", score);
+                    break;
+
+                    default:
+                        settings = getApplicationContext().getSharedPreferences("score", 0);
+                        editor = settings.edit();
+                        editor.putInt("score", score);
+                        break;
+            }
+
             // Apply the edits!
             editor.apply();
         }
