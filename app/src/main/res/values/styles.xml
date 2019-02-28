@@ -17,13 +17,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="PrevNext" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/darkorange</item>
+        <item name="colorButtonNormal">@color/orange</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
     <style name="MyButtonRed" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/darkred</item>
         <item name="colorButtonNormal">@color/red</item>
         <item name="android:textSize">30dp</item>
         <item name="android:shadowColor">#000000</item>
         <item name="android:shadowRadius">3</item>
-        <item name="dialogCornerRadius">10dp</item>
     </style>
 
     <style name="MyButtonGreen" parent="Theme.AppCompat.Light">
@@ -73,6 +80,12 @@
         <item name="android:textSize">30dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Score">
+        <item name="android:shadowRadius">4</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
 </resources>

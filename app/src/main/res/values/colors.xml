@@ -13,4 +13,6 @@
     <color name="darkpurple">#8b008b</color>
     <color name="yellow">#ffff00</color>
     <color name="darkyellow">#ffa500</color>
+    <color name="orange">#ffa500</color>
+    <color name="darkorange">#ff4500</color>
 </resources>

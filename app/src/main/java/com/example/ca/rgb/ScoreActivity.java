@@ -77,7 +77,7 @@ public class ScoreActivity extends AppCompatActivity {
             // Apply the edits!
             editor.apply();
         } else {
-            textView.setText("    Name:  " + myName + ",    Score:  " + myScore);
+            textView.setText("Name:  " + myName + ",    Score:  " + myScore);
         }
 
         textView = findViewById(R.id.nameTxt);
@@ -106,15 +106,15 @@ public class ScoreActivity extends AppCompatActivity {
                     try {
                         JSONObject object = new JSONObject(responseString);
                         JSONArray Jarray = object.getJSONArray("data");
-                        String name = "";
-                        String number = "";
-                        String score = "";
+                        String name = "Player\n\n";
+                        String number = "\n\n";
+                        String score = "Score\n\n";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
                             if (i != (Jarray.length()-1)) {
-                                number += (i + 1) + ".\n\n";
-                                name += Jasonobject.getString("name") + "\n\n";
-                                score += Jasonobject.getString(jsonMode) + "\n\n";
+                                number += (i + 1) + ".\n";
+                                name += Jasonobject.getString("name") + "\n";
+                                score += Jasonobject.getString(jsonMode) + "\n";
                             } else {
                                 number += (i + 1);
                                 name += Jasonobject.getString("name");
