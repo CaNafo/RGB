@@ -556,12 +556,12 @@ public class PlayActivity extends AppCompatActivity {
                 break;
             case 3:
                 //timeattack hard
-                settings = getApplicationContext().getSharedPreferences("timeattack_hard", 0);
+                settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
                 myScore = settings.getInt("timeattackHard", 0);
                 break;
             case 4:
                 //classic hard
-                settings = getApplicationContext().getSharedPreferences("classic_hard", 0);
+                settings = getApplicationContext().getSharedPreferences("classicHard", 0);
                 myScore = settings.getInt("classicHard", 0);
                 break;
         }
@@ -644,9 +644,9 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("dadsadasdas");
+                    System.out.println("");
                 } else {
-                    System.out.println("NIJEdadsadasdas");
+                    System.out.println("");
                 }
             }
 
