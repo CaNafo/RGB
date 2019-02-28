@@ -18,6 +18,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIogovor;
+import com.example.ca.rgb.Interfaces.APIrefreshScore;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 
@@ -53,6 +54,9 @@ public class ScoreActivity extends AppCompatActivity {
 
         Button previousBtn = findViewById(R.id.previousBtn);
         previousBtn.setOnClickListener(backListener);
+
+        Button refreshBtn = findViewById(R.id.refreshBtn);
+        refreshBtn.setOnClickListener(refreshListener);
 
         offlineLoad();
         getRetrofitObject("score");// Get from the SharedPreferences
@@ -434,6 +438,51 @@ public class ScoreActivity extends AppCompatActivity {
                     getUserPosition("classicHard");
                     break;
             }
+        }
+    };
+
+    View.OnClickListener refreshListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .baseUrl("http://rgb.dx.am/")
+                    .build();
+
+            APIrefreshScore scalarService = retrofit.create(APIrefreshScore.class);
+
+            SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
+            int myID = settings.getInt("ID", 0);
+
+            settings = getApplicationContext().getSharedPreferences("score", 0);
+            int timeAttack = settings.getInt("score", 0);
+
+            settings = getApplicationContext().getSharedPreferences("classic", 0);
+            int classic = settings.getInt("classic", 0);
+
+            settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
+            int timeAttackHard = settings.getInt("timeattackHard", 0);
+
+            settings = getApplicationContext().getSharedPreferences("classicHard", 0);
+            int classicHard = settings.getInt("classicHard", 0);
+
+
+            Call<String> stringCall = scalarService.setQuery(myID,timeAttack,classic,timeAttackHard,classicHard);
+            stringCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful()) {
+                        getRetrofitObject("score");
+                    } else {
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    getRetrofitObject("score");
+                }
+            });
         }
     };
 }
