@@ -34,12 +34,6 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        File f = new File("/data/data/" + getPackageName() +  "/shared_prefs/" + getPackageName()+ "ID.xml");
-
-        if(!f.exists())
-        {
-            System.out.println("NE POSOJI");
-        }
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(onClickListener);
     }
@@ -60,16 +54,10 @@ public class UserActivity extends AppCompatActivity {
 
             if (myID == 0) {
                 setID();
-                File f = new File("/data/data/" + getPackageName() +  "/shared_prefs/" + getPackageName()+ "ID.xml");
-
-                if(f.exists())
-                {
-                    System.out.println("SADA POSTOJI");
-                }
-                addNewScore(textView.getText().toString(),0);
             }else{
                 updateName(myID,textView.getText().toString());
             }
+
             finish();
         }
     };
@@ -104,7 +92,8 @@ public class UserActivity extends AppCompatActivity {
                             editor.putInt("ID", ID);
                             // Apply the edits!
                             editor.apply();
-
+                            TextView textView = findViewById(R.id.nameTxt);
+                            addNewScore(textView.getText().toString(),0);
                         }
 
                     } catch (JSONException e) {

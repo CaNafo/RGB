@@ -175,21 +175,9 @@ public class ScoreActivity extends AppCompatActivity {
         String myName = settings.getString("name", "");
 
         if (myID == 0) {
-            setID();
+            setID(mode);
             settings = getApplicationContext().getSharedPreferences("ID", 0);
             myID = settings.getInt("ID", 0);
-
-            if (!(myName.length() > 0)) {
-                settings = getApplicationContext().getSharedPreferences("name", 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString("name", "DefaultUser");
-                // Apply the edits!
-                editor.apply();
-                addNewScore("DefaultUser",myScore);
-
-            } else {
-                addNewScore(myName, myScore);
-            }
         }
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -271,7 +259,8 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
-    void setID() {
+    void setID(String mode) {
+        final String modeJson = mode;
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .baseUrl("http://rgb.dx.am/")
@@ -299,6 +288,42 @@ public class ScoreActivity extends AppCompatActivity {
                             editor.putInt("ID", ID);
                             // Apply the edits!
                             editor.apply();
+                            settings = getApplicationContext().getSharedPreferences("ID", 0);
+                            int myID = settings.getInt("ID", 0);
+
+                            int myScore = 0;
+                            switch (modeJson){
+                                case "score":
+                                    settings = getApplicationContext().getSharedPreferences("score", 0);
+                                    myScore = settings.getInt("score", 0);
+                                    break;
+                                case "classic":
+                                    settings = getApplicationContext().getSharedPreferences("classic", 0);
+                                    myScore = settings.getInt("classic", 0);
+                                    break;
+                                case "timeattackHard":
+                                    settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
+                                    myScore = settings.getInt("timeattackHard", 0);
+                                    break;
+                                case "classicHard":
+                                    settings = getApplicationContext().getSharedPreferences("classicHard", 0);
+                                    myScore = settings.getInt("classicHard", 0);
+                                    break;
+                            }
+
+                            settings = getApplicationContext().getSharedPreferences("name", 0);
+                            String myName = settings.getString("name", "");
+                            if (!(myName.length() > 0)) {
+                                settings = getApplicationContext().getSharedPreferences("name", 0);
+                                editor = settings.edit();
+                                editor.putString("name", "DefaultUser");
+                                // Apply the edits!
+                                editor.apply();
+                                addNewScore("DefaultUser",myScore);
+
+                            } else {
+                                addNewScore(myName, myScore);
+                            }
                         }
 
                     } catch (JSONException e) {

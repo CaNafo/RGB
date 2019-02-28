@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RGB</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="top_10_players">Top 10 players</string>
+    <string name="previous">Previous</string>
+    <string name="_1">1</string>
 </resources>
