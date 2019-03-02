@@ -21,6 +21,9 @@ import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.Interfaces.APIrefreshScore;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +42,7 @@ public class ScoreActivity extends AppCompatActivity {
     boolean btnClicked = false;
     String responseString;
     TextView tittleTxt;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,11 @@ public class ScoreActivity extends AppCompatActivity {
         offlineLoad();
         getRetrofitObject("score");// Get from the SharedPreferences
         getUserPosition("score");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, "ca-app-pub-2037874631253623~2347238577");
     }
 
     void offlineLoad() {

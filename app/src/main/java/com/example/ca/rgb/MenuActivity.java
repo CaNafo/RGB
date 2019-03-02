@@ -16,6 +16,9 @@ import com.example.ca.rgb.Interfaces.APIogovor;
 import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.R;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,11 +33,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class MenuActivity extends AppCompatActivity {
     private static final String TAG = MenuActivity.class.getSimpleName();
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
 
         Button playBtn = findViewById(R.id.playBtn);
         Button scoreBtn = findViewById(R.id.scoreBtn);
@@ -53,6 +57,12 @@ public class MenuActivity extends AppCompatActivity {
         exitBtn.setOnClickListener(menuActionListener);
         editBtn.setOnClickListener(editNameListener);
         helpBtn.setOnClickListener(menuActionListener);
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, "ca-app-pub-2037874631253623~2347238577");
+
     }
 
 

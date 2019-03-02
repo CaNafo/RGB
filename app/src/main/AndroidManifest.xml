@@ -26,8 +26,8 @@
         <activity android:name=".ScoreActivity" android:screenOrientation="portrait"/>
 
         <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2037874631253623~2347238577"/>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -25,6 +26,11 @@ import com.example.ca.rgb.Interfaces.APIservisi;
 import com.example.ca.rgb.Interfaces.APIupdateServisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateCall;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,6 +55,8 @@ public class PlayActivity extends AppCompatActivity {
     private int speed = 7;
     private int tempSpeed = 7;
     private int lives = 3;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,25 +64,41 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         Bundle b = getIntent().getExtras();
-        if(b != null)
+        if (b != null)
             mode = b.getInt("mode");
 
         final TextView textView4 = findViewById(R.id.textView4);
         disableButtons();
 
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, "ca-app-pub-2037874631253623~2347238577");
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
-                if(l / 1000 == 3){
+                if (l / 1000 == 3) {
                     btnVisibility();
                     livesVisibility();
                 }
 
                 fadeOutAnimation(textView4, 750);
                 fadeInAnimation(textView4, 750);
-                if(l / 1000 != 0){
+                if (l / 1000 != 0) {
                     textView4.setText(String.valueOf(l / 1000));
-                }else{
+                } else {
                     textView4.setText("START!");
                 }
             }
@@ -88,20 +112,20 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void resetOnStart(){
+    private void resetOnStart() {
         score = 0;
         time = 0;
         speed = 7;
         tempSpeed = 7;
         lives = 3;
-        ((TextView)findViewById(R.id.textView)).setText("");
-        ((TextView)findViewById(R.id.textView2)).setText("");
-        ((TextView)findViewById(R.id.textView3)).setText("");
+        ((TextView) findViewById(R.id.textView)).setText("");
+        ((TextView) findViewById(R.id.textView2)).setText("");
+        ((TextView) findViewById(R.id.textView3)).setText("");
     }
 
-    private void startGame(){
+    private void startGame() {
         resetOnStart();
-        switch (mode){
+        switch (mode) {
             case 1:
                 startGameTimeAttack();
                 break;
@@ -147,7 +171,7 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void startGameClassic(){
+    private void startGameClassic() {
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -161,18 +185,18 @@ public class PlayActivity extends AppCompatActivity {
 
         changeText();
         textView2.setText("Score\n" + String.valueOf(score));
-        countDownTimer3 = new CountDownTimer(10000,1000) {
+        countDownTimer3 = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long l) {
                 ++time;
                 --tempSpeed;
                 textView3.setText("Time\n" + String.valueOf(time));
 
-                if(speed > 1 && time % 10 == 0){
+                if (speed > 1 && time % 10 == 0) {
                     --speed;
                 }
 
-                if(tempSpeed == 0){
+                if (tempSpeed == 0) {
                     changeText();
                     --lives;
                     lostLife();
@@ -188,7 +212,7 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void startHardMode(){
+    private void startHardMode() {
         Button purpleBtn = findViewById(R.id.purpleBtn);
         Button yellowBtn = findViewById(R.id.yellowBtn);
 
@@ -196,50 +220,50 @@ public class PlayActivity extends AppCompatActivity {
         yellowBtn.setOnClickListener(playActionListener);
     }
 
-    private void btnVisibility(){
+    private void btnVisibility() {
         Button purpleBtn = findViewById(R.id.purpleBtn);
         Button yellowBtn = findViewById(R.id.yellowBtn);
 
-        if(mode == 3 || mode == 4){
+        if (mode == 3 || mode == 4) {
             purpleBtn.setVisibility(View.VISIBLE);
             yellowBtn.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             purpleBtn.setVisibility(View.GONE);
             yellowBtn.setVisibility(View.GONE);
         }
     }
 
-    private void livesVisibility(){
-        if(mode == 2 || mode == 4){
-            ((ImageView)findViewById(R.id.imageView1)).setVisibility(View.VISIBLE);
-            ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.VISIBLE);
-            ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.VISIBLE);
+    private void livesVisibility() {
+        if (mode == 2 || mode == 4) {
+            ((ImageView) findViewById(R.id.imageView1)).setVisibility(View.VISIBLE);
+            ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.VISIBLE);
+            ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.VISIBLE);
 
-            scaleView((ImageView)findViewById(R.id.imageView1), 0, 1);
-            scaleView((ImageView)findViewById(R.id.imageView2), 0, 1);
-            scaleView((ImageView)findViewById(R.id.imageView3), 0, 1);
-        }else{
+            scaleView((ImageView) findViewById(R.id.imageView1), 0, 1);
+            scaleView((ImageView) findViewById(R.id.imageView2), 0, 1);
+            scaleView((ImageView) findViewById(R.id.imageView3), 0, 1);
+        } else {
 
-            ((ImageView)findViewById(R.id.imageView1)).setVisibility(View.GONE);
-            ((ImageView)findViewById(R.id.imageView2)).setVisibility(View.GONE);
-            ((ImageView)findViewById(R.id.imageView3)).setVisibility(View.GONE);
+            ((ImageView) findViewById(R.id.imageView1)).setVisibility(View.GONE);
+            ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.GONE);
+            ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.GONE);
         }
     }
 
-    private void lostLife(){
-        if(lives == 0){
+    private void lostLife() {
+        if (lives == 0) {
             disableButtons();
             countDownTimer3.cancel();
-            scaleView(((ImageView)findViewById(R.id.imageView1)), 1, 0);
+            scaleView(((ImageView) findViewById(R.id.imageView1)), 1, 0);
             showAlertDialogButtonClicked("GAME OVER");
-        }else if(lives == 1){
-            scaleView(((ImageView)findViewById(R.id.imageView2)), 1, 0);
-        }else if(lives == 2){
-            scaleView(((ImageView)findViewById(R.id.imageView3)), 1, 0);
+        } else if (lives == 1) {
+            scaleView(((ImageView) findViewById(R.id.imageView2)), 1, 0);
+        } else if (lives == 2) {
+            scaleView(((ImageView) findViewById(R.id.imageView3)), 1, 0);
         }
     }
 
-    private void disableButtons(){
+    private void disableButtons() {
         Button redBtn = findViewById(R.id.redBtn);
         Button greenBtn = findViewById(R.id.greenBtn);
         Button blueBtn = findViewById(R.id.blueBtn);
@@ -255,20 +279,20 @@ public class PlayActivity extends AppCompatActivity {
 
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
-            Button button = (Button)v;
+            Button button = (Button) v;
             TextView textView = findViewById(R.id.textView);
             TextView textView2 = findViewById(R.id.textView2);
 
             String colorName = String.valueOf(textView.getText());
             String action = String.valueOf(button.getTag());
 
-            if(colorName.equalsIgnoreCase(action)){
+            if (colorName.equalsIgnoreCase(action)) {
                 ++score;
                 tempSpeed = speed;
                 textView2.setText("Score\n" + String.valueOf(score));
                 changeText();
-            }else{
-                switch (mode){
+            } else {
+                switch (mode) {
                     case 1:
                         countDownTimer.cancel();
                         showAlertDialogButtonClicked("GAME OVER");
@@ -296,7 +320,7 @@ public class PlayActivity extends AppCompatActivity {
 
         int numOfColors = 3;
 
-        if(mode == 3 || mode == 4){
+        if (mode == 3 || mode == 4) {
             numOfColors = 5;
         }
 
@@ -346,7 +370,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
-        switch (mode){
+        switch (mode) {
             case 1:
                 //timeattack
                 finishUpdate(1);
@@ -365,6 +389,14 @@ public class PlayActivity extends AppCompatActivity {
                 break;
         }
 
+
+        if(s.equalsIgnoreCase("time's up") && (mode == 1 || mode == 3)){
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
+        }
 
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -398,16 +430,17 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public void onBackPressed() {
-        if(started){
-            if(mode == 1 || mode == 3){
+        if (started) {
+            if (mode == 1 || mode == 3) {
                 countDownTimer.cancel();
-            }else{
+            } else {
                 countDownTimer3.cancel();
             }
             showAlertDialogButtonClicked("GAME OVER");
-        }else{
+        } else {
             countDownTimer2.cancel();
 
             finish();
@@ -540,10 +573,10 @@ public class PlayActivity extends AppCompatActivity {
         });
     }
 
-    private void finishUpdate(int mode){
+    private void finishUpdate(int mode) {
         SharedPreferences settings;
         int myScore = 0;
-        switch (mode){
+        switch (mode) {
             case 1:
                 //timeattack
                 settings = getApplicationContext().getSharedPreferences("score", 0);
@@ -578,7 +611,7 @@ public class PlayActivity extends AppCompatActivity {
                 setID();
                 settings = getApplicationContext().getSharedPreferences("ID", 0);
                 myID = settings.getInt("ID", 0);
-                addNewScore(myName,score);
+                addNewScore(myName, score);
             }
             setID();
             settings = getApplicationContext().getSharedPreferences("name", 0);
@@ -598,7 +631,7 @@ public class PlayActivity extends AppCompatActivity {
 
             SharedPreferences.Editor editor;
 
-            switch (mode){
+            switch (mode) {
                 case 1:
                     //timeattack
                     settings = getApplicationContext().getSharedPreferences("score", 0);
@@ -624,11 +657,11 @@ public class PlayActivity extends AppCompatActivity {
                     editor.putInt("classicHard", score);
                     break;
 
-                    default:
-                        settings = getApplicationContext().getSharedPreferences("score", 0);
-                        editor = settings.edit();
-                        editor.putInt("score", score);
-                        break;
+                default:
+                    settings = getApplicationContext().getSharedPreferences("score", 0);
+                    editor = settings.edit();
+                    editor.putInt("score", score);
+                    break;
             }
 
             // Apply the edits!

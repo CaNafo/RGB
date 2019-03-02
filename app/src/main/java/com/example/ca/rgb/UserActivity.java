@@ -15,6 +15,9 @@ import com.example.ca.rgb.Interfaces.APIupdateServisi;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateCall;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitUpdateName;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,13 +32,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class UserActivity extends AppCompatActivity {
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(onClickListener);
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, "ca-app-pub-2037874631253623~2347238577");
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
