@@ -49,7 +49,9 @@ public class PlayActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private CountDownTimer countDownTimer3;
+    private CountDownTimer countDownTimer4;
     private boolean started = false;
+    private int bonusTime = 0;
     private int mode = -1;
     private int time = 0;
     private int speed = 7;
@@ -118,6 +120,7 @@ public class PlayActivity extends AppCompatActivity {
         speed = 7;
         tempSpeed = 7;
         lives = 3;
+        bonusTime = 0;
         ((TextView) findViewById(R.id.textView)).setText("");
         ((TextView) findViewById(R.id.textView2)).setText("");
         ((TextView) findViewById(R.id.textView3)).setText("");
@@ -162,6 +165,21 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 textView3.setText("Time\n" + String.valueOf(l / 1000));
+
+                if(l/1000 == 10){
+                    if(score >= 25 && score < 30){
+                        bonusTime = 15000;
+                    }else if(score >= 30 && score < 35){
+                        bonusTime = 20000;
+                    }else if(score >= 35){
+                        bonusTime = 25000;
+                    }
+                }
+
+                if(bonusTime != 0){
+                    countDownTimer.cancel();
+                    setBonusTime();
+                }
             }
 
             @Override
@@ -277,6 +295,25 @@ public class PlayActivity extends AppCompatActivity {
         yellowBtn.setOnClickListener(null);
     }
 
+    private void setBonusTime(){
+        TextView textView4 = findViewById(R.id.textView4);
+        fadeInAnimation(textView4, 1500);
+        textView4.setText("+" + String.valueOf(bonusTime/1000 - 10) + " seconds");
+        fadeOutAnimation(textView4, 1500);
+
+        countDownTimer4 = new CountDownTimer(bonusTime + 1000, 1000) {
+            @Override
+            public void onTick(long l) {
+                ((TextView)findViewById(R.id.textView3)).setText("Time\n" + String.valueOf(l / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                showAlertDialogButtonClicked("Time's up");
+            }
+        }.start();
+    }
+
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
             Button button = (Button) v;
@@ -294,7 +331,11 @@ public class PlayActivity extends AppCompatActivity {
             } else {
                 switch (mode) {
                     case 1:
-                        countDownTimer.cancel();
+                        if(bonusTime == 0){
+                            countDownTimer.cancel();
+                        }else{
+                            countDownTimer4.cancel();
+                        }
                         showAlertDialogButtonClicked("GAME OVER");
                         break;
                     case 2:
@@ -302,7 +343,11 @@ public class PlayActivity extends AppCompatActivity {
                         lostLife();
                         break;
                     case 3:
-                        countDownTimer.cancel();
+                        if(bonusTime == 0){
+                            countDownTimer.cancel();
+                        }else{
+                            countDownTimer4.cancel();
+                        }
                         showAlertDialogButtonClicked("GAME OVER");
                         break;
                     case 4:
@@ -445,7 +490,11 @@ public class PlayActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (started) {
             if (mode == 1 || mode == 3) {
-                countDownTimer.cancel();
+                if(bonusTime == 0){
+                    countDownTimer.cancel();
+                }else{
+                    countDownTimer4.cancel();
+                }
             } else {
                 countDownTimer3.cancel();
             }

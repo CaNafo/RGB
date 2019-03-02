@@ -66,6 +66,43 @@
                 android:layout_marginRight="5dp"
                 android:theme="@style/Help"
                 android:text="In classic mode you start with 3 lives. Color name will change if you're too slow or you tap wrong button you will lose 1 life. In the begining color name changes every 7 seconds. The longer you play, the faster it will change."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/HelpTitle"
+                android:text="Bonus Time:"/>
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="When you're playing TimeAttack mode. You can get bonus time if you can get more than 25 points in first 20 seconds."/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="25-30 equals 5 more seconds"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="30-35 equals 10 more seconds"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="35+ equals 15 more seconds"/>
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
