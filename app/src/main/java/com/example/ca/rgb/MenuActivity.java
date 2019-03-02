@@ -40,6 +40,7 @@ public class MenuActivity extends AppCompatActivity {
     public static MediaPlayer mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 

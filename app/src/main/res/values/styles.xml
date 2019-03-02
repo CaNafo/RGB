@@ -17,6 +17,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_centered</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="PrevNext" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/darkorange</item>
         <item name="colorButtonNormal">@color/orange</item>

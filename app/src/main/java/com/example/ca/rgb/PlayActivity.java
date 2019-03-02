@@ -223,6 +223,10 @@ public class PlayActivity extends AppCompatActivity {
                 }
 
                 if (tempSpeed == 0) {
+                    if(MenuActivity.sound == 1){
+                        MediaPlayer mp = MediaPlayer.create(PlayActivity.this, R.raw.error);
+                        mp.start();
+                    }
                     changeText();
                     --lives;
                     lostLife();

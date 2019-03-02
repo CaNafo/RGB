@@ -11,7 +11,7 @@
         android:label="Color Tap"
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/splashScreenTheme">
         <activity android:name=".SettingsActivity"></activity>
         <activity
             android:name=".HelpActivity"
