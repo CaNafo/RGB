@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/top_10_players"
-                    android:textSize="30dp"
+                    android:textSize="36dp"
                     android:textStyle="bold"
                     android:theme="@style/Score"
                     app:fontFamily="@font/almendra_sc"
