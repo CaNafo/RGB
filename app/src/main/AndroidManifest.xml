@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".SettingsActivity"></activity>
         <activity
             android:name=".HelpActivity"
             android:screenOrientation="portrait" />

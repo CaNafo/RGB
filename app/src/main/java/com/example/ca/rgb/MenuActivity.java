@@ -36,7 +36,8 @@ public class MenuActivity extends AppCompatActivity {
     private static final String TAG = MenuActivity.class.getSimpleName();
     private AdView mAdView;
     public static int music;
-    public static MediaPlayer mp;// = MediaPlayer.create(MenuActivity.this, R.raw.error);
+    public static int sound;
+    public static MediaPlayer mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,22 +50,16 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences.Editor editorMS = MusicSound.edit();
         music = MusicSound.getInt("Music", 0);
 
-        if(music == 2){
-            ((Button)findViewById(R.id.musicBtn)).setText("Music: OFF");
-        }else{
-            ((Button)findViewById(R.id.musicBtn)).setText("Music: ON");
+        if(music != 2){
             mp.start();
             editorMS.putInt("Music", 1);
         }
 
         editorMS.apply();
         MusicSound = getApplicationContext().getSharedPreferences("Sound", 0);
-        int sound = MusicSound.getInt("Sound", 0);
+        sound = MusicSound.getInt("Sound", 0);
 
-        if(sound == 2){
-            ((Button)findViewById(R.id.soundBtn)).setText("Sound: OFF");
-        }else{
-            ((Button)findViewById(R.id.soundBtn)).setText("Sound: ON");
+        if(sound != 2){
             editorMS.putInt("Sound", 1);
             editorMS = MusicSound.edit();
         }
@@ -73,10 +68,8 @@ public class MenuActivity extends AppCompatActivity {
         Button playBtn = findViewById(R.id.playBtn);
         Button scoreBtn = findViewById(R.id.scoreBtn);
         Button exitBtn = findViewById(R.id.exitBtn);
-        Button editBtn = findViewById(R.id.editNameBtn);
-        Button musicBtn = findViewById(R.id.musicBtn);
-        Button soundBtn = findViewById(R.id.soundBtn);
         Button helpBtn = findViewById(R.id.helpBtn);
+        Button settingsBtn = findViewById(R.id.settingsBtn);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
@@ -87,10 +80,8 @@ public class MenuActivity extends AppCompatActivity {
         playBtn.setOnClickListener(menuActionListener);
         scoreBtn.setOnClickListener(menuActionListener);
         exitBtn.setOnClickListener(menuActionListener);
-        editBtn.setOnClickListener(editNameListener);
-        musicBtn.setOnClickListener(menuActionListener);
-        soundBtn.setOnClickListener(menuActionListener);
         helpBtn.setOnClickListener(menuActionListener);
+        settingsBtn.setOnClickListener(menuActionListener);
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -119,38 +110,11 @@ public class MenuActivity extends AppCompatActivity {
                    startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
                     //addNewScore();
                    break;
+               case "settingsBtn":
+                   startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
+                   break;
                case "exitBtn":
                    finish();
-                   break;
-               case "musicBtn":
-                   s = String.valueOf(button.getText());
-                   settings = getApplicationContext().getSharedPreferences("Music", 0);
-                   editor = settings.edit();
-                   if(s.equalsIgnoreCase("Music: ON")){
-                       music = 2;
-                       mp.pause();
-                       editor.putInt("Music", 2);
-                       button.setText("Music: OFF");
-                   }else{
-                       music = 1;
-                       mp.start();
-                       editor.putInt("Music", 1);
-                       button.setText("Music: ON");
-                   }
-                   editor.apply();
-                   break;
-               case "soundBtn":
-                   s = String.valueOf(button.getText());
-                   settings = getApplicationContext().getSharedPreferences("Sound", 0);
-                   editor = settings.edit();
-                   if(s.equalsIgnoreCase("Sound: ON")){
-                       editor.putInt("Sound", 2);
-                       button.setText("Sound: OFF");
-                   }else{
-                       editor.putInt("Sound", 1);
-                       button.setText("Sound: ON");
-                   }
-                   editor.apply();
                    break;
                case "helpBtn":
                    startActivity(new Intent(MenuActivity.this, HelpActivity.class));
@@ -160,12 +124,6 @@ public class MenuActivity extends AppCompatActivity {
        }
    };
 
-    View.OnClickListener editNameListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(MenuActivity.this, UserActivity.class));
-        }
-    };
 
     @Override
     public void onBackPressed() {

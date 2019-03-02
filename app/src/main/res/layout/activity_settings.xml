@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background"
-    tools:context=".MenuActivity">
+    tools:context=".SettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,63 +14,13 @@
         android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical">
         <Button
-            android:id="@+id/playBtn"
+            android:id="@+id/editNameBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="playBtn"
-            android:text="Play"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonGreen"
-            app:layout_constraintBottom_toTopOf="@+id/scoreBtn"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/scoreBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="scoreBtn"
-            android:text="Score"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonBlue"
-            app:layout_constraintBottom_toTopOf="@+id/exitBtn"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/settingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="settingsBtn"
-            android:text="Settings"
+            android:text="Edit Name"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonPurple"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/helpBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="helpBtn"
-            android:text="Help"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonYellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -79,16 +29,31 @@
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/exitBtn"
+            android:id="@+id/musicBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="exitBtn"
-            android:text="Exit"
+            android:tag="musicBtn"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonRed"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/soundBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="soundBtn"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <!-- view for AdMob Banner Ad -->
         <Space
             android:layout_width="match_parent"
