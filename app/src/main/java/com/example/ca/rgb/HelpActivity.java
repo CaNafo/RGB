@@ -10,11 +10,31 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
     }
 
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(HelpActivity.this, MenuActivity.class));
+        //startActivity(new Intent(HelpActivity.this, MenuActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
     }
 }

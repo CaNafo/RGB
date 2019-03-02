@@ -52,6 +52,7 @@ public class PlayActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer3;
     private CountDownTimer countDownTimer4;
     private boolean started = false;
+    private int sound;
     private int bonusTime = 0;
     private int mode = -1;
     private int time = 0;
@@ -65,6 +66,12 @@ public class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
+
+        sound = (getApplicationContext().getSharedPreferences("Sound", 0)).getInt("Sound", 0);
 
         Bundle b = getIntent().getExtras();
         if (b != null)
@@ -330,8 +337,10 @@ public class PlayActivity extends AppCompatActivity {
                 textView2.setText("Score\n" + String.valueOf(score));
                 changeText();
             } else {
-                MediaPlayer mp = MediaPlayer.create(PlayActivity.this, R.raw.error);
-                mp.start();
+                if(sound == 1){
+                    MediaPlayer mp = MediaPlayer.create(PlayActivity.this, R.raw.error);
+                    mp.start();
+                }
                 switch (mode) {
                     case 1:
                         if(bonusTime == 0){
@@ -750,6 +759,22 @@ public class PlayActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
     }
 }
 

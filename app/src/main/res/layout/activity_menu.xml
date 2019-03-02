@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:tag="playBtn"
             android:text="Play"
+            android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonGreen"
             app:layout_constraintBottom_toTopOf="@+id/scoreBtn"
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:tag="scoreBtn"
             android:text="Score"
+            android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonBlue"
             app:layout_constraintBottom_toTopOf="@+id/exitBtn"
@@ -48,8 +50,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Name"
+            android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonPurple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/musicBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="musicBtn"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonRed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/soundBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="soundBtn"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -63,6 +96,7 @@
             android:layout_height="wrap_content"
             android:tag="helpBtn"
             android:text="Help"
+            android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonYellow"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,6 +112,7 @@
             android:layout_height="wrap_content"
             android:tag="exitBtn"
             android:text="Exit"
+            android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonRed"
             app:layout_constraintBottom_toBottomOf="parent"
