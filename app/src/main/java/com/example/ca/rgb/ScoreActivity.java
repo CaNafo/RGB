@@ -62,7 +62,7 @@ public class ScoreActivity extends AppCompatActivity {
         Button refreshBtn = findViewById(R.id.refreshBtn);
         refreshBtn.setOnClickListener(refreshListener);
 
-        offlineLoad();
+        offlineLoad("score");
         getRetrofitObject("score");// Get from the SharedPreferences
         getUserPosition("score");
 
@@ -72,11 +72,29 @@ public class ScoreActivity extends AppCompatActivity {
         MobileAds.initialize(this, "ca-app-pub-2037874631253623~2347238577");
     }
 
-    void offlineLoad() {
+    void offlineLoad(String mode) {
         TextView textView = findViewById(R.id.myScoreTxt);
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("score", 0);
-        int myScore = settings.getInt("score", 0);
+        int myScore = 0;
+        switch (mode){
+            case "score":
+                settings = getApplicationContext().getSharedPreferences("score", 0);
+                myScore = settings.getInt("score", 0);
+                break;
+            case "classic":
+                settings = getApplicationContext().getSharedPreferences("classic", 0);
+                myScore = settings.getInt("classic", 0);
+                break;
+            case "timeattackHard":
+                settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
+                myScore = settings.getInt("timeattackHard", 0);
+                break;
+            case "classicHard":
+                settings = getApplicationContext().getSharedPreferences("classicHard", 0);
+                myScore = settings.getInt("classicHard", 0);
+                break;
+        }
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
@@ -380,29 +398,33 @@ public class ScoreActivity extends AppCompatActivity {
     View.OnClickListener nextListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            offlineLoad();
             btnClicked = true;
             if(mode == 4)
                 mode = 1;
             else
                 mode++;
+
             switch (mode){
                 case 1:
+                    offlineLoad("score");
                     tittleTxt.setText("Top 10 Time Attack players");
                     getRetrofitObject("score");
                     getUserPosition("score");
                     break;
                 case 2:
+                    offlineLoad("classic");
                     tittleTxt.setText("Top 10 Classic players");
                     getRetrofitObject("classic");
                     getUserPosition("classic");
                     break;
                 case 3:
+                    offlineLoad("timeattackHard");
                     tittleTxt.setText("Top 10 Time Attack Hard players");
                     getRetrofitObject("timeattackHard");
                     getUserPosition("timeattackHard");
                     break;
                 case 4:
+                    offlineLoad("classicHard");
                     tittleTxt.setText("Top 10 Classic Hard players");
                     getRetrofitObject("classicHard");
                     getUserPosition("classicHard");
@@ -415,7 +437,6 @@ public class ScoreActivity extends AppCompatActivity {
     View.OnClickListener backListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            offlineLoad();
             if(!btnClicked){
                 mode = 4;
                 btnClicked = true;
@@ -427,21 +448,25 @@ public class ScoreActivity extends AppCompatActivity {
             }
             switch (mode){
                 case 1:
+                    offlineLoad("score");
                     tittleTxt.setText("Top 10 Time Attack players");
                     getRetrofitObject("score");
                     getUserPosition("score");
                     break;
                 case 2:
+                    offlineLoad("classic");
                     tittleTxt.setText("Top 10 Classic players");
                     getRetrofitObject("classic");
                     getUserPosition("classic");
                     break;
                 case 3:
+                    offlineLoad("timeattackHard");
                     tittleTxt.setText("Top 10 Time Attack Hard players");
                     getRetrofitObject("timeattackHard");
                     getUserPosition("timeattackHard");
                     break;
                 case 4:
+                    offlineLoad("classicHard");
                     tittleTxt.setText("Top 10 Classic Hard players");
                     getRetrofitObject("classicHard");
                     getUserPosition("classicHard");
