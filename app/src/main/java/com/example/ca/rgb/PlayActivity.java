@@ -56,8 +56,8 @@ public class PlayActivity extends AppCompatActivity {
     private int bonusTime = 0;
     private int mode = -1;
     private int time = 0;
-    private int speed = 7;
-    private int tempSpeed = 7;
+    private int speed = 8;
+    private int tempSpeed = 8;
     private int lives = 3;
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
@@ -126,8 +126,8 @@ public class PlayActivity extends AppCompatActivity {
     private void resetOnStart() {
         score = 0;
         time = 0;
-        speed = 7;
-        tempSpeed = 7;
+        speed = 8;
+        tempSpeed = 8;
         lives = 3;
         bonusTime = 0;
         ((TextView) findViewById(R.id.textView)).setText("");
