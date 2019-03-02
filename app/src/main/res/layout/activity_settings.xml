@@ -6,62 +6,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background"
-    tools:context=".UserActivity">
+    tools:context=".SettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical">
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter your name"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Enter your name" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="50dp" />
-
-        <EditText
-            android:id="@+id/nameTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:ems="10"
-            android:hint="Enter your name here"
-            android:inputType="textPersonName"
-            android:textSize="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="70dp" />
-
         <Button
-            android:id="@+id/okBtn"
+            android:id="@+id/editNameBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="@android:color/black"
-            android:shadowRadius="3"
-            android:text="Confirm"
+            android:text="Edit Name"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
-            android:theme="@style/MyButtonGreen"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nameTxt"
-            tools:text="Confirm" />
+            android:theme="@style/MyButtonPurple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/musicBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="musicBtn"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonRed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/soundBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="soundBtn"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- view for AdMob Banner Ad -->
         <Space
             android:layout_width="match_parent"
             android:layout_height="19dp" />
@@ -75,4 +68,5 @@
             ads:adSize="SMART_BANNER"
             ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

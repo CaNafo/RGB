@@ -41,50 +41,22 @@
             app:layout_constraintBottom_toTopOf="@+id/exitBtn"
             app:layout_constraintStart_toStartOf="parent" />
 
+
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/editNameBtn"
+            android:id="@+id/settingsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Name"
+            android:tag="settingsBtn"
+            android:text="Settings"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonPurple"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/musicBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="musicBtn"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonRed"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/soundBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="soundBtn"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
@@ -131,7 +103,5 @@
             ads:adSize="SMART_BANNER"
             ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
     </LinearLayout>
-
-
 
 </android.support.constraint.ConstraintLayout>
