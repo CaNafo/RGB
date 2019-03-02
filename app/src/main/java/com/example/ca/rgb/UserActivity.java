@@ -41,13 +41,15 @@ public class UserActivity extends AppCompatActivity {
         if(MenuActivity.music == 1){
             MenuActivity.mp.start();
         }
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
         String name = settings.getString("name", "");
 
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(onClickListener);
+
         TextView nameTxt = findViewById(R.id.nameTxt);
         nameTxt.setText(name);
+
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
