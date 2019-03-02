@@ -396,6 +396,16 @@ public class PlayActivity extends AppCompatActivity {
             } else {
                 Log.d("TAG", "The interstitial wasn't loaded yet.");
             }
+        }else{
+            int r = new Random().nextInt(100);
+
+            if(r < 15){
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                }
+            }
         }
 
         // setup the alert builder
