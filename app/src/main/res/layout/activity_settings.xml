@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Name"
+            android:tag="editBtn"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonPurple"
