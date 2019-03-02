@@ -152,7 +152,7 @@ public class ScoreActivity extends AppCompatActivity {
                                 name += Jasonobject.getString("name") + "\n";
                                 score += Jasonobject.getString(jsonMode) + "\n";
                             } else {
-                                number += (i + 1);
+                                number += (i + 1) + ".";
                                 name += Jasonobject.getString("name");
                                 score += Jasonobject.getString(jsonMode);
                             }
