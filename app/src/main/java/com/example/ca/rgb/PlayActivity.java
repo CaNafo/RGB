@@ -219,7 +219,7 @@ public class PlayActivity extends AppCompatActivity {
                 --tempSpeed;
                 textView3.setText("Time\n" + String.valueOf(time));
 
-                if (speed > 1 && time % 10 == 0) {
+                if (speed > 2 && time % 15 == 0) {
                     --speed;
                 }
 
