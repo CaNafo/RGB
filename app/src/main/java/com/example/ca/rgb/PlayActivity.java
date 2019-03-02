@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -329,6 +330,8 @@ public class PlayActivity extends AppCompatActivity {
                 textView2.setText("Score\n" + String.valueOf(score));
                 changeText();
             } else {
+                MediaPlayer mp = MediaPlayer.create(PlayActivity.this, R.raw.error);
+                mp.start();
                 switch (mode) {
                     case 1:
                         if(bonusTime == 0){
