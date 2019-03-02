@@ -138,7 +138,7 @@ public class ScoreActivity extends AppCompatActivity {
                         JSONObject object = new JSONObject(responseString);
                         JSONArray Jarray = object.getJSONArray("data");
                         String name = "Player\n\n";
-                        String number = "\n\n";
+                        String number = "No.\n\n";
                         String score = "Score\n\n";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
