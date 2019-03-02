@@ -512,7 +512,9 @@ public class ScoreActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
+                        tittleTxt.setText("Top 10 Time Attack players");
                         getRetrofitObject("score");
+                        mode = 1;
                     } else {
                     }
 
@@ -520,7 +522,9 @@ public class ScoreActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
+                    tittleTxt.setText("Top 10 Time Attack players");
                     getRetrofitObject("score");
+                    mode = 1;
                 }
             });
         }
