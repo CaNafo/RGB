@@ -87,21 +87,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:theme="@style/Help"
+                android:theme="@style/HelpBonus"
                 android:text="25-30 equals 5 more seconds"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:theme="@style/Help"
+                android:theme="@style/HelpBonus"
                 android:text="30-35 equals 10 more seconds"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:theme="@style/Help"
+                android:theme="@style/HelpBonus"
                 android:text="35+ equals 15 more seconds"/>
         </LinearLayout>
     </ScrollView>
