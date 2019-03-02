@@ -37,6 +37,11 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
+
         Button okBtn = findViewById(R.id.okBtn);
         okBtn.setOnClickListener(onClickListener);
 
@@ -164,4 +169,25 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        //startActivity(new Intent(HelpActivity.this, MenuActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
+    }
 }

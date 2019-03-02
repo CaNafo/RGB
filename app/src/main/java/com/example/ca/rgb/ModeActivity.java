@@ -18,6 +18,10 @@ public class ModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode);
 
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
+
         Button mode1Btn = findViewById(R.id.mode1Btn);
         Button mode2Btn = findViewById(R.id.mode2Btn);
         Button mode3Btn = findViewById(R.id.mode3Btn);
@@ -77,6 +81,22 @@ public class ModeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        startActivity(new Intent(ModeActivity.this, MenuActivity.class));
+        //startActivity(new Intent(ModeActivity.this, MenuActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
     }
 }

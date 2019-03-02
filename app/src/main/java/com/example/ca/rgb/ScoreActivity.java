@@ -47,6 +47,11 @@ public class ScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
+
         tittleTxt = findViewById(R.id.titleTxt);
         tittleTxt.setText("Top 10 Time Attack players");
 
@@ -519,4 +524,26 @@ public class ScoreActivity extends AppCompatActivity {
             });
         }
     };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MenuActivity.music == 1){
+            MenuActivity.mp.start();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        //startActivity(new Intent(HelpActivity.this, MenuActivity.class));
+    }
 }
