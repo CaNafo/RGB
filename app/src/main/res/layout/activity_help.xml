@@ -65,7 +65,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:theme="@style/Help"
-                android:text="In classic mode you start with 3 lives. Color name will change if you're too slow or you tap wrong button you will lose 1 life. In the begining color name changes every 8 seconds. The longer you play, the faster it will change."/>
+                android:text="In classic mode you start with 3 lives. Color name will change if you're too slow or you tap wrong button you will lose 1 life. In the beginning color name changes every 8 seconds. The longer you play, the faster it will change."/>
 
             <TextView
                 android:layout_width="match_parent"
