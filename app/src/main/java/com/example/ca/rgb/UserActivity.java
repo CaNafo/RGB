@@ -103,7 +103,6 @@ public class UserActivity extends AppCompatActivity {
                             int ID = Integer.parseInt(Jasonobject.get("ID").toString());
 
                             ID = ID + 1;
-                            System.out.println(ID+ "AJDIIII");
 
                             SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
                             SharedPreferences.Editor editor = settings.edit();
@@ -120,7 +119,6 @@ public class UserActivity extends AppCompatActivity {
                     }
                     // todo: do something with the response string
                 } else {
-                    //System.out.println(response.body() + "ETOOOOO");
                 }
 
             }
@@ -140,9 +138,9 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("dadsadasdas");
+
                 } else {
-                    System.out.println("NIJEdadsadasdas");
+
                 }
             }
 
@@ -162,9 +160,9 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("");
+
                 } else {
-                    System.out.println("");
+
                 }
             }
 

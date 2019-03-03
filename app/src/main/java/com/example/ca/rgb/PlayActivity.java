@@ -10,7 +10,6 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -456,7 +455,7 @@ public class PlayActivity extends AppCompatActivity {
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
+
             }
         }else{
             int r = new Random().nextInt(100);
@@ -465,7 +464,7 @@ public class PlayActivity extends AppCompatActivity {
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+
                 }
             }
         }
@@ -589,9 +588,9 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("");
+
                 } else {
-                    System.out.println("");
+
                 }
             }
 
@@ -637,7 +636,7 @@ public class PlayActivity extends AppCompatActivity {
                     }
                     // todo: do something with the response string
                 } else {
-                    //System.out.println(response.body() + "ETOOOOO");
+
                 }
 
             }
@@ -753,9 +752,9 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("");
+
                 } else {
-                    System.out.println("");
+
                 }
             }
 

@@ -172,7 +172,7 @@ public class ScoreActivity extends AppCompatActivity {
                     }
                     // todo: do something with the response string
                 } else {
-                    //System.out.println(response.body() + "ETOOOOO");
+
                 }
 
             }
@@ -368,7 +368,7 @@ public class ScoreActivity extends AppCompatActivity {
                     }
                     // todo: do something with the response string
                 } else {
-                    //System.out.println(response.body() + "ETOOOOO");
+
                 }
 
             }
@@ -388,9 +388,9 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("");
+
                 } else {
-                    System.out.println("");
+
                 }
             }
 
