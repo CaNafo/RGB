@@ -36,7 +36,7 @@ public class ModeActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        MobileAds.initialize(this, "ca-app-pub-2037874631253623~2347238577");
+        MobileAds.initialize(this, "ca-app-pub-2037874631253623/3277176861");
     }
 
     View.OnClickListener modeActionListener = new View.OnClickListener() {
