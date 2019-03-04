@@ -9,8 +9,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="395dp"
-        android:layout_height="715dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -42,6 +42,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                android:gravity="center"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="579dp">
@@ -50,6 +53,7 @@
                     android:id="@+id/imgStar1"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_weight="1"
                     android:src="@drawable/star" />
 
                 <ImageView
@@ -57,29 +61,28 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/starHolder" />
+                    android:src="@drawable/starholder" />
 
                 <ImageView
                     android:id="@+id/imgStar3"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/starHolder" />
+                    android:src="@drawable/starholder" />
 
                 <ImageView
                     android:id="@+id/mgStar4"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/starHolder" />
+                    android:src="@drawable/starholder" />
 
                 <ImageView
                     android:id="@+id/mgStar5"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/starHolder" />
-
+                    android:src="@drawable/starholder" />
             </LinearLayout>
 
             <ImageView
@@ -160,7 +163,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Starter"
+                        android:text="Beginner"
                         android:textSize="36dp"
                         android:textStyle="bold"
                         tools:layout_editor_absoluteX="49dp"
