@@ -8,11 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import static com.example.ca.rgb.MenuActivity.mp;
 import static com.example.ca.rgb.MenuActivity.music;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -29,6 +35,12 @@ public class ProfileActivity extends AppCompatActivity {
         String myName = settings.getString("name","");
 
         textView.setText(myName);
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        String defaultInputText = getResources().getString(R.string.ad_id_banner);
+        MobileAds.initialize(this, defaultInputText);
     }
 
     View.OnClickListener editNameOnClickListener = new View.OnClickListener() {
