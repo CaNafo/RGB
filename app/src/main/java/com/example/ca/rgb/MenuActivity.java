@@ -10,26 +10,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.ca.rgb.Interfaces.APIogovor;
-import com.example.ca.rgb.Interfaces.APIservisi;
-import com.example.ca.rgb.R;
-import com.example.ca.rgb.RetrofitPoziv.RetrofitCall;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -43,6 +27,9 @@ public class MenuActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Button profileButton = findViewById(R.id.profileBtn);
+        profileButton.setOnClickListener(profileOnClickListener);
 
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
@@ -147,4 +134,11 @@ public class MenuActivity extends AppCompatActivity {
             mp.start();
         }
     }
+
+    View.OnClickListener profileOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
+        }
+    };
 }
