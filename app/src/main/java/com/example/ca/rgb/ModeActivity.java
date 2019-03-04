@@ -36,7 +36,8 @@ public class ModeActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        MobileAds.initialize(this, String.valueOf(R.string.ad_id_banner));
+        String defaultInputText = getResources().getString(R.string.ad_id_banner);
+        MobileAds.initialize(this, defaultInputText);
     }
 
     View.OnClickListener modeActionListener = new View.OnClickListener() {

@@ -31,6 +31,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +63,7 @@ public class PlayActivity extends AppCompatActivity {
     private int lives = 3;
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
+    private RewardedVideoAd mRewardedVideoAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +87,12 @@ public class PlayActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        MobileAds.initialize(this, String.valueOf(R.string.ad_id_banner));
+        String defaultInputText = getResources().getString(R.string.ad_id_banner);
+        MobileAds.initialize(this, defaultInputText);
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(String.valueOf(R.string.ad_id_interstitial));
+        defaultInputText = getResources().getString(R.string.ad_id_interstitial);
+        mInterstitialAd.setAdUnitId(String.valueOf(defaultInputText));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -96,6 +102,13 @@ public class PlayActivity extends AppCompatActivity {
             }
 
         });
+
+        // Use an activity context to get the rewarded video instance.
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(rewardedVideoAdListener);
+
+        loadRewardedVideoAd();
+
         countDownTimer2 = new CountDownTimer(4000, 1000) {
             @Override
             public void onTick(long l) {
@@ -120,6 +133,61 @@ public class PlayActivity extends AppCompatActivity {
                 startGame();
             }
         }.start();
+    }
+
+    private void adReward(String s){
+        if(mRewardedVideoAd.isLoaded()){
+            mRewardedVideoAd.show();
+        }else{
+
+        }
+    }
+
+    RewardedVideoAdListener rewardedVideoAdListener = new RewardedVideoAdListener() {
+        @Override
+        public void onRewardedVideoAdLoaded() {
+
+        }
+
+        @Override
+        public void onRewardedVideoAdOpened() {
+
+        }
+
+        @Override
+        public void onRewardedVideoStarted() {
+
+        }
+
+        @Override
+        public void onRewardedVideoAdClosed() {
+            loadRewardedVideoAd();
+        }
+
+        @Override
+        public void onRewarded(RewardItem rewardItem) {
+
+        }
+
+        @Override
+        public void onRewardedVideoAdLeftApplication() {
+
+        }
+
+        @Override
+        public void onRewardedVideoAdFailedToLoad(int i) {
+
+        }
+
+        @Override
+        public void onRewardedVideoCompleted() {
+
+        }
+    };
+
+    private void loadRewardedVideoAd() {
+        String defaultInputText = getResources().getString(R.string.ad_id_rewarded);
+        mRewardedVideoAd.loadAd(defaultInputText, new AdRequest.Builder().build());
     }
 
     private void resetOnStart() {
