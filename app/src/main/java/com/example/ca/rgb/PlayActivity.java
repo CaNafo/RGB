@@ -83,10 +83,10 @@ public class PlayActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        MobileAds.initialize(this, "ca-app-pub-2037874631253623/3277176861");
+        MobileAds.initialize(this, String.valueOf(R.string.ad_id_banner));
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-2037874631253623/2400167324");
+        mInterstitialAd.setAdUnitId(String.valueOf(R.string.ad_id_interstitial));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override

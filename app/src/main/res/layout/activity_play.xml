@@ -179,7 +179,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-2037874631253623/3277176861"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/ad_id_banner"></com.google.android.gms.ads.AdView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

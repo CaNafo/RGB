@@ -54,7 +54,7 @@ public class UserActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        MobileAds.initialize(this, "ca-app-pub-2037874631253623/3277176861");
+        MobileAds.initialize(this, String.valueOf(R.string.ad_id_banner));
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
