@@ -19,7 +19,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="right|top|end"
-            android:background="@drawable/avatar_test_small" />
+            android:background="@drawable/avatar1_small" />
 
         <android.support.v4.widget.Space
             android:id="@+id/space"

@@ -45,8 +45,114 @@
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <android.support.v4.widget.Space
+            android:id="@+id/space2"
+            android:layout_width="match_parent"
+            android:layout_height="31dp" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="70dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avatar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar2_small" />
+
+            <ImageView
+                android:id="@+id/avatar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar3_small" />
+
+            <ImageView
+                android:id="@+id/avatar3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar4_small" />
+
+            <ImageView
+                android:id="@+id/avatar4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar5_small" />
+
+            <ImageView
+                android:id="@+id/avatar5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar6_small" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avatar6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                app:srcCompat="@drawable/avatar7_small" />
+
+            <ImageView
+                android:id="@+id/avatar7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar8_small" />
+
+            <ImageView
+                android:id="@+id/avatar8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar1_small" />
+
+            <ImageView
+                android:id="@+id/avatar9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar1_small" />
+
+            <ImageView
+                android:id="@+id/avatar10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar1_small" />
+
+            <ImageView
+                android:id="@+id/avatar11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar1_small" />
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="22dp" />
 
         <Button
             android:id="@+id/okBtn"
