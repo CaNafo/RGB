@@ -54,6 +54,7 @@ public class PlayActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer3;
     private CountDownTimer countDownTimer4;
     private boolean started = false;
+    private boolean rewarded = false;
     private int sound;
     private int bonusTime = 0;
     private int mode = -1;
@@ -135,9 +136,17 @@ public class PlayActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void adReward(String s){
-        if(mRewardedVideoAd.isLoaded()){
+    private void adRewardClassic(){
+        if(mRewardedVideoAd.isLoaded() && rewarded == false){
             mRewardedVideoAd.show();
+        }else{
+
+        }
+    }
+
+    private void adRewardTimeAttack(String s){
+        if(mRewardedVideoAd.isLoaded() && rewarded == false){
+
         }else{
 
         }
@@ -181,7 +190,7 @@ public class PlayActivity extends AppCompatActivity {
 
         @Override
         public void onRewardedVideoCompleted() {
-
+            rewarded = true;
         }
     };
 
