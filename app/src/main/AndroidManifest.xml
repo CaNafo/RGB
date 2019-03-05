@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ButtonsActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".SettingsActivity" />
         <activity
             android:name=".HelpActivity"
@@ -35,7 +36,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlayActivity"
+            android:name=".PlayActivityTimeAttack"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PlayActivityClassic"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ScoreActivity"

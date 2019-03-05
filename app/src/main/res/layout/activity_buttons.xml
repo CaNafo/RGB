@@ -6,36 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background"
-    tools:context=".ModeActivity">
+    tools:context="com.example.ca.rgb.ButtonsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical">
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:shadowRadius="1"
-            android:shadowColor="#000000"
-            android:textColor="#FFFFFF"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:text="" />
-
-        <android.support.v4.widget.Space
-            android:id="@+id/Space"
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
 
         <Button
-            android:id="@+id/timeAttackBtn"
+            android:id="@+id/threeButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="timeAttack"
-            android:text="TimeAttack"
+            android:tag="3btns"
+            android:text="3 Colors"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonGreen"
@@ -48,33 +32,48 @@
 
 
         <Button
-            android:id="@+id/classicBtn"
+            android:id="@+id/fiveButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="classic"
-            android:text="Classic"
+            android:tag="5btns"
+            android:text="5 Colors"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonBlue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeAttackBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
 
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
 
-
         <Button
-            android:id="@+id/scoreBtn"
+            android:id="@+id/eightButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="score"
-            android:text="Score"
+            android:tag="8btns"
+            android:text="8 Colors"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
-            android:theme="@style/MyButtonPurple"
+            android:theme="@style/MyButtonYellow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mode1Btn" />
+            app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/tenButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="10btns"
+            android:text="10 Colors"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonRed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
 
         <Space
             android:layout_width="match_parent"
@@ -88,6 +87,7 @@
             android:layout_centerHorizontal="true"
             ads:adSize="SMART_BANNER"
             ads:adUnitId="@string/ad_id_banner"></com.google.android.gms.ads.AdView>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

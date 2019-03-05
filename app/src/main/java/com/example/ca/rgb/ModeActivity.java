@@ -11,27 +11,34 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import static com.example.ca.rgb.StaticMethods.getMusic;
+
 public class ModeActivity extends AppCompatActivity {
     private AdView mAdView;
+    private int mode = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode);
 
-        if(MenuActivity.music == 1){
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+            mode = b.getInt("mode");
+
+        setTitle();
+
+        if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
 
-        Button mode1Btn = findViewById(R.id.mode1Btn);
-        Button mode2Btn = findViewById(R.id.mode2Btn);
-        Button mode3Btn = findViewById(R.id.mode3Btn);
-        Button mode4Btn = findViewById(R.id.mode4Btn);
+        Button timeAttackBtn = findViewById(R.id.timeAttackBtn);
+        Button classicBtn = findViewById(R.id.classicBtn);
+        Button scoreBtn = findViewById(R.id.scoreBtn);
 
-        mode1Btn.setOnClickListener(modeActionListener);
-        mode2Btn.setOnClickListener(modeActionListener);
-        mode3Btn.setOnClickListener(modeActionListener);
-        mode4Btn.setOnClickListener(modeActionListener);
+        timeAttackBtn.setOnClickListener(modeActionListener);
+        classicBtn.setOnClickListener(modeActionListener);
+        //scoreBtn.setOnClickListener(modeActionListener);
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -40,41 +47,51 @@ public class ModeActivity extends AppCompatActivity {
         MobileAds.initialize(this, defaultInputText);
     }
 
+    private void setTitle(){
+        String s = "3 Colors";
+
+        if(mode == 1 || mode == 2){
+            mode = 1;
+        }else if(mode == 3 || mode == 4){
+            mode = 3;
+            s = "5 Colors";
+        }else if(mode == 5 || mode == 6){
+            mode = 5;
+            s = "8 Colors";
+        }else if(mode == 7 || mode == 8){
+            mode = 6;
+            s = "10 Colors";
+        }
+
+        ((TextView)findViewById(R.id.textView7)).setText(s);
+    }
+
     View.OnClickListener modeActionListener = new View.OnClickListener() {
         public void onClick(View v) {
             Button button = (Button)v;
             String action = String.valueOf(button.getTag());
-            Intent intent = new Intent(ModeActivity.this, PlayActivity.class);
+            Intent intentTimeAttack = new Intent(ModeActivity.this, PlayActivityTimeAttack.class);
+            Intent intentClassic = new Intent(ModeActivity.this, PlayActivityClassic.class);
             Bundle b;
 
             switch (action){
-                case "mode1":
+                case "timeAttack":
                     b = new Bundle();
-                    b.putInt("mode", 1); //Your id
-                    intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
+                    b.putInt("mode", mode); //Your id
+                    intentTimeAttack.putExtras(b); //Put your id to your next Intent
                     finish();
+                    startActivity(intentTimeAttack);
                     break;
-                case "mode2":
+                case "classic":
+                    ++mode;
                     b = new Bundle();
-                    b.putInt("mode", 2); //Your id
-                    intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
+                    b.putInt("mode", mode); //Your id
+                    intentClassic.putExtras(b); //Put your id to your next Intent
                     finish();
+                    startActivity(intentClassic);
                     break;
-                case "mode3":
-                    b = new Bundle();
-                    b.putInt("mode", 3); //Your id
-                    intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
-                    finish();
-                    break;
-                case "mode4":
-                    b = new Bundle();
-                    b.putInt("mode", 4); //Your id
-                    intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
-                    finish();
+                case "score":
+                    //ovde ubaci skor
                     break;
             }
         }
@@ -83,13 +100,13 @@ public class ModeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        //startActivity(new Intent(ModeActivity.this, MenuActivity.class));
+        startActivity(new Intent(ModeActivity.this, ButtonsActivity.class));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(MenuActivity.music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.pause();
         }
     }
@@ -97,7 +114,7 @@ public class ModeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(MenuActivity.music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
     }

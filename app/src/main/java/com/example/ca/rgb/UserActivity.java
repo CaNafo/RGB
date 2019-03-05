@@ -31,6 +31,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import static com.example.ca.rgb.MenuActivity.mp;
+import static com.example.ca.rgb.StaticMethods.getMusic;
+
 public class UserActivity extends AppCompatActivity {
     private AdView mAdView;
     @Override
@@ -39,8 +42,8 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.start();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.start();
         }
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
         String name = settings.getString("name", "");
@@ -177,22 +180,21 @@ public class UserActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        //startActivity(new Intent(HelpActivity.this, MenuActivity.class));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.pause();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.pause();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.start();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.start();
         }
     }
 }

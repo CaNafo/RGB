@@ -13,7 +13,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.MenuActivity.mp;
-import static com.example.ca.rgb.MenuActivity.music;
+import static com.example.ca.rgb.StaticMethods.getMusic;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
@@ -24,6 +24,10 @@ public class ProfileActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        if(getMusic(getApplicationContext()) == 1){
+            MenuActivity.mp.start();
+        }
 
         textView = findViewById(R.id.nameTxt);
         textView.setOnClickListener(editNameOnClickListener);
@@ -57,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name",0);
         String myName = settings.getString("name","");
         textView.setText(myName);
-        if(music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             mp.start();
         }
     }
@@ -65,8 +69,8 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.pause();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.pause();
         }
     }
 }

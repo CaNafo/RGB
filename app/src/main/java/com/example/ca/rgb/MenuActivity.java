@@ -15,12 +15,15 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import static com.example.ca.rgb.StaticMethods.getMusic;
+import static com.example.ca.rgb.StaticMethods.getSound;
+import static com.example.ca.rgb.StaticMethods.setMusic;
+import static com.example.ca.rgb.StaticMethods.setSound;
+
 
 public class MenuActivity extends AppCompatActivity {
     private static final String TAG = MenuActivity.class.getSimpleName();
     private AdView mAdView;
-    public static int music;
-    public static int sound;
     public static MediaPlayer mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,24 +37,14 @@ public class MenuActivity extends AppCompatActivity {
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
 
-        SharedPreferences MusicSound = getApplicationContext().getSharedPreferences("Music", 0);
-        SharedPreferences.Editor editorMS = MusicSound.edit();
-        music = MusicSound.getInt("Music", 0);
-
-        if(music != 2){
+        if(getMusic(getApplicationContext()) != 2){
             mp.start();
-            editorMS.putInt("Music", 1);
+            setMusic(getApplicationContext(), 1);
         }
 
-        editorMS.apply();
-        MusicSound = getApplicationContext().getSharedPreferences("Sound", 0);
-        sound = MusicSound.getInt("Sound", 0);
-
-        if(sound != 2){
-            editorMS.putInt("Sound", 1);
-            editorMS = MusicSound.edit();
+        if(getSound(getApplicationContext()) != 2){
+            setSound(getApplicationContext(), 1);
         }
-        editorMS.apply();
 
         Button playBtn = findViewById(R.id.playBtn);
         Button scoreBtn = findViewById(R.id.scoreBtn);
@@ -91,12 +84,10 @@ public class MenuActivity extends AppCompatActivity {
            SharedPreferences.Editor editor;
            switch (action){
                case "playBtn":
-                   startActivity(new Intent(MenuActivity.this, ModeActivity.class));
-                   //finish();
+                   startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
                    break;
                case "scoreBtn":
                    startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
-                    //addNewScore();
                    break;
                case "settingsBtn":
                    startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
@@ -106,7 +97,6 @@ public class MenuActivity extends AppCompatActivity {
                    break;
                case "helpBtn":
                    startActivity(new Intent(MenuActivity.this, HelpActivity.class));
-                   //finish();
                    break;
            }
        }
@@ -122,7 +112,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             mp.pause();
         }
     }
@@ -130,7 +120,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             mp.start();
         }
     }

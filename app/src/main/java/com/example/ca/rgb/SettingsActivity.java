@@ -14,8 +14,10 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.MenuActivity.mp;
-import static com.example.ca.rgb.MenuActivity.music;
-import static com.example.ca.rgb.MenuActivity.sound;
+import static com.example.ca.rgb.StaticMethods.getMusic;
+import static com.example.ca.rgb.StaticMethods.getSound;
+import static com.example.ca.rgb.StaticMethods.setMusic;
+import static com.example.ca.rgb.StaticMethods.setSound;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -26,14 +28,14 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        if(music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             mp.start();
             ((Button)findViewById(R.id.musicBtn)).setText("Music: ON");
         }else{
             ((Button)findViewById(R.id.musicBtn)).setText("Music: OFF");
         }
 
-        if(sound == 1){
+        if(getSound(getApplicationContext()) == 1){
             ((Button)findViewById(R.id.soundBtn)).setText("Sound: ON");
         }else{
             ((Button)findViewById(R.id.soundBtn)).setText("Sound: OFF");
@@ -73,30 +75,26 @@ public class SettingsActivity extends AppCompatActivity {
                     settings = getApplicationContext().getSharedPreferences("Music", 0);
                     editor = settings.edit();
                     if(s.equalsIgnoreCase("Music: ON")){
-                        music = 2;
                         mp.pause();
-                        editor.putInt("Music", 2);
+                        setMusic(getApplicationContext(), 2);
                         button.setText("Music: OFF");
                     }else{
-                        music = 1;
                         mp.start();
-                        editor.putInt("Music", 1);
+                        setMusic(getApplicationContext(), 1);
                         button.setText("Music: ON");
                     }
-                    editor.apply();
                     break;
                 case "soundBtn":
                     s = String.valueOf(button.getText());
                     settings = getApplicationContext().getSharedPreferences("Sound", 0);
                     editor = settings.edit();
                     if(s.equalsIgnoreCase("Sound: ON")){
-                        editor.putInt("Sound", 2);
+                        setSound(getApplicationContext(), 2);
                         button.setText("Sound: OFF");
                     }else{
-                        editor.putInt("Sound", 1);
+                        setSound(getApplicationContext(), 2);
                         button.setText("Sound: ON");
                     }
-                    editor.apply();
                     break;
             }
         }
@@ -110,7 +108,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             mp.pause();
         }
     }
@@ -118,7 +116,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(music == 1){
+        if(getMusic(getApplicationContext()) == 1){
             mp.start();
         }
     }

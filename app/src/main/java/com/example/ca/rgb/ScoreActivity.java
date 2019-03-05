@@ -37,6 +37,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import static com.example.ca.rgb.MenuActivity.mp;
+import static com.example.ca.rgb.StaticMethods.getMusic;
+
 public class ScoreActivity extends AppCompatActivity {
     int mode = 1;
     boolean btnClicked = false;
@@ -49,8 +52,8 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.start();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.start();
         }
 
         tittleTxt = findViewById(R.id.titleTxt);
@@ -534,22 +537,21 @@ public class ScoreActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.pause();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.pause();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(MenuActivity.music == 1){
-            MenuActivity.mp.start();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.start();
         }
     }
 
     @Override
     public void onBackPressed() {
         finish();
-        //startActivity(new Intent(HelpActivity.this, MenuActivity.class));
     }
 }
