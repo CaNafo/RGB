@@ -3,6 +3,7 @@ package com.example.ca.rgb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,24 +26,27 @@ public class MenuActivity extends AppCompatActivity {
     private static final String TAG = MenuActivity.class.getSimpleName();
     private AdView mAdView;
     public static MediaPlayer mp;
+    Button profileButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button profileButton = findViewById(R.id.profileBtn);
+        profileButton = findViewById(R.id.profileBtn);
         profileButton.setOnClickListener(profileOnClickListener);
+
 
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
 
-        if(getMusic(getApplicationContext()) != 2){
+        if (getMusic(getApplicationContext()) != 2) {
             mp.start();
             setMusic(getApplicationContext(), 1);
         }
 
-        if(getSound(getApplicationContext()) != 2){
+        if (getSound(getApplicationContext()) != 2) {
             setSound(getApplicationContext(), 1);
         }
 
@@ -55,8 +59,8 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
 
-        if(!(myName.length() > 0))
-             startActivity(new Intent(MenuActivity.this, UserActivity.class));
+        if (!(myName.length() > 0))
+            startActivity(new Intent(MenuActivity.this, UserActivity.class));
 
         playBtn.setOnClickListener(menuActionListener);
         exitBtn.setOnClickListener(menuActionListener);
@@ -68,38 +72,39 @@ public class MenuActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         String defaultInputText = getResources().getString(R.string.ad_id_banner);
         MobileAds.initialize(this, defaultInputText);
+
     }
 
 
-   View.OnClickListener menuActionListener = new View.OnClickListener() {
+    View.OnClickListener menuActionListener = new View.OnClickListener() {
 
-       @RequiresApi(api = Build.VERSION_CODES.M)
-       @Override
-       public void onClick(View v) {
-           Button button = (Button)v;
-           String action = String.valueOf(button.getTag());
-           String s = "";
-           SharedPreferences settings;
-           SharedPreferences.Editor editor;
-           switch (action){
-               case "playBtn":
-                   startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
-                   break;
-               case "scoreBtn":
-                   startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
-                   break;
-               case "settingsBtn":
-                   startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
-                   break;
-               case "exitBtn":
-                   finish();
-                   break;
-               case "helpBtn":
-                   startActivity(new Intent(MenuActivity.this, HelpActivity.class));
-                   break;
-           }
-       }
-   };
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        public void onClick(View v) {
+            Button button = (Button) v;
+            String action = String.valueOf(button.getTag());
+            String s = "";
+            SharedPreferences settings;
+            SharedPreferences.Editor editor;
+            switch (action) {
+                case "playBtn":
+                    startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
+                    break;
+                case "scoreBtn":
+                    startActivity(new Intent(MenuActivity.this, ScoreActivity.class));
+                    break;
+                case "settingsBtn":
+                    startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
+                    break;
+                case "exitBtn":
+                    finish();
+                    break;
+                case "helpBtn":
+                    startActivity(new Intent(MenuActivity.this, HelpActivity.class));
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -111,7 +116,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(getMusic(getApplicationContext()) == 1){
+        if (getMusic(getApplicationContext()) == 1) {
             mp.pause();
         }
     }
@@ -119,7 +124,8 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(getMusic(getApplicationContext()) == 1){
+        setAvatar();
+        if (getMusic(getApplicationContext()) == 1) {
             mp.start();
         }
     }
@@ -130,4 +136,33 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
         }
     };
+
+    private void setAvatar() {
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("avatar", 0);
+        String avatar = settings.getString("avatar", "");
+
+        switch (avatar){
+            case "avatar1":
+                profileButton.setBackgroundResource(R.drawable.avatar1_small);
+                break;
+            case "avatar2":
+                profileButton.setBackgroundResource(R.drawable.avatar2_small);
+                break;
+            case "avatar3":
+                profileButton.setBackgroundResource(R.drawable.avatar3_small);
+                break;
+            case "avatar4":
+                profileButton.setBackgroundResource(R.drawable.avatar4_small);
+                break;
+            case "avatar5":
+                profileButton.setBackgroundResource(R.drawable.avatar5_small);
+                break;
+            case "avatar6":
+                profileButton.setBackgroundResource(R.drawable.avatar6_small);
+                break;
+            case "avatar7":
+                profileButton.setBackgroundResource(R.drawable.avatar7_small);
+                break;
+        }
+    }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -19,12 +20,13 @@ import static com.example.ca.rgb.StaticMethods.getPoints;
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
     private AdView mAdView;
-
+    ImageView avatarProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        setAvatar();
 
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
@@ -60,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setAvatar();
         TextView textView = findViewById(R.id.nameTxt);
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name",0);
         String myName = settings.getString("name","");
@@ -74,6 +77,36 @@ public class ProfileActivity extends AppCompatActivity {
         super.onPause();
         if(getMusic(getApplicationContext()) == 1){
             mp.pause();
+        }
+    }
+
+    private void setAvatar() {
+        avatarProfile = findViewById(R.id.avatarProfile);
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("avatar", 0);
+        String avatar = settings.getString("avatar", "");
+
+        switch (avatar){
+            case "avatar1":
+                avatarProfile.setImageResource(R.drawable.avatar1_big);
+                break;
+            case "avatar2":
+                avatarProfile.setImageResource(R.drawable.avatar2_big);
+                break;
+            case "avatar3":
+                avatarProfile.setImageResource(R.drawable.avatar3_big);
+                break;
+            case "avatar4":
+                avatarProfile.setImageResource(R.drawable.avatar4_big);
+                break;
+            case "avatar5":
+                avatarProfile.setImageResource(R.drawable.avatar5_big);
+                break;
+            case "avatar6":
+                avatarProfile.setImageResource(R.drawable.avatar6_big);
+                break;
+            case "avatar7":
+                avatarProfile.setImageResource(R.drawable.avatar7_big);
+                break;
         }
     }
 }

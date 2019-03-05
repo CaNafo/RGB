@@ -61,7 +61,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar2_small" />
+                android:tag="avatar1"
+                app:srcCompat="@drawable/avatar1_small" />
 
             <ImageView
                 android:id="@+id/avatar2"
@@ -70,7 +71,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar3_small" />
+                android:tag="avatar2"
+                app:srcCompat="@drawable/avatar2_small" />
 
             <ImageView
                 android:id="@+id/avatar3"
@@ -79,7 +81,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar4_small" />
+                android:tag="avatar3"
+                app:srcCompat="@drawable/avatar3_small" />
 
             <ImageView
                 android:id="@+id/avatar4"
@@ -88,7 +91,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar5_small" />
+                android:tag="avatar4"
+                app:srcCompat="@drawable/avatar4_small" />
 
             <ImageView
                 android:id="@+id/avatar5"
@@ -97,7 +101,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar6_small" />
+                android:tag="avatar5"
+                app:srcCompat="@drawable/avatar5_small" />
 
         </LinearLayout>
 
@@ -112,21 +117,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
-                app:srcCompat="@drawable/avatar7_small" />
+                android:tag="avatar6"
+                app:srcCompat="@drawable/avatar6_small" />
+
 
             <ImageView
                 android:id="@+id/avatar7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar8_small" />
-
-            <ImageView
-                android:id="@+id/avatar8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/avatar1_small" />
+                app:srcCompat="@drawable/avatar7_small" />
 
             <ImageView
                 android:id="@+id/avatar9"

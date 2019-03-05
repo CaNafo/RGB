@@ -82,9 +82,9 @@ public class ScoreActivity extends AppCompatActivity {
             getUserPosition("timeAttack");
         }else if(buttonMode == 3 || buttonMode == 4){
             buttonMode = 3;
-            offlineLoad("timeAttackHard");
-            getRetrofitObject("timeAttackHard");
-            getUserPosition("timeAttackHard");
+            offlineLoad("timeattackHard");
+            getRetrofitObject("timeattackHard");
+            getUserPosition("timeattackHard");
         }else if(buttonMode == 5 || buttonMode == 6){
             buttonMode = 5;
         }else if(buttonMode == 7 || buttonMode == 8){
@@ -441,9 +441,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getUserPosition("timeAttack");
                     }else if(buttonMode == 3 || buttonMode == 4){
                         buttonMode = 3;
-                        offlineLoad("timeAttackHard");
-                        getRetrofitObject("timeAttackHard");
-                        getUserPosition("timeAttackHard");
+                        offlineLoad("timeattackHard");
+                        getRetrofitObject("timeattackHard");
+                        getUserPosition("timeattackHard");
                     }else if(buttonMode == 5 || buttonMode == 6){
                         buttonMode = 5;
                     }else if(buttonMode == 7 || buttonMode == 8){
@@ -453,14 +453,14 @@ public class ScoreActivity extends AppCompatActivity {
                 case 2:
                     tittleTxt.setText("Top 10 Classic players");
                     if(buttonMode == 1 || buttonMode == 2){
-                        offlineLoad("timeAttack");
-                        getRetrofitObject("timeAttack");
-                        getUserPosition("timeAttack");
+                        offlineLoad("classic");
+                        getRetrofitObject("classic");
+                        getUserPosition("classic");
                     }else if(buttonMode == 3 || buttonMode == 4){
                         buttonMode = 3;
-                        offlineLoad("timeAttackHard");
-                        getRetrofitObject("timeAttackHard");
-                        getUserPosition("timeAttackHard");
+                        offlineLoad("classicHard");
+                        getRetrofitObject("classicHard");
+                        getUserPosition("classicHard");
                     }else if(buttonMode == 5 || buttonMode == 6){
                         buttonMode = 5;
                     }else if(buttonMode == 7 || buttonMode == 8){
@@ -492,9 +492,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getUserPosition("timeAttack");
                     }else if(buttonMode == 3 || buttonMode == 4){
                         buttonMode = 3;
-                        offlineLoad("timeAttackHard");
-                        getRetrofitObject("timeAttackHard");
-                        getUserPosition("timeAttackHard");
+                        offlineLoad("timeattackHard");
+                        getRetrofitObject("timeattackHard");
+                        getUserPosition("timeattackHard");
                     }else if(buttonMode == 5 || buttonMode == 6){
                         buttonMode = 5;
                     }else if(buttonMode == 7 || buttonMode == 8){
@@ -504,14 +504,14 @@ public class ScoreActivity extends AppCompatActivity {
                 case 2:
                     tittleTxt.setText("Top 10 Classic players");
                     if(buttonMode == 1 || buttonMode == 2){
-                        offlineLoad("timeAttack");
-                        getRetrofitObject("timeAttack");
-                        getUserPosition("timeAttack");
+                        offlineLoad("classic");
+                        getRetrofitObject("classic");
+                        getUserPosition("classic");
                     }else if(buttonMode == 3 || buttonMode == 4){
                         buttonMode = 3;
-                        offlineLoad("timeAttackHard");
-                        getRetrofitObject("timeAttackHard");
-                        getUserPosition("timeAttackHard");
+                        offlineLoad("classicHard");
+                        getRetrofitObject("classicHard");
+                        getUserPosition("classicHard");
                     }else if(buttonMode == 5 || buttonMode == 6){
                         buttonMode = 5;
                     }else if(buttonMode == 7 || buttonMode == 8){
@@ -560,9 +560,9 @@ public class ScoreActivity extends AppCompatActivity {
                             getUserPosition("timeAttack");
                         }else if(buttonMode == 3 || buttonMode == 4){
                             buttonMode = 3;
-                            offlineLoad("timeAttackHard");
-                            getRetrofitObject("timeAttackHard");
-                            getUserPosition("timeAttackHard");
+                            offlineLoad("timeattackHard");
+                            getRetrofitObject("timeattackHard");
+                            getUserPosition("timeattackHard");
                         }else if(buttonMode == 5 || buttonMode == 6){
                             buttonMode = 5;
                         }else if(buttonMode == 7 || buttonMode == 8){
@@ -583,9 +583,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getUserPosition("timeAttack");
                     }else if(buttonMode == 3 || buttonMode == 4){
                         buttonMode = 3;
-                        offlineLoad("timeAttackHard");
-                        getRetrofitObject("timeAttackHard");
-                        getUserPosition("timeAttackHard");
+                        offlineLoad("timeattackHard");
+                        getRetrofitObject("timeattackHard");
+                        getUserPosition("timeattackHard");
                     }else if(buttonMode == 5 || buttonMode == 6){
                         buttonMode = 5;
                     }else if(buttonMode == 7 || buttonMode == 8){

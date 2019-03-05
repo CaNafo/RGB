@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ca.rgb.Interfaces.APIgetID;
@@ -41,6 +42,23 @@ public class UserActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+
+        ImageView avatar1 = findViewById(R.id.avatar1);
+        avatar1.setOnClickListener(imageOnClickListener);
+        ImageView avatar2 = findViewById(R.id.avatar2);
+        avatar2.setOnClickListener(imageOnClickListener);
+        ImageView avatar3 = findViewById(R.id.avatar3);
+        avatar3.setOnClickListener(imageOnClickListener);
+        ImageView avatar4 = findViewById(R.id.avatar4);
+        avatar4.setOnClickListener(imageOnClickListener);
+        ImageView avatar5 = findViewById(R.id.avatar5);
+        avatar5.setOnClickListener(imageOnClickListener);
+        ImageView avatar6 = findViewById(R.id.avatar6);
+        avatar6.setOnClickListener(imageOnClickListener);
+        ImageView avatar7 = findViewById(R.id.avatar7);
+        avatar7.setOnClickListener(imageOnClickListener);
+
 
         if(getMusic(getApplicationContext()) == 1){
             mp.start();
@@ -197,4 +215,65 @@ public class UserActivity extends AppCompatActivity {
             mp.start();
         }
     }
+
+    View.OnClickListener imageOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                ImageView imageView = (ImageView)v;
+                SharedPreferences settings;
+                 SharedPreferences.Editor editor;
+
+                switch (imageView.getTag().toString()){
+                    case "avatar1":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar1");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                    case "avatar2":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar2");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                    case "avatar3":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar3");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                    case "avatar4":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar4");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                    case "avatar5":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar5");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                    case "avatar6":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar6");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                    case "avatar7":
+                        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                        editor = settings.edit();
+                        editor.putString("avatar", "avatar7");
+                        // Apply the edits!
+                        editor.apply();
+                        break;
+                }
+        }
+    };
 }
