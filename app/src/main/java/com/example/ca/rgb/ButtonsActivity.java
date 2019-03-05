@@ -36,7 +36,7 @@ public class ButtonsActivity extends AppCompatActivity {
     }
 
     private void setButtons(){
-        ((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
+        /*((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
 
         if(getPoints(getApplicationContext()) > 150){
             ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(modeActionListener);
@@ -57,7 +57,12 @@ public class ButtonsActivity extends AppCompatActivity {
         }else{
             ((Button)findViewById(R.id.tenButtons)).setBackgroundColor(Color.parseColor("gray"));
             ((Button)findViewById(R.id.tenButtons)).setOnClickListener(null);
-        }
+        }*/
+
+        ((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
+        ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(modeActionListener);
+        ((Button)findViewById(R.id.eightButtons)).setOnClickListener(modeActionListener);
+        ((Button)findViewById(R.id.tenButtons)).setOnClickListener(null);
     }
 
     View.OnClickListener modeActionListener = new View.OnClickListener() {
