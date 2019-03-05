@@ -24,11 +24,13 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.util.Random;
 
+import static com.example.ca.rgb.StaticMethods.getPoints;
 import static com.example.ca.rgb.StaticMethods.scaleView;
 import static com.example.ca.rgb.StaticMethods.fadeInAnimation;
 import static com.example.ca.rgb.StaticMethods.fadeOutAnimation;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getSound;
+import static com.example.ca.rgb.StaticMethods.setPoints;
 import static com.example.ca.rgb.StaticScoreMethods.finishUpdate;
 
 public class PlayActivityTimeAttack extends AppCompatActivity {
@@ -475,6 +477,18 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         }
     }
 
+    private void addPoints(){
+        int points = getPoints(getApplicationContext());
+        int modeBonus = (mode / 2) * 10;
+        if(score >= 30 && score < 60){
+            points = points + 10 + modeBonus;
+        }else if(score >= 60){
+            points = points + 20 + modeBonus;
+        }
+
+        setPoints(getApplicationContext(), points);
+    }
+
     private void rewardAlertDialog(){
         // setup the alert builder
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -517,6 +531,8 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         if(mode < 5){
             finishUpdate(mode, score, getApplicationContext());
         }
+
+        addPoints();
 
         if(s.equalsIgnoreCase("time's up")){
             if (mInterstitialAd.isLoaded()) {

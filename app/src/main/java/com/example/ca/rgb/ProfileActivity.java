@@ -14,6 +14,7 @@ import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.MenuActivity.mp;
 import static com.example.ca.rgb.StaticMethods.getMusic;
+import static com.example.ca.rgb.StaticMethods.getPoints;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
@@ -28,6 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
+
+        ((TextView)findViewById(R.id.pointsTxt)).setText(String.valueOf(getPoints(getApplicationContext())));
 
         textView = findViewById(R.id.nameTxt);
         textView.setOnClickListener(editNameOnClickListener);

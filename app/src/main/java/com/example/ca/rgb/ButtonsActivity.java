@@ -1,6 +1,7 @@
 package com.example.ca.rgb;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.StaticMethods.getMusic;
+import static com.example.ca.rgb.StaticMethods.getPoints;
 
 public class ButtonsActivity extends AppCompatActivity {
     private AdView mAdView;
@@ -24,21 +26,38 @@ public class ButtonsActivity extends AppCompatActivity {
             MenuActivity.mp.start();
         }
 
-        Button btn3 = findViewById(R.id.threeButtons);
-        Button btn5 = findViewById(R.id.fiveButtons);
-        Button btn8 = findViewById(R.id.eightButtons);
-        Button btn10 = findViewById(R.id.tenButtons);
-
-        btn3.setOnClickListener(modeActionListener);
-        btn5.setOnClickListener(modeActionListener);
-        btn8.setOnClickListener(modeActionListener);
-        //btn10.setOnClickListener(modeActionListener);
+        setButtons();
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         String defaultInputText = getResources().getString(R.string.ad_id_banner);
         MobileAds.initialize(this, defaultInputText);
+    }
+
+    private void setButtons(){
+        ((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
+
+        if(getPoints(getApplicationContext()) > 150){
+            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(modeActionListener);
+        }else{
+            ((Button)findViewById(R.id.fiveButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(null);
+        }
+
+        if(getPoints(getApplicationContext()) > 500){
+            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(modeActionListener);
+        }else{
+            ((Button)findViewById(R.id.eightButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(null);
+        }
+
+        if(getPoints(getApplicationContext()) > 1000){
+            ((Button)findViewById(R.id.tenButtons)).setOnClickListener(modeActionListener);
+        }else{
+            ((Button)findViewById(R.id.tenButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.tenButtons)).setOnClickListener(null);
+        }
     }
 
     View.OnClickListener modeActionListener = new View.OnClickListener() {

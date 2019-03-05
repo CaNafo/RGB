@@ -78,6 +78,12 @@ public class StaticMethods {
         return sound;
     }
 
+    public static int getPoints(Context context){
+        SharedPreferences pointsPreferences = context.getSharedPreferences("Points", 0);
+        int sound = pointsPreferences.getInt("Points", 0);
+        return sound;
+    }
+
     public static void setMusic(Context context, int music){
         SharedPreferences MusicSound = context.getSharedPreferences("Music", 0);
         SharedPreferences.Editor editorMS = MusicSound.edit();
@@ -89,6 +95,13 @@ public class StaticMethods {
         SharedPreferences MusicSound = context.getSharedPreferences("Sound", 0);
         SharedPreferences.Editor editorMS = MusicSound.edit();
         editorMS.putInt("Sound", sound);
+        editorMS.apply();
+    }
+
+    public static void setPoints(Context context, int points){
+        SharedPreferences pointsPreferences = context.getSharedPreferences("Points", 0);
+        SharedPreferences.Editor editorMS = pointsPreferences.edit();
+        editorMS.putInt("Points", points);
         editorMS.apply();
     }
 }
