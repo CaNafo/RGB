@@ -47,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         Button playBtn = findViewById(R.id.playBtn);
-        Button scoreBtn = findViewById(R.id.scoreBtn);
+
         Button exitBtn = findViewById(R.id.exitBtn);
         Button helpBtn = findViewById(R.id.helpBtn);
         Button settingsBtn = findViewById(R.id.settingsBtn);
@@ -59,7 +59,6 @@ public class MenuActivity extends AppCompatActivity {
              startActivity(new Intent(MenuActivity.this, UserActivity.class));
 
         playBtn.setOnClickListener(menuActionListener);
-        scoreBtn.setOnClickListener(menuActionListener);
         exitBtn.setOnClickListener(menuActionListener);
         helpBtn.setOnClickListener(menuActionListener);
         settingsBtn.setOnClickListener(menuActionListener);

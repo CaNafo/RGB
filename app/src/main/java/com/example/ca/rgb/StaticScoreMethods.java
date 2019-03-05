@@ -26,8 +26,8 @@ public class StaticScoreMethods {
         switch (mode) {
             case 1:
                 //timeattack
-                settings = context.getSharedPreferences("score", 0);
-                myScore = settings.getInt("score", 0);
+                settings = context.getSharedPreferences("timeAttack", 0);
+                myScore = settings.getInt("timeAttack", 0);
                 break;
             case 2:
                 //classic
@@ -58,7 +58,7 @@ public class StaticScoreMethods {
                 setID(context);
                 settings = context.getSharedPreferences("ID", 0);
                 myID = settings.getInt("ID", 0);
-                addNewScore(myName, score);
+                addNewScore(myName);
             }
             setID(context);
             settings = context.getSharedPreferences("name", 0);
@@ -81,9 +81,9 @@ public class StaticScoreMethods {
             switch (mode) {
                 case 1:
                     //timeattack
-                    settings = context.getSharedPreferences("score", 0);
+                    settings = context.getSharedPreferences("timeAttack", 0);
                     editor = settings.edit();
-                    editor.putInt("score", score);
+                    editor.putInt("timeAttack", score);
                     break;
                 case 2:
                     //classic
@@ -105,9 +105,9 @@ public class StaticScoreMethods {
                     break;
 
                 default:
-                    settings = context.getSharedPreferences("score", 0);
+                    settings = context.getSharedPreferences("timeAttack", 0);
                     editor = settings.edit();
-                    editor.putInt("score", score);
+                    editor.putInt("timeAttack", score);
                     break;
             }
 
@@ -119,7 +119,7 @@ public class StaticScoreMethods {
     static void setID(final Context context) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl("http://rgb.dx.am/")
+                .baseUrl(DomainName.getIstance())
                 .build();
 
         APIgetID scalarService = retrofit.create(APIgetID.class);
@@ -163,10 +163,10 @@ public class StaticScoreMethods {
         });
     }
 
-    private static void addNewScore(String name, int score) {
+    private static void addNewScore(String name) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name, score);
+        call = api.setQuery(name);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

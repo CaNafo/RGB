@@ -38,7 +38,7 @@ public class ModeActivity extends AppCompatActivity {
 
         timeAttackBtn.setOnClickListener(modeActionListener);
         classicBtn.setOnClickListener(modeActionListener);
-        //scoreBtn.setOnClickListener(modeActionListener);
+        scoreBtn.setOnClickListener(scoreOnClickListener);
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -118,4 +118,15 @@ public class ModeActivity extends AppCompatActivity {
             MenuActivity.mp.start();
         }
     }
+
+    View.OnClickListener scoreOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intentScore = new Intent(ModeActivity.this, ScoreActivity.class);
+            Bundle b = new Bundle();
+            b.putInt("mode", mode); //Your id
+            intentScore.putExtras(b); //Put your id to your next Intent
+            startActivity(intentScore);
+        }
+    };
 }

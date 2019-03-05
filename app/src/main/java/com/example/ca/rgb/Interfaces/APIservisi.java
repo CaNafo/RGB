@@ -11,8 +11,7 @@ import retrofit2.http.Query;
 public interface APIservisi
 {
     @GET("/RGB/score_add.php")
-    Call<String> setQuery(@Query("name") String name,
-                          @Query("score") int score);
+    Call<String> setQuery(@Query("name") String name);
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.ca.rgb.RetrofitPoziv;
 
+import com.example.ca.rgb.DomainName;
 import com.example.ca.rgb.Interfaces.APIupdateName;
 import com.example.ca.rgb.Interfaces.APIupdateServisi;
 
@@ -10,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitUpdateName {
-    private static final String ROOT_URL = "http://rgb.dx.am/";
+    private static final String ROOT_URL = DomainName.getIstance();
 
     static OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)

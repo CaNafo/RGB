@@ -88,7 +88,7 @@ public class UserActivity extends AppCompatActivity {
     void setID() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .baseUrl("http://rgb.dx.am/")
+                .baseUrl(DomainName.getIstance())
                 .build();
 
         APIgetID scalarService = retrofit.create(APIgetID.class);
@@ -115,7 +115,7 @@ public class UserActivity extends AppCompatActivity {
                             // Apply the edits!
                             editor.apply();
                             TextView textView = findViewById(R.id.nameTxt);
-                            addNewScore(textView.getText().toString(),0);
+                            addNewScore(textView.getText().toString());
                         }
 
                     } catch (JSONException e) {
@@ -134,10 +134,10 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
-    private void addNewScore(String name, int score) {
+    private void addNewScore(String name) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name, score);
+        call = api.setQuery(name);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
