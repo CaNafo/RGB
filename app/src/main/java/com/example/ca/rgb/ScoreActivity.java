@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -88,7 +89,6 @@ public class ScoreActivity extends AppCompatActivity {
             getRetrofitObject("timeAttack");
             getUserPosition("timeAttack");
         } else if (buttonMode == 3 || buttonMode == 4) {
-            buttonMode = 3;
             offlineLoad("timeattackHard");
             getRetrofitObject("timeattackHard");
             getUserPosition("timeattackHard");
@@ -96,12 +96,10 @@ public class ScoreActivity extends AppCompatActivity {
             offlineLoad("timeAttack8");
             getRetrofitObject("timeAttack8");
             getUserPosition("timeAttack8");
-            buttonMode = 5;
         } else if (buttonMode == 7 || buttonMode == 8) {
-            offlineLoad("timeAttack8Hard");
-            getRetrofitObject("timeAttack8Hard");
-            getUserPosition("timeAttack8Hard");
-            buttonMode = 6;
+            offlineLoad("8Hard");
+            getRetrofitObject("8Hard");
+            getUserPosition("8Hard");
         }
 
 
@@ -142,14 +140,11 @@ public class ScoreActivity extends AppCompatActivity {
                 settings = getApplicationContext().getSharedPreferences("classic8", 0);
                 myScore = settings.getInt("classic8", 0);
                 break;
-            case "timeAttack8hard":
-                settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
-                myScore = settings.getInt("timeAttack8hard", 0);
+            case "8Hard":
+                settings = getApplicationContext().getSharedPreferences("8Hard", 0);
+                myScore = settings.getInt("8Hard", 0);
                 break;
-            case "classic8Hard":
-                settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
-                myScore = settings.getInt("classic8Hard", 0);
-                break;
+
         }
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
@@ -214,10 +209,7 @@ public class ScoreActivity extends AppCompatActivity {
                         noumberTxt.setGravity(Gravity.CENTER);
                         noumber.addView(noumberTxt);
 
-                        ImageView avatarImg = new ImageView(image.getContext());
-                        avatarImg.setBackgroundResource(R.drawable.avatar1_small);
-                        avatarImg.setLayoutParams(new LinearLayout.LayoutParams(25, 25));
-                        image.addView(avatarImg);
+                        ImageView avatarImg ;
 
                         TextView nameTxt = new TextView(name.getContext());
                         nameTxt.setText("Name");
@@ -247,8 +239,33 @@ public class ScoreActivity extends AppCompatActivity {
                             noumber.addView(noumberTxt);
 
                             avatarImg = new ImageView(image.getContext());
-                            avatarImg.setBackgroundResource(R.drawable.avatar1_small);
-                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(40, 40));
+                            String avatar = Jasonobject.getString("avatar");
+
+                            switch (avatar){
+                                case "avatar1":
+                                    avatarImg.setImageResource(R.drawable.avatar1_small);
+                                    break;
+                                case "avatar2":
+                                    avatarImg.setImageResource(R.drawable.avatar2_small);
+                                    break;
+                                case "avatar3":
+                                    avatarImg.setImageResource(R.drawable.avatar3_small);
+                                    break;
+                                case "avatar4":
+                                    avatarImg.setImageResource(R.drawable.avatar4_small);
+                                    break;
+                                case "avatar5":
+                                    avatarImg.setImageResource(R.drawable.avatar5_small);
+                                    break;
+                                case "avatar6":
+                                    avatarImg.setImageResource(R.drawable.avatar6_small);
+                                    break;
+                                case "avatar7":
+                                    avatarImg.setImageResource(R.drawable.avatar7_small);
+                                    break;
+                            }
+                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(45, 45));
+
                             //image.addView(avatarImg);
 
                             nameTxt = new TextView(name.getContext());
@@ -327,14 +344,11 @@ public class ScoreActivity extends AppCompatActivity {
                 settings = getApplicationContext().getSharedPreferences("classic8", 0);
                 myScore = settings.getInt("classic8", 0);
                 break;
-            case "timeAttack8hard":
-                settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
-                myScore = settings.getInt("timeAttack8hard", 0);
+            case "8Hard":
+                settings = getApplicationContext().getSharedPreferences("8Hard", 0);
+                myScore = settings.getInt("8Hard", 0);
                 break;
-            case "classic8Hard":
-                settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
-                myScore = settings.getInt("classic8Hard", 0);
-                break;
+
         }
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
@@ -397,14 +411,11 @@ public class ScoreActivity extends AppCompatActivity {
                                     settings = getApplicationContext().getSharedPreferences("classic8", 0);
                                     myScore = settings.getInt("classic8", 0);
                                     break;
-                                case "timeAttack8hard":
-                                    settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
-                                    myScore = settings.getInt("timeAttack8hard", 0);
+                                case "8Hard":
+                                    settings = getApplicationContext().getSharedPreferences("8Hard", 0);
+                                    myScore = settings.getInt("8Hard", 0);
                                     break;
-                                case "classic8Hard":
-                                    settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
-                                    myScore = settings.getInt("classic8Hard", 0);
-                                    break;
+
                             }
 
 
@@ -499,14 +510,11 @@ public class ScoreActivity extends AppCompatActivity {
                                     settings = getApplicationContext().getSharedPreferences("classic8", 0);
                                     myScore = settings.getInt("classic8", 0);
                                     break;
-                                case "timeAttack8hard":
-                                    settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
-                                    myScore = settings.getInt("timeAttack8hard", 0);
+                                case "8Hard":
+                                    settings = getApplicationContext().getSharedPreferences("8Hard", 0);
+                                    myScore = settings.getInt("8Hard", 0);
                                     break;
-                                case "classic8Hard":
-                                    settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
-                                    myScore = settings.getInt("classic8Hard", 0);
-                                    break;
+
                             }
 
                             settings = getApplicationContext().getSharedPreferences("name", 0);
@@ -592,9 +600,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        offlineLoad("timeAttack8Hard");
-                        getRetrofitObject("timeAttack8Hard");
-                        getUserPosition("timeAttack8Hard");
+                        offlineLoad("8Hard");
+                        getRetrofitObject("8Hard");
+                        getUserPosition("8Hard");
                     }
                     break;
                 case 2:
@@ -613,9 +621,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("classic8");
                         getUserPosition("classic8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        offlineLoad("classic8Hard");
-                        getRetrofitObject("classic8Hard");
-                        getUserPosition("classic8Hard");
+                        offlineLoad("8Hard");
+                        getRetrofitObject("8Hard");
+                        getUserPosition("8Hard");
                     }
                     break;
             }
@@ -651,9 +659,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        offlineLoad("timeAttack8Hard");
-                        getRetrofitObject("timeAttack8Hard");
-                        getUserPosition("timeAttack8Hard");
+                        offlineLoad("8Hard");
+                        getRetrofitObject("8Hard");
+                        getUserPosition("8Hard");
                     }
                     break;
                 case 2:
@@ -672,9 +680,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("classic8");
                         getUserPosition("classic8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        offlineLoad("classic8Hard");
-                        getRetrofitObject("classic8Hard");
-                        getUserPosition("classic8Hard");
+                        offlineLoad("8Hard");
+                        getRetrofitObject("8Hard");
+                        getUserPosition("8Hard");
                     }
                     break;
             }
@@ -712,17 +720,14 @@ public class ScoreActivity extends AppCompatActivity {
             settings = getApplicationContext().getSharedPreferences("classic8", 0);
             int classic8 = settings.getInt("classic8", 0);
 
-            settings = getApplicationContext().getSharedPreferences("timeAttack8Hard", 0);
-            int timeAttack8Hard = settings.getInt("timeAttack8Hard", 0);
-
-            settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
-            int classic8Hard = settings.getInt("classic8Hard", 0);
+            settings = getApplicationContext().getSharedPreferences("8Hard", 0);
+            int hard8 = settings.getInt("8Hard", 0);
 
             settings = getApplicationContext().getSharedPreferences("avatar", 0);
             String avatar = settings.getString("avatar", "");
 
             Call<String> stringCall = scalarService.setQuery(myID, avatar, timeAttack, classic, timeAttackHard, classicHard,
-                    timeAttack8, classic8, timeAttack8Hard, classic8Hard);
+                    timeAttack8, classic8, hard8);
 
             stringCall.enqueue(new Callback<String>() {
                 @Override
@@ -743,9 +748,9 @@ public class ScoreActivity extends AppCompatActivity {
                             getRetrofitObject("timeAttack8");
                             getUserPosition("timeAttack8");
                         } else if (buttonMode == 7 || buttonMode == 8) {
-                            offlineLoad("timeAttack8Hard");
-                            getRetrofitObject("timeAttack8Hard");
-                            getUserPosition("timeAttack8Hard");
+                            offlineLoad("8Hard");
+                            getRetrofitObject("8Hard");
+                            getUserPosition("8Hard");
                         }
                         mode = 1;
                     } else {

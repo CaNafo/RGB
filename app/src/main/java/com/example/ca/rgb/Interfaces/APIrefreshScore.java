@@ -14,6 +14,5 @@ public interface APIrefreshScore {
                           @Query("classicHard") int classicHard,
                           @Query("timeAttack8") int timeAttack8,
                           @Query("classic8") int classic8,
-                          @Query("timeAttack8Hard") int timeAttack8Hard,
-                          @Query("classic8Hard") int classic8hard);
+                          @Query("8Hard") int timeAttack8Hard);
 }

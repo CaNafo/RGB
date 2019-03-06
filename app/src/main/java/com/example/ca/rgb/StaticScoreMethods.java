@@ -45,13 +45,16 @@ public class StaticScoreMethods {
                 myScore = settings.getInt("classicHard", 0);
                 break;
             case 5:
-                //timeattack 8 buttona
+                settings = context.getSharedPreferences("timeAttack8", 0);
+                myScore = settings.getInt("timeAttack8", 0);
                 break;
             case 6:
-                //classic 8 buttona
+                settings = context.getSharedPreferences("classic8", 0);
+                myScore = settings.getInt("classic8", 0);
                 break;
             case 7:
-                //8 buttona novi mod
+                settings = context.getSharedPreferences("8Hard", 0);
+                myScore = settings.getInt("8Hard", 0);
                 break;
         }
         // Get from the SharedPreferences
@@ -117,6 +120,21 @@ public class StaticScoreMethods {
                     settings = context.getSharedPreferences("classicHard", 0);
                     editor = settings.edit();
                     editor.putInt("classicHard", score);
+                    break;
+                case 5:
+                    settings = context.getSharedPreferences("timeAttack8", 0);
+                    editor = settings.edit();
+                    editor.putInt("timeAttack8", score);
+                    break;
+                case 6:
+                    settings = context.getSharedPreferences("classic8", 0);
+                    editor = settings.edit();
+                    editor.putInt("classic8", score);
+                    break;
+                case 7:
+                    settings = context.getSharedPreferences("8Hard", 0);
+                    editor = settings.edit();
+                    editor.putInt("8Hard", score);
                     break;
 
                 default:
