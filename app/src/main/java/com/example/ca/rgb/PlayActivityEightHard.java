@@ -545,7 +545,10 @@ public class PlayActivityEightHard extends AppCompatActivity {
         builder.setNegativeButton("Change Mode", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(PlayActivityEightHard.this, ButtonsActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("mode", 7);
+                Intent intent = new Intent(PlayActivityEightHard.this, ModeActivity.class);
+                intent.putExtras(b);
                 finish();
                 startActivity(intent);
             }
@@ -568,7 +571,10 @@ public class PlayActivityEightHard extends AppCompatActivity {
             showAlertDialogButtonClicked("GAME OVER");
         } else {
             countDownTimer.cancel();
-            Intent intent = new Intent(PlayActivityEightHard.this, ButtonsActivity.class);
+            Bundle b = new Bundle();
+            b.putInt("mode", 7);
+            Intent intent = new Intent(PlayActivityEightHard.this, ModeActivity.class);
+            intent.putExtras(b);
             finish();
             startActivity(intent);
         }

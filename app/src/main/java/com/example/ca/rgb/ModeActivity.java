@@ -36,9 +36,16 @@ public class ModeActivity extends AppCompatActivity {
         Button classicBtn = findViewById(R.id.classicBtn);
         Button scoreBtn = findViewById(R.id.scoreBtn);
 
-        timeAttackBtn.setOnClickListener(modeActionListener);
-        classicBtn.setOnClickListener(modeActionListener);
-        scoreBtn.setOnClickListener(scoreOnClickListener);
+        if(mode == 7){
+            timeAttackBtn.setOnClickListener(null);
+            timeAttackBtn.setVisibility(View.GONE);
+            classicBtn.setOnClickListener(hardActionListener);
+            scoreBtn.setOnClickListener(scoreOnClickListener);
+        }else{
+            timeAttackBtn.setOnClickListener(modeActionListener);
+            classicBtn.setOnClickListener(modeActionListener);
+            scoreBtn.setOnClickListener(scoreOnClickListener);
+        }
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -58,9 +65,9 @@ public class ModeActivity extends AppCompatActivity {
         }else if(mode == 5 || mode == 6){
             mode = 5;
             s = "8 Colors";
-        }else if(mode == 7 || mode == 8){
-            mode = 6;
-            s = "10 Colors";
+        }else if(mode == 7){
+            mode = 7;
+            s = "8 Buttons Hard";
         }
 
         ((TextView)findViewById(R.id.textView7)).setText(s);
@@ -87,6 +94,24 @@ public class ModeActivity extends AppCompatActivity {
                     b = new Bundle();
                     b.putInt("mode", mode); //Your id
                     intentClassic.putExtras(b); //Put your id to your next Intent
+                    finish();
+                    startActivity(intentClassic);
+                    break;
+                case "score":
+                    //ovde ubaci skor
+                    break;
+            }
+        }
+    };
+
+    View.OnClickListener hardActionListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Button button = (Button)v;
+            String action = String.valueOf(button.getTag());
+            Intent intentClassic = new Intent(ModeActivity.this, PlayActivityEightHard.class);
+
+            switch (action){
+                case "classic":
                     finish();
                     startActivity(intentClassic);
                     break;

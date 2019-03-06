@@ -152,15 +152,15 @@ public class StaticMethods {
     public static int getStars(Context context){
         int points = getPoints(context);
 
-        if(points >= 2 && points <= 60){
+        if(points >= 2 && points <= 200){
             return 1;
-        }else if(points > 60 && points <= 120){
+        }else if(points > 200 && points <= 400){
             return 2;
-        }else if(points > 120 && points <= 240){
+        }else if(points > 400 && points <= 700){
             return 3;
-        }else if(points > 240 && points <= 480){
+        }else if(points > 700 && points <= 1000){
             return 4;
-        }else if(points > 480){
+        }else if(points > 1000){
             return 5;
         }
 

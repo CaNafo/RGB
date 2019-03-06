@@ -92,7 +92,9 @@ public class ButtonsActivity extends AppCompatActivity {
                     finish();
                     break;
                 case "8btnHard":
-                    intent = new Intent(ButtonsActivity.this, PlayActivityEightHard.class);
+                    b = new Bundle();
+                    b.putInt("mode", 7); //Your id
+                    intent.putExtras(b); //Put your id to your next Intent
                     startActivity(intent);
                     finish();
                     break;
