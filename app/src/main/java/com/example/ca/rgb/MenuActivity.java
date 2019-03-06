@@ -17,6 +17,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.StaticMethods.getMusic;
+import static com.example.ca.rgb.StaticMethods.getName;
 import static com.example.ca.rgb.StaticMethods.getSound;
 import static com.example.ca.rgb.StaticMethods.setMusic;
 import static com.example.ca.rgb.StaticMethods.setSound;
@@ -56,8 +57,8 @@ public class MenuActivity extends AppCompatActivity {
         Button helpBtn = findViewById(R.id.helpBtn);
         Button settingsBtn = findViewById(R.id.settingsBtn);
 
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("name", 0);
-        String myName = settings.getString("name", "");
+        String myName = getName(getApplicationContext());
+        profileButton.setText(myName);
 
         if (!(myName.length() > 0))
             startActivity(new Intent(MenuActivity.this, UserActivity.class));
@@ -128,6 +129,8 @@ public class MenuActivity extends AppCompatActivity {
         if (getMusic(getApplicationContext()) == 1) {
             mp.start();
         }
+        String myName = getName(getApplicationContext());
+        profileButton.setText(myName);
     }
 
     View.OnClickListener profileOnClickListener = new View.OnClickListener() {
@@ -143,25 +146,25 @@ public class MenuActivity extends AppCompatActivity {
 
         switch (avatar){
             case "avatar1":
-                profileButton.setBackgroundResource(R.drawable.avatar1_small);
+                profileButton.setBackgroundResource(R.drawable.avatar1_big);
                 break;
             case "avatar2":
-                profileButton.setBackgroundResource(R.drawable.avatar2_small);
+                profileButton.setBackgroundResource(R.drawable.avatar2_big);
                 break;
             case "avatar3":
-                profileButton.setBackgroundResource(R.drawable.avatar3_small);
+                profileButton.setBackgroundResource(R.drawable.avatar3_big);
                 break;
             case "avatar4":
-                profileButton.setBackgroundResource(R.drawable.avatar4_small);
+                profileButton.setBackgroundResource(R.drawable.avatar4_big);
                 break;
             case "avatar5":
-                profileButton.setBackgroundResource(R.drawable.avatar5_small);
+                profileButton.setBackgroundResource(R.drawable.avatar5_big);
                 break;
             case "avatar6":
-                profileButton.setBackgroundResource(R.drawable.avatar6_small);
+                profileButton.setBackgroundResource(R.drawable.avatar6_big);
                 break;
             case "avatar7":
-                profileButton.setBackgroundResource(R.drawable.avatar7_small);
+                profileButton.setBackgroundResource(R.drawable.avatar7_big);
                 break;
         }
     }

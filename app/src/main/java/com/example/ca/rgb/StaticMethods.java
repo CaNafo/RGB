@@ -79,6 +79,12 @@ public class StaticMethods {
         return sound;
     }
 
+    public static String getName(Context context){
+        SharedPreferences namePreference = context.getSharedPreferences("name", 0);
+        String name = namePreference.getString("name", "");
+        return name;
+    }
+
     public static int getPoints(Context context){
         SharedPreferences pointsPreferences = context.getSharedPreferences("Points", 0);
         int sound = pointsPreferences.getInt("Points", 0);
