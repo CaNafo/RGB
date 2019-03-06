@@ -5,12 +5,18 @@ import com.example.ca.rgb.Interfaces.APIgetPosition;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Size;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -161,12 +167,12 @@ public class ScoreActivity extends AppCompatActivity {
             textView.setText("Name:  " + myName + ",    Score:  " + myScore);
         }
 
-        textView = findViewById(R.id.nameTxt);
+       /* textView = findViewById(R.id.nameTxt);
         textView.setText("Loading...");
         textView = findViewById(R.id.scoreTxt);
         textView.setText("Loading...");
         textView = findViewById(R.id.numberTxt);
-        textView.setText("1.");
+        textView.setText("1.");*/
 
     }
 
@@ -187,29 +193,92 @@ public class ScoreActivity extends AppCompatActivity {
                     try {
                         JSONObject object = new JSONObject(responseString);
                         JSONArray Jarray = object.getJSONArray("data");
-                        String name = "Player\n\n";
-                        String number = "No.\n\n";
-                        String score = "Score\n\n";
+
+                        LinearLayout noumber = findViewById(R.id.numberLayout);
+                        noumber.removeAllViews();
+
+                        LinearLayout name = findViewById(R.id.nameLayout);
+                        name.removeAllViews();
+
+                        LinearLayout image = findViewById(R.id.imageLayout);
+                        image.removeAllViews();
+
+                        LinearLayout score = findViewById(R.id.scoreLayout);
+                        score.removeAllViews();
+
+                        TextView noumberTxt = new TextView(noumber.getContext());
+                        noumberTxt.setText("No.");
+                        noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
+                        noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                        noumberTxt.setTypeface(null, Typeface.BOLD);
+                        noumberTxt.setGravity(Gravity.CENTER);
+                        noumber.addView(noumberTxt);
+
+                        ImageView avatarImg = new ImageView(image.getContext());
+                        avatarImg.setBackgroundResource(R.drawable.avatar1_small);
+                        avatarImg.setLayoutParams(new LinearLayout.LayoutParams(25, 25));
+                        image.addView(avatarImg);
+
+                        TextView nameTxt = new TextView(name.getContext());
+                        nameTxt.setText("Name");
+                        nameTxt.setTextColor(Color.parseColor("#FFFFFF"));
+                        nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                        nameTxt.setTypeface(null, Typeface.BOLD);
+                        nameTxt.setGravity(Gravity.CENTER);
+                        name.addView(nameTxt);
+
+
+                        TextView scoreTxt = new TextView(score.getContext());
+                        scoreTxt.setText("Score");
+                        scoreTxt.setTextColor(Color.parseColor("#FFFFFF"));
+                        scoreTxt.setTypeface(null, Typeface.BOLD);
+                        scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                        scoreTxt.setGravity(Gravity.CENTER);
+                        score.addView(scoreTxt);
+
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            if (i != (Jarray.length() - 1)) {
-                                number += (i + 1) + ".\n";
-                                name += Jasonobject.getString("name") + "\n";
-                                score += Jasonobject.getString(jsonMode) + "\n";
-                            } else {
-                                number += (i + 1) + ".";
-                                name += Jasonobject.getString("name");
-                                score += Jasonobject.getString(jsonMode);
-                            }
+
+                            noumberTxt = new TextView(noumber.getContext());
+                            noumberTxt.setText((i + 1) + ".");
+                            noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+                            noumberTxt.setGravity(Gravity.CENTER);
+                            noumberTxt.setTypeface(null, Typeface.BOLD);
+                            noumber.addView(noumberTxt);
+
+                            avatarImg = new ImageView(image.getContext());
+                            avatarImg.setBackgroundResource(R.drawable.avatar1_small);
+                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(40, 40));
+                            //image.addView(avatarImg);
+
+                            nameTxt = new TextView(name.getContext());
+                            nameTxt.setText((Jasonobject.getString("name")));
+                            nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+                            nameTxt.setGravity(Gravity.CENTER);
+                            nameTxt.setTypeface(null, Typeface.BOLD);
+
+                            LinearLayout nameLinear = new LinearLayout(name.getContext());
+                            nameLinear.setOrientation(LinearLayout.HORIZONTAL);
+                            nameLinear.addView(avatarImg);
+                            nameLinear.addView(nameTxt);
+
+                            name.addView(nameLinear);
+
+                            scoreTxt = new TextView(score.getContext());
+                            scoreTxt.setText(Jasonobject.getString(jsonMode));
+                            scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+                            scoreTxt.setGravity(Gravity.CENTER);
+                            scoreTxt.setTypeface(null, Typeface.BOLD);
+                            score.addView(scoreTxt);
 
                         }
 
-                        TextView textView = findViewById(R.id.nameTxt);
+                       /* TextView textView = findViewById(R.id.nameTxt);
                         textView.setText(name);
                         textView = findViewById(R.id.scoreTxt);
                         textView.setText(score);
                         textView = findViewById(R.id.numberTxt);
-                        textView.setText(number);
+                        textView.setText(number);*/
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -649,8 +718,12 @@ public class ScoreActivity extends AppCompatActivity {
             settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
             int classic8Hard = settings.getInt("classic8Hard", 0);
 
-            Call<String> stringCall = scalarService.setQuery(myID, timeAttack, classic, timeAttackHard, classicHard,
+            settings = getApplicationContext().getSharedPreferences("avatar", 0);
+            String avatar = settings.getString("avatar", "");
+
+            Call<String> stringCall = scalarService.setQuery(myID, avatar, timeAttack, classic, timeAttackHard, classicHard,
                     timeAttack8, classic8, timeAttack8Hard, classic8Hard);
+
             stringCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {

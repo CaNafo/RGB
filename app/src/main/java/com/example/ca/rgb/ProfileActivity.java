@@ -2,7 +2,6 @@ package com.example.ca.rgb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.pointsTxt)).setText(String.valueOf(getPoints(getApplicationContext())));
 
-        textView = findViewById(R.id.nameTxt);
+        textView = findViewById(R.id.scoreTxtt);
         textView.setOnClickListener(editNameOnClickListener);
 
         Button editName = findViewById(R.id.editNameBtn);
@@ -116,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setAvatar();
-        TextView textView = findViewById(R.id.nameTxt);
+        TextView textView = findViewById(R.id.scoreTxtt);
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name",0);
         String myName = settings.getString("name","");
         textView.setText(myName);
