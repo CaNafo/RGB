@@ -220,21 +220,6 @@ public class PlayActivityEightHard extends AppCompatActivity {
         }
     }
 
-    private void resetOnStart() {
-        score = 0;
-        time = 0;
-        points = 0;
-        speed = 2000;
-        lives = 3;
-        started = false;
-        rewarded = false;
-        gameOver = false;
-        dialogShowed = false;
-        ((TextView) findViewById(R.id.textView)).setText("");
-        ((TextView) findViewById(R.id.textView2)).setText("");
-        ((TextView) findViewById(R.id.textView3)).setText("");
-    }
-
     private void disableButtons(){
         ((Button)findViewById(R.id.redBtn)).setOnClickListener(null);
         ((Button)findViewById(R.id.greenBtn)).setOnClickListener(null);
@@ -258,10 +243,10 @@ public class PlayActivityEightHard extends AppCompatActivity {
     }
 
     private void startGame() {
+        changeText();
         final TextView textView3 = findViewById(R.id.textView3);
         TextView textView2 = findViewById(R.id.textView2);
 
-        changeText();
         textView2.setText("Score\n" + String.valueOf(score));
         tempTimer(speed);
         countDownTimer2 = new CountDownTimer(10000, 1000) {
@@ -553,9 +538,8 @@ public class PlayActivityEightHard extends AppCompatActivity {
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                resetOnStart();
-                livesVisibility();
-                countDownTimer.start();
+                finish();
+                startActivity(new Intent(PlayActivityEightHard.this, PlayActivityEightHard.class));
             }
         });
         builder.setNegativeButton("Change Mode", new DialogInterface.OnClickListener() {

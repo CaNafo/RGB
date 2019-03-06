@@ -215,19 +215,6 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         }
     }
 
-    private void resetOnStart() {
-        score = 0;
-        bonusTime = 0;
-        points = 0;
-        started = false;
-        rewarded = false;
-        gameOver = false;
-        dialogShowed = false;
-        ((TextView) findViewById(R.id.textView)).setText("");
-        ((TextView) findViewById(R.id.textView2)).setText("");
-        ((TextView) findViewById(R.id.textView3)).setText("");
-    }
-
     private void disableButtons(){
         ((Button)findViewById(R.id.redBtn)).setOnClickListener(null);
         ((Button)findViewById(R.id.greenBtn)).setOnClickListener(null);
@@ -597,8 +584,11 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                resetOnStart();
-                countDownTimer.start();
+                Intent intent = new Intent(PlayActivityTimeAttack.this, PlayActivityTimeAttack.class);
+                Bundle b = new Bundle();
+                b.putInt("mode", mode);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Change Mode", new DialogInterface.OnClickListener() {
