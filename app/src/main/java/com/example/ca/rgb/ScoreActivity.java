@@ -54,6 +54,8 @@ public class ScoreActivity extends AppCompatActivity {
     String responseString;
     TextView tittleTxt;
     private AdView mAdView;
+    Button nextBtn;
+    Button previousBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +73,10 @@ public class ScoreActivity extends AppCompatActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myScore = settings.getInt("ID", 0);
 
-        Button nextBtn = findViewById(R.id.nextBtn);
+        nextBtn = findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(nextListener);
 
-        Button previousBtn = findViewById(R.id.previousBtn);
+        previousBtn = findViewById(R.id.previousBtn);
         previousBtn.setOnClickListener(backListener);
 
         Button refreshBtn = findViewById(R.id.refreshBtn);
@@ -97,6 +99,9 @@ public class ScoreActivity extends AppCompatActivity {
             getRetrofitObject("timeAttack8");
             getUserPosition("timeAttack8");
         } else if (buttonMode == 7 || buttonMode == 8) {
+            tittleTxt.setText("Top 10 players");
+            nextBtn.setVisibility(View.INVISIBLE);
+            previousBtn.setVisibility(View.INVISIBLE);
             offlineLoad("8Hard");
             getRetrofitObject("8Hard");
             getUserPosition("8Hard");
@@ -633,6 +638,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
+                        tittleTxt.setText("Top 10 players");
+                        nextBtn.setVisibility(View.INVISIBLE);
+                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
@@ -654,6 +662,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("classic8");
                         getUserPosition("classic8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
+                        tittleTxt.setText("Top 10 players");
+                        nextBtn.setVisibility(View.INVISIBLE);
+                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
@@ -692,6 +703,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
+                        tittleTxt.setText("Top 10 players");
+                        nextBtn.setVisibility(View.INVISIBLE);
+                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
@@ -713,6 +727,9 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("classic8");
                         getUserPosition("classic8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
+                        tittleTxt.setText("Top 10 players");
+                        nextBtn.setVisibility(View.INVISIBLE);
+                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
@@ -781,6 +798,7 @@ public class ScoreActivity extends AppCompatActivity {
                             getRetrofitObject("timeAttack8");
                             getUserPosition("timeAttack8");
                         } else if (buttonMode == 7 || buttonMode == 8) {
+                            tittleTxt.setText("Top 10");
                             offlineLoad("8Hard");
                             getRetrofitObject("8Hard");
                             getUserPosition("8Hard");
@@ -804,9 +822,14 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeattackHard");
                         getUserPosition("timeattackHard");
                     } else if (buttonMode == 5 || buttonMode == 6) {
-                        buttonMode = 5;
+                        offlineLoad("timeAttack8");
+                        getRetrofitObject("timeAttack8");
+                        getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        buttonMode = 6;
+                        tittleTxt.setText("Top 10");
+                        offlineLoad("8Hard");
+                        getRetrofitObject("8Hard");
+                        getUserPosition("8Hard");
                     }
                     mode = 1;
                 }
