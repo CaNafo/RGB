@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/splashScreenTheme">
+        <activity android:name=".TopTenScore"></activity>
         <activity android:name=".ButtonsActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SettingsActivity" />

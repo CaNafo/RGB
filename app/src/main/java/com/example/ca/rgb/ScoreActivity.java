@@ -337,12 +337,6 @@ public class ScoreActivity extends AppCompatActivity {
 
                         }
 
-                       /* TextView textView = findViewById(R.id.nameTxt);
-                        textView.setText(name);
-                        textView = findViewById(R.id.scoreTxt);
-                        textView.setText(score);
-                        textView = findViewById(R.id.numberTxt);
-                        textView.setText(number);*/
 
                     } catch (JSONException e) {
                         e.printStackTrace();

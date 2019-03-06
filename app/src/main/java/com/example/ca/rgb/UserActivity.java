@@ -148,7 +148,7 @@ public class UserActivity extends AppCompatActivity {
                 // Apply the edits!
                 editor.apply();
             }else{
-                editor.putString("DefaultUser", textView.getText().toString());
+                editor.putString("name", "DefaultUser");
                 // Apply the edits!
                 editor.apply();
             }
