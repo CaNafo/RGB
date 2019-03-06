@@ -117,7 +117,7 @@ public class UserActivity extends AppCompatActivity {
             case 9:
                 ((ImageView)findViewById(R.id.avatar9)).setImageResource(R.drawable.avatar9_small_checked);
                 break;
-            case 10:
+            case 0:
                 ((ImageView)findViewById(R.id.avatar10)).setImageResource(R.drawable.avatar1a_small_checked);
                 break;
         }

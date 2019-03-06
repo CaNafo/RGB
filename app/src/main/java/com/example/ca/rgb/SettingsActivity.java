@@ -41,11 +41,9 @@ public class SettingsActivity extends AppCompatActivity {
             ((Button)findViewById(R.id.soundBtn)).setText("Sound: OFF");
         }
 
-        Button editBtn = findViewById(R.id.editNameBtn);
         Button musicBtn = findViewById(R.id.musicBtn);
         Button soundBtn = findViewById(R.id.soundBtn);
 
-        editBtn.setOnClickListener(menuActionListener);
         musicBtn.setOnClickListener(menuActionListener);
         soundBtn.setOnClickListener(menuActionListener);
 
@@ -67,9 +65,6 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreferences settings;
             SharedPreferences.Editor editor;
             switch (action){
-                case "editBtn":
-                    startActivity(new Intent(SettingsActivity.this, UserActivity.class));
-                    break;
                 case "musicBtn":
                     s = String.valueOf(button.getText());
                     settings = getApplicationContext().getSharedPreferences("Music", 0);
