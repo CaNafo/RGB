@@ -162,13 +162,42 @@ public class ScoreActivity extends AppCompatActivity {
             textView.setText("Name:  " + myName + ",    Score:  " + myScore);
         }
 
-       /* textView = findViewById(R.id.nameTxt);
-        textView.setText("Loading...");
-        textView = findViewById(R.id.scoreTxt);
-        textView.setText("Loading...");
-        textView = findViewById(R.id.numberTxt);
-        textView.setText("1.");*/
+        LinearLayout noumber = findViewById(R.id.numberLayout);
+        noumber.removeAllViews();
 
+        LinearLayout name = findViewById(R.id.nameLayout);
+        name.removeAllViews();
+
+        LinearLayout image = findViewById(R.id.imageLayout);
+        image.removeAllViews();
+
+        LinearLayout score = findViewById(R.id.scoreLayout);
+        score.removeAllViews();
+
+        TextView noumberTxt = new TextView(noumber.getContext());
+        noumberTxt.setText("1.");
+        noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
+        noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        noumberTxt.setTypeface(null, Typeface.BOLD);
+        noumberTxt.setGravity(Gravity.CENTER);
+        noumber.addView(noumberTxt);
+
+        TextView nameTxt = new TextView(name.getContext());
+        nameTxt.setText("Loading...");
+        nameTxt.setTextColor(Color.parseColor("#FFFFFF"));
+        nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        nameTxt.setTypeface(null, Typeface.BOLD);
+        nameTxt.setGravity(Gravity.CENTER);
+        name.addView(nameTxt);
+
+
+        TextView scoreTxt = new TextView(score.getContext());
+        scoreTxt.setText("Loading...");
+        scoreTxt.setTextColor(Color.parseColor("#FFFFFF"));
+        scoreTxt.setTypeface(null, Typeface.BOLD);
+        scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        scoreTxt.setGravity(Gravity.CENTER);
+        score.addView(scoreTxt);
     }
 
     void getRetrofitObject(String mode) {
@@ -263,6 +292,10 @@ public class ScoreActivity extends AppCompatActivity {
                                 case "avatar7":
                                     avatarImg.setImageResource(R.drawable.avatar7_small);
                                     break;
+
+                                    default:
+                                        avatarImg.setImageResource(R.drawable.avatar1_small);
+                                        break;
                             }
                             avatarImg.setLayoutParams(new LinearLayout.LayoutParams(45, 45));
 

@@ -85,9 +85,15 @@ public class UserActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = settings.edit();
 
             TextView textView = findViewById(R.id.scoreTxtt);
-            editor.putString("name", textView.getText().toString());
-            // Apply the edits!
-            editor.apply();
+            if(textView.getText().toString().length()>0){
+                editor.putString("name", textView.getText().toString());
+                // Apply the edits!
+                editor.apply();
+            }else{
+                editor.putString("DefaultUser", textView.getText().toString());
+                // Apply the edits!
+                editor.apply();
+            }
 
             settings = getApplicationContext().getSharedPreferences("ID", 0);
             int myID = settings.getInt("ID", 0);
