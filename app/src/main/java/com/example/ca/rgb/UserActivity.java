@@ -231,7 +231,7 @@ public class UserActivity extends AppCompatActivity {
         public void onClick(View v) {
                 ImageView imageView = (ImageView)v;
                 SharedPreferences settings;
-                 SharedPreferences.Editor editor;
+                SharedPreferences.Editor editor;
 
                 switch (imageView.getTag().toString()){
                     case "avatar1":
