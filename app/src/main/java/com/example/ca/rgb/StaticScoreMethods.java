@@ -67,7 +67,13 @@ public class StaticScoreMethods {
                 setID(context);
                 settings = context.getSharedPreferences("ID", 0);
                 myID = settings.getInt("ID", 0);
-                addNewScore(myName);
+
+
+                settings = context.getSharedPreferences("avatar", 0);
+                String avatar = settings.getString("avatar", "");
+
+
+                addNewScore(myName,avatar);
             }
             setID(context);
             settings = context.getSharedPreferences("name", 0);
@@ -172,10 +178,10 @@ public class StaticScoreMethods {
         });
     }
 
-    private static void addNewScore(String name) {
+    private static void addNewScore(String name, String avatar) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name);
+        call = api.setQuery(name,avatar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

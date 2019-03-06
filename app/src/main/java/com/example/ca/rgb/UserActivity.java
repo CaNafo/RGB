@@ -133,7 +133,11 @@ public class UserActivity extends AppCompatActivity {
                             // Apply the edits!
                             editor.apply();
                             TextView textView = findViewById(R.id.nameTxt);
-                            addNewScore(textView.getText().toString());
+
+                            settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                            String avatar = settings.getString("avatar", "");
+
+                            addNewScore(textView.getText().toString(),avatar);
                         }
 
                     } catch (JSONException e) {
@@ -152,10 +156,10 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
-    private void addNewScore(String name) {
+    private void addNewScore(String name, String avatar) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name);
+        call = api.setQuery(name,avatar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

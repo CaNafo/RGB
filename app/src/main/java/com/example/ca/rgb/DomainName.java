@@ -2,7 +2,7 @@ package com.example.ca.rgb;
 
 public class DomainName {
     static DomainName domainName = null;
-    static String domain = "http://192.168.0.104/";
+    static String domain = "http://uvod.dx.am/";
     private DomainName(){
 
     }

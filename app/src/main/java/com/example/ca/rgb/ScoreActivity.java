@@ -47,13 +47,14 @@ public class ScoreActivity extends AppCompatActivity {
     String responseString;
     TextView tittleTxt;
     private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        if(getMusic(getApplicationContext()) == 1){
+        if (getMusic(getApplicationContext()) == 1) {
             mp.start();
         }
 
@@ -76,21 +77,26 @@ public class ScoreActivity extends AppCompatActivity {
         if (b != null)
             buttonMode = b.getInt("mode");
 
-        if(buttonMode == 1 || buttonMode == 2){
+        if (buttonMode == 1 || buttonMode == 2) {
             offlineLoad("timeAttack");
             getRetrofitObject("timeAttack");
             getUserPosition("timeAttack");
-        }else if(buttonMode == 3 || buttonMode == 4){
+        } else if (buttonMode == 3 || buttonMode == 4) {
             buttonMode = 3;
             offlineLoad("timeattackHard");
             getRetrofitObject("timeattackHard");
             getUserPosition("timeattackHard");
-        }else if(buttonMode == 5 || buttonMode == 6){
+        } else if (buttonMode == 5 || buttonMode == 6) {
+            offlineLoad("timeAttack8");
+            getRetrofitObject("timeAttack8");
+            getUserPosition("timeAttack8");
             buttonMode = 5;
-        }else if(buttonMode == 7 || buttonMode == 8){
+        } else if (buttonMode == 7 || buttonMode == 8) {
+            offlineLoad("timeAttack8Hard");
+            getRetrofitObject("timeAttack8Hard");
+            getUserPosition("timeAttack8Hard");
             buttonMode = 6;
         }
-
 
 
         mAdView = findViewById(R.id.adView);
@@ -105,7 +111,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("timeAttack", 0);
         int myScore = 0;
-        switch (mode){
+        switch (mode) {
             case "timeAttack":
                 settings = getApplicationContext().getSharedPreferences("timeAttack", 0);
                 myScore = settings.getInt("timeAttack", 0);
@@ -121,6 +127,22 @@ public class ScoreActivity extends AppCompatActivity {
             case "classicHard":
                 settings = getApplicationContext().getSharedPreferences("classicHard", 0);
                 myScore = settings.getInt("classicHard", 0);
+                break;
+            case "timeAttack8":
+                settings = getApplicationContext().getSharedPreferences("timeAttack8", 0);
+                myScore = settings.getInt("timeAttack8", 0);
+                break;
+            case "classic8":
+                settings = getApplicationContext().getSharedPreferences("classic8", 0);
+                myScore = settings.getInt("classic8", 0);
+                break;
+            case "timeAttack8hard":
+                settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
+                myScore = settings.getInt("timeAttack8hard", 0);
+                break;
+            case "classic8Hard":
+                settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
+                myScore = settings.getInt("classic8Hard", 0);
                 break;
         }
 
@@ -156,7 +178,7 @@ public class ScoreActivity extends AppCompatActivity {
                 .build();
 
         APIogovor scalarService = retrofit.create(APIogovor.class);
-        Call<String> stringCall = scalarService.getStringResponse("/RGB/score_read.php",mode);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/score_read.php", mode);
         stringCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -170,7 +192,7 @@ public class ScoreActivity extends AppCompatActivity {
                         String score = "Score\n\n";
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
-                            if (i != (Jarray.length()-1)) {
+                            if (i != (Jarray.length() - 1)) {
                                 number += (i + 1) + ".\n";
                                 name += Jasonobject.getString("name") + "\n";
                                 score += Jasonobject.getString(jsonMode) + "\n";
@@ -211,7 +233,7 @@ public class ScoreActivity extends AppCompatActivity {
         int myID = settings.getInt("ID", 0);
 
         int myScore = 0;
-        switch (mode){
+        switch (mode) {
             case "timeAttack":
                 settings = getApplicationContext().getSharedPreferences("timeAttack", 0);
                 myScore = settings.getInt("timeAttack", 0);
@@ -227,6 +249,22 @@ public class ScoreActivity extends AppCompatActivity {
             case "classicHard":
                 settings = getApplicationContext().getSharedPreferences("classicHard", 0);
                 myScore = settings.getInt("classicHard", 0);
+                break;
+            case "timeAttack8":
+                settings = getApplicationContext().getSharedPreferences("timeAttack8", 0);
+                myScore = settings.getInt("timeAttack8", 0);
+                break;
+            case "classic8":
+                settings = getApplicationContext().getSharedPreferences("classic8", 0);
+                myScore = settings.getInt("classic8", 0);
+                break;
+            case "timeAttack8hard":
+                settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
+                myScore = settings.getInt("timeAttack8hard", 0);
+                break;
+            case "classic8Hard":
+                settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
+                myScore = settings.getInt("classic8Hard", 0);
                 break;
         }
 
@@ -246,7 +284,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         APIgetPosition scalarService = retrofit.create(APIgetPosition.class);
         APIgetPosition api = scalarService;
-        Call<String> stringCall = scalarService.getStringResponse("/RGB/getUserPosition.php", myID,mode);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/getUserPosition.php", myID, mode);
 
         final String modeJson = mode;
 
@@ -265,7 +303,7 @@ public class ScoreActivity extends AppCompatActivity {
                             TextView textView = findViewById(R.id.myScoreTxt);
                             SharedPreferences settings;
                             int myScore = 0;
-                            switch (modeJson){
+                            switch (modeJson) {
                                 case "timeAttack":
                                     settings = getApplicationContext().getSharedPreferences("timeAttack", 0);
                                     myScore = settings.getInt("timeAttack", 0);
@@ -281,6 +319,22 @@ public class ScoreActivity extends AppCompatActivity {
                                 case "classicHard":
                                     settings = getApplicationContext().getSharedPreferences("classicHard", 0);
                                     myScore = settings.getInt("classicHard", 0);
+                                    break;
+                                case "timeAttack8":
+                                    settings = getApplicationContext().getSharedPreferences("timeAttack8", 0);
+                                    myScore = settings.getInt("timeAttack8", 0);
+                                    break;
+                                case "classic8":
+                                    settings = getApplicationContext().getSharedPreferences("classic8", 0);
+                                    myScore = settings.getInt("classic8", 0);
+                                    break;
+                                case "timeAttack8hard":
+                                    settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
+                                    myScore = settings.getInt("timeAttack8hard", 0);
+                                    break;
+                                case "classic8Hard":
+                                    settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
+                                    myScore = settings.getInt("classic8Hard", 0);
                                     break;
                             }
 
@@ -351,7 +405,7 @@ public class ScoreActivity extends AppCompatActivity {
                             int myID = settings.getInt("ID", 0);
 
                             int myScore = 0;
-                            switch (modeJson){
+                            switch (modeJson) {
                                 case "timeAttack":
                                     settings = getApplicationContext().getSharedPreferences("timeAttack", 0);
                                     myScore = settings.getInt("timeAttack", 0);
@@ -368,20 +422,41 @@ public class ScoreActivity extends AppCompatActivity {
                                     settings = getApplicationContext().getSharedPreferences("classicHard", 0);
                                     myScore = settings.getInt("classicHard", 0);
                                     break;
+                                case "timeAttack8":
+                                    settings = getApplicationContext().getSharedPreferences("timeAttack8", 0);
+                                    myScore = settings.getInt("timeAttack8", 0);
+                                    break;
+                                case "classic8":
+                                    settings = getApplicationContext().getSharedPreferences("classic8", 0);
+                                    myScore = settings.getInt("classic8", 0);
+                                    break;
+                                case "timeAttack8hard":
+                                    settings = getApplicationContext().getSharedPreferences("timeAttack8hard", 0);
+                                    myScore = settings.getInt("timeAttack8hard", 0);
+                                    break;
+                                case "classic8Hard":
+                                    settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
+                                    myScore = settings.getInt("classic8Hard", 0);
+                                    break;
                             }
 
                             settings = getApplicationContext().getSharedPreferences("name", 0);
                             String myName = settings.getString("name", "");
+
+                            settings = getApplicationContext().getSharedPreferences("avatar", 0);
+                            String avatar = settings.getString("avatar", "");
+
                             if (!(myName.length() > 0)) {
                                 settings = getApplicationContext().getSharedPreferences("name", 0);
                                 editor = settings.edit();
                                 editor.putString("name", "DefaultUser");
                                 // Apply the edits!
                                 editor.apply();
-                                addNewScore("DefaultUser");
+
+                                addNewScore("DefaultUser",avatar);
 
                             } else {
-                                addNewScore(myName);
+                                addNewScore(myName,avatar);
                             }
                         }
 
@@ -402,10 +477,10 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
-    private void addNewScore(String name) {
+    private void addNewScore(String name, String avatar) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name);
+        call = api.setQuery(name,avatar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -427,44 +502,51 @@ public class ScoreActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             btnClicked = true;
-            if(mode == 2)
+            if (mode == 2)
                 mode = 1;
             else
                 mode++;
 
-            switch (mode){
+            switch (mode) {
                 case 1:
                     tittleTxt.setText("Top 10 Time Attack players");
-                    if(buttonMode == 1 || buttonMode == 2){
+                    if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("timeAttack");
                         getRetrofitObject("timeAttack");
                         getUserPosition("timeAttack");
-                    }else if(buttonMode == 3 || buttonMode == 4){
-                        buttonMode = 3;
+                    } else if (buttonMode == 3 || buttonMode == 4) {
                         offlineLoad("timeattackHard");
                         getRetrofitObject("timeattackHard");
                         getUserPosition("timeattackHard");
-                    }else if(buttonMode == 5 || buttonMode == 6){
-                        buttonMode = 5;
-                    }else if(buttonMode == 7 || buttonMode == 8){
-                        buttonMode = 6;
+                    } else if (buttonMode == 5 || buttonMode == 6) {
+                        offlineLoad("timeAttack8");
+                        getRetrofitObject("timeAttack8");
+                        getUserPosition("timeAttack8");
+                    } else if (buttonMode == 7 || buttonMode == 8) {
+                        offlineLoad("timeAttack8Hard");
+                        getRetrofitObject("timeAttack8Hard");
+                        getUserPosition("timeAttack8Hard");
                     }
                     break;
                 case 2:
                     tittleTxt.setText("Top 10 Classic players");
-                    if(buttonMode == 1 || buttonMode == 2){
+                    if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("classic");
                         getRetrofitObject("classic");
                         getUserPosition("classic");
-                    }else if(buttonMode == 3 || buttonMode == 4){
+                    } else if (buttonMode == 3 || buttonMode == 4) {
                         buttonMode = 3;
                         offlineLoad("classicHard");
                         getRetrofitObject("classicHard");
                         getUserPosition("classicHard");
-                    }else if(buttonMode == 5 || buttonMode == 6){
-                        buttonMode = 5;
-                    }else if(buttonMode == 7 || buttonMode == 8){
-                        buttonMode = 6;
+                    } else if (buttonMode == 5 || buttonMode == 6) {
+                        offlineLoad("classic8");
+                        getRetrofitObject("classic8");
+                        getUserPosition("classic8");
+                    } else if (buttonMode == 7 || buttonMode == 8) {
+                        offlineLoad("classic8Hard");
+                        getRetrofitObject("classic8Hard");
+                        getUserPosition("classic8Hard");
                     }
                     break;
             }
@@ -474,48 +556,56 @@ public class ScoreActivity extends AppCompatActivity {
     View.OnClickListener backListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(!btnClicked){
+            if (!btnClicked) {
                 mode = 2;
                 btnClicked = true;
-            }else {
-                if(mode == 1)
+            } else {
+                if (mode == 1)
                     mode = 2;
                 else
                     mode--;
             }
-            switch (mode){
+            switch (mode) {
                 case 1:
                     tittleTxt.setText("Top 10 Time Attack players");
-                    if(buttonMode == 1 || buttonMode == 2){
+                    if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("timeAttack");
                         getRetrofitObject("timeAttack");
                         getUserPosition("timeAttack");
-                    }else if(buttonMode == 3 || buttonMode == 4){
+                    } else if (buttonMode == 3 || buttonMode == 4) {
                         buttonMode = 3;
                         offlineLoad("timeattackHard");
                         getRetrofitObject("timeattackHard");
                         getUserPosition("timeattackHard");
-                    }else if(buttonMode == 5 || buttonMode == 6){
-                        buttonMode = 5;
-                    }else if(buttonMode == 7 || buttonMode == 8){
-                        buttonMode = 6;
+                    } else if (buttonMode == 5 || buttonMode == 6) {
+                        offlineLoad("timeAttack8");
+                        getRetrofitObject("timeAttack8");
+                        getUserPosition("timeAttack8");
+                    } else if (buttonMode == 7 || buttonMode == 8) {
+                        offlineLoad("timeAttack8Hard");
+                        getRetrofitObject("timeAttack8Hard");
+                        getUserPosition("timeAttack8Hard");
                     }
                     break;
                 case 2:
                     tittleTxt.setText("Top 10 Classic players");
-                    if(buttonMode == 1 || buttonMode == 2){
+                    if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("classic");
                         getRetrofitObject("classic");
                         getUserPosition("classic");
-                    }else if(buttonMode == 3 || buttonMode == 4){
+                    } else if (buttonMode == 3 || buttonMode == 4) {
                         buttonMode = 3;
                         offlineLoad("classicHard");
                         getRetrofitObject("classicHard");
                         getUserPosition("classicHard");
-                    }else if(buttonMode == 5 || buttonMode == 6){
-                        buttonMode = 5;
-                    }else if(buttonMode == 7 || buttonMode == 8){
-                        buttonMode = 6;
+                    } else if (buttonMode == 5 || buttonMode == 6) {
+                        offlineLoad("classic8");
+                        getRetrofitObject("classic8");
+                        getUserPosition("classic8");
+                    } else if (buttonMode == 7 || buttonMode == 8) {
+                        offlineLoad("classic8Hard");
+                        getRetrofitObject("classic8Hard");
+                        getUserPosition("classic8Hard");
                     }
                     break;
             }
@@ -547,26 +637,42 @@ public class ScoreActivity extends AppCompatActivity {
             settings = getApplicationContext().getSharedPreferences("classicHard", 0);
             int classicHard = settings.getInt("classicHard", 0);
 
+            settings = getApplicationContext().getSharedPreferences("timeAttack8", 0);
+            int timeAttack8 = settings.getInt("timeAttack8", 0);
 
-            Call<String> stringCall = scalarService.setQuery(myID,timeAttack,classic,timeAttackHard,classicHard);
+            settings = getApplicationContext().getSharedPreferences("classic8", 0);
+            int classic8 = settings.getInt("classic8", 0);
+
+            settings = getApplicationContext().getSharedPreferences("timeAttack8Hard", 0);
+            int timeAttack8Hard = settings.getInt("timeAttack8Hard", 0);
+
+            settings = getApplicationContext().getSharedPreferences("classic8Hard", 0);
+            int classic8Hard = settings.getInt("classic8Hard", 0);
+
+            Call<String> stringCall = scalarService.setQuery(myID, timeAttack, classic, timeAttackHard, classicHard,
+                    timeAttack8, classic8, timeAttack8Hard, classic8Hard);
             stringCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
                         tittleTxt.setText("Top 10 Time Attack players");
-                        if(buttonMode == 1 || buttonMode == 2){
+                        if (buttonMode == 1 || buttonMode == 2) {
                             offlineLoad("timeAttack");
                             getRetrofitObject("timeAttack");
                             getUserPosition("timeAttack");
-                        }else if(buttonMode == 3 || buttonMode == 4){
+                        } else if (buttonMode == 3 || buttonMode == 4) {
                             buttonMode = 3;
                             offlineLoad("timeattackHard");
                             getRetrofitObject("timeattackHard");
                             getUserPosition("timeattackHard");
-                        }else if(buttonMode == 5 || buttonMode == 6){
-                            buttonMode = 5;
-                        }else if(buttonMode == 7 || buttonMode == 8){
-                            buttonMode = 6;
+                        } else if (buttonMode == 5 || buttonMode == 6) {
+                            offlineLoad("timeAttack8");
+                            getRetrofitObject("timeAttack8");
+                            getUserPosition("timeAttack8");
+                        } else if (buttonMode == 7 || buttonMode == 8) {
+                            offlineLoad("timeAttack8Hard");
+                            getRetrofitObject("timeAttack8Hard");
+                            getUserPosition("timeAttack8Hard");
                         }
                         mode = 1;
                     } else {
@@ -577,18 +683,18 @@ public class ScoreActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
                     tittleTxt.setText("Top 10 Time Attack players");
-                    if(buttonMode == 1 || buttonMode == 2){
+                    if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("timeAttack");
                         getRetrofitObject("timeAttack");
                         getUserPosition("timeAttack");
-                    }else if(buttonMode == 3 || buttonMode == 4){
+                    } else if (buttonMode == 3 || buttonMode == 4) {
                         buttonMode = 3;
                         offlineLoad("timeattackHard");
                         getRetrofitObject("timeattackHard");
                         getUserPosition("timeattackHard");
-                    }else if(buttonMode == 5 || buttonMode == 6){
+                    } else if (buttonMode == 5 || buttonMode == 6) {
                         buttonMode = 5;
-                    }else if(buttonMode == 7 || buttonMode == 8){
+                    } else if (buttonMode == 7 || buttonMode == 8) {
                         buttonMode = 6;
                     }
                     mode = 1;
@@ -600,7 +706,7 @@ public class ScoreActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(getMusic(getApplicationContext()) == 1){
+        if (getMusic(getApplicationContext()) == 1) {
             mp.pause();
         }
     }
@@ -608,7 +714,7 @@ public class ScoreActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(getMusic(getApplicationContext()) == 1){
+        if (getMusic(getApplicationContext()) == 1) {
             mp.start();
         }
     }
