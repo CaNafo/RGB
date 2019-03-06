@@ -130,25 +130,28 @@
                 app:srcCompat="@drawable/avatar7_small" />
 
             <ImageView
+                android:id="@+id/avatar8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="avatar8"
+                app:srcCompat="@drawable/avatar8_small" />
+
+            <ImageView
                 android:id="@+id/avatar9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar1_small" />
+                android:tag="avatar9"
+                app:srcCompat="@drawable/avatar9_small" />
 
             <ImageView
                 android:id="@+id/avatar10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/avatar1_small" />
-
-            <ImageView
-                android:id="@+id/avatar11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/avatar1_small" />
+                android:tag="avatar10"
+                app:srcCompat="@drawable/avatar10_small" />
         </LinearLayout>
 
         <android.support.v4.widget.Space
