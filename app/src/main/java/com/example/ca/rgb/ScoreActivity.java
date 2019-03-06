@@ -297,6 +297,15 @@ public class ScoreActivity extends AppCompatActivity {
                                 case "avatar7":
                                     avatarImg.setImageResource(R.drawable.avatar7_small);
                                     break;
+                                case "avatar8":
+                                    avatarImg.setImageResource(R.drawable.avatar8_small);
+                                    break;
+                                case "avatar9":
+                                    avatarImg.setImageResource(R.drawable.avatar9_small);
+                                    break;
+                                case "avatar10":
+                                    avatarImg.setImageResource(R.drawable.avatar1a_small);
+                                    break;
 
                                     default:
                                         avatarImg.setImageResource(R.drawable.avatar1_small);

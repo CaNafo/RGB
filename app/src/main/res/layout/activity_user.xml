@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:tag="avatar10"
-                app:srcCompat="@drawable/avatar10_small" />
+                app:srcCompat="@drawable/avatar1a_small" />
         </LinearLayout>
 
         <android.support.v4.widget.Space

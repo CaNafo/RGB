@@ -57,6 +57,12 @@ public class UserActivity extends AppCompatActivity {
         avatar6.setOnClickListener(imageOnClickListener);
         ImageView avatar7 = findViewById(R.id.avatar7);
         avatar7.setOnClickListener(imageOnClickListener);
+        ImageView avatar8 = findViewById(R.id.avatar8);
+        avatar8.setOnClickListener(imageOnClickListener);
+        ImageView avatar9 = findViewById(R.id.avatar9);
+        avatar9.setOnClickListener(imageOnClickListener);
+        ImageView avatar10 = findViewById(R.id.avatar10);
+        avatar10.setOnClickListener(imageOnClickListener);
 
 
         if(getMusic(getApplicationContext()) == 1){
@@ -260,6 +266,15 @@ public class UserActivity extends AppCompatActivity {
                         break;
                     case "avatar7":
                         tempAvatar = "avatar7";
+                        break;
+                    case "avatar8":
+                        tempAvatar = "avatar8";
+                        break;
+                    case "avatar9":
+                        tempAvatar = "avatar9";
+                        break;
+                    case "avatar10":
+                        tempAvatar = "avatar10";
                         break;
                 }
         }

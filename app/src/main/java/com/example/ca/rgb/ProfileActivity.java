@@ -163,6 +163,15 @@ public class ProfileActivity extends AppCompatActivity {
             case "avatar7":
                 avatarProfile.setImageResource(R.drawable.avatar7_big);
                 break;
+            case "avatar8":
+                avatarProfile.setBackgroundResource(R.drawable.avatar8_big);
+                break;
+            case "avatar9":
+                avatarProfile.setBackgroundResource(R.drawable.avatar9_big);
+                break;
+            case "avatar10":
+                avatarProfile.setBackgroundResource(R.drawable.avatar1a_big);
+                break;
         }
     }
 }

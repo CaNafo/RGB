@@ -142,7 +142,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void setAvatar() {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("avatar", 0);
-        String avatar = settings.getString("avatar", "");
+        String avatar = settings.getString("avatar", "avatar1");
 
         switch (avatar){
             case "avatar1":
@@ -165,6 +165,15 @@ public class MenuActivity extends AppCompatActivity {
                 break;
             case "avatar7":
                 profileButton.setBackgroundResource(R.drawable.avatar7_big);
+                break;
+            case "avatar8":
+                profileButton.setBackgroundResource(R.drawable.avatar8_big);
+                break;
+            case "avatar9":
+                profileButton.setBackgroundResource(R.drawable.avatar9_big);
+                break;
+            case "avatar10":
+                profileButton.setBackgroundResource(R.drawable.avatar1a_big);
                 break;
         }
     }
