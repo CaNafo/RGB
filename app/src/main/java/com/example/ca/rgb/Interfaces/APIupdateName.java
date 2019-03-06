@@ -7,5 +7,6 @@ import retrofit2.http.Query;
 public interface APIupdateName {
     @GET("/RGB/name_update.php")
     Call<String> setQuery(@Query("ID") int ID,
-                          @Query("name") String name);
+                          @Query("name") String name,
+                          @Query("avatar") String avatar);
 }
