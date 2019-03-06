@@ -163,6 +163,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
                 }.start();
             }else{
                 lives = 1;
+                gameOver = false;
                 scaleView(((ImageView)findViewById(R.id.imageView1)), 0, 1);
                 continueReward();
             }
@@ -604,8 +605,18 @@ public class PlayActivityEightHard extends AppCompatActivity {
             MenuActivity.mp.start();
         }
 
-        if(gameOver == true && dialogShowed == false){
-            showAlertDialogButtonClicked("GAME OVER");
+        if(gameOver && !dialogShowed){
+            CountDownTimer cdt = new CountDownTimer(300, 300) {
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    showAlertDialogButtonClicked("GAME OVER");
+                }
+            }.start();
         }
     }
 }

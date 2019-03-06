@@ -158,6 +158,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                     }
                 }.start();
             }else{
+                gameOver = false;
                 continueReward();
             }
         }
@@ -659,8 +660,18 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
             MenuActivity.mp.start();
         }
 
-        if(gameOver == true && dialogShowed == false){
-            showAlertDialogButtonClicked("GAME OVER");
+        if(gameOver && !dialogShowed){
+            CountDownTimer cdt = new CountDownTimer(300, 300) {
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    showAlertDialogButtonClicked("GAME OVER");
+                }
+            }.start();
         }
     }
 
