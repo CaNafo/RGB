@@ -13,6 +13,7 @@ import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getPoints;
+import static com.example.ca.rgb.StaticMethods.getStars;
 
 public class ButtonsActivity extends AppCompatActivity {
     private AdView mAdView;
@@ -36,33 +37,27 @@ public class ButtonsActivity extends AppCompatActivity {
     }
 
     private void setButtons(){
-        /*((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
-
-        if(getPoints(getApplicationContext()) > 150){
-            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(modeActionListener);
-        }else{
-            ((Button)findViewById(R.id.fiveButtons)).setBackgroundColor(Color.parseColor("gray"));
-            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(null);
-        }
-
-        if(getPoints(getApplicationContext()) > 500){
-            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(modeActionListener);
-        }else{
-            ((Button)findViewById(R.id.eightButtons)).setBackgroundColor(Color.parseColor("gray"));
-            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(null);
-        }
-
-        if(getPoints(getApplicationContext()) > 1000){
-            ((Button)findViewById(R.id.tenButtons)).setOnClickListener(modeActionListener);
-        }else{
-            ((Button)findViewById(R.id.tenButtons)).setBackgroundColor(Color.parseColor("gray"));
-            ((Button)findViewById(R.id.tenButtons)).setOnClickListener(null);
-        }*/
+        int stars = getStars(getApplicationContext());
 
         ((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
         ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(modeActionListener);
         ((Button)findViewById(R.id.eightButtons)).setOnClickListener(modeActionListener);
-        ((Button)findViewById(R.id.tenButtons)).setOnClickListener(null);
+        ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(modeActionListener);
+
+        if(stars < 5){
+            ((Button)findViewById(R.id.eightHardButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(null);
+        }
+
+        if(stars < 3){
+            ((Button)findViewById(R.id.eightButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(null);
+        }
+
+        if(stars < 2){
+            ((Button)findViewById(R.id.fiveButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(null);
+        }
     }
 
     View.OnClickListener modeActionListener = new View.OnClickListener() {
@@ -94,10 +89,8 @@ public class ButtonsActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     break;
-                case "10btns":
-                    b = new Bundle();
-                    b.putInt("mode", 7); //Your id
-                    intent.putExtras(b); //Put your id to your next Intent
+                case "8btnHard":
+                    intent = new Intent(ButtonsActivity.this, PlayActivityEightHard.class);
                     startActivity(intent);
                     finish();
                     break;

@@ -35,7 +35,9 @@ import static com.example.ca.rgb.StaticScoreMethods.finishUpdate;
 
 public class PlayActivityTimeAttack extends AppCompatActivity {
     private int score = 0;
-    private  int bonusTime = 0;
+    private int bonusTime = 0;
+    private int points = 0;
+    private int pointsIncrement = 0;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private CountDownTimer countDownTimer3;
@@ -61,6 +63,8 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if (b != null)
             mode = b.getInt("mode");
+
+        setPointsIncrement();
 
         btnVisibility();
         livesVisibility();
@@ -211,6 +215,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     private void resetOnStart() {
         score = 0;
         bonusTime = 0;
+        points = 0;
         started = false;
         rewarded = false;
         ((TextView) findViewById(R.id.textView)).setText("");
@@ -237,9 +242,9 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                 ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
                 ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(null);
                 ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(null);
-                //((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
-                //((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
-                //((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
+                ((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
+                ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
+                ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
                 break;
             case 3:
                 ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
@@ -247,9 +252,9 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                 ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
                 ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(playActionListener);
                 ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(playActionListener);
-                //((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
-                //((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
-                //((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
+                ((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
+                ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
+                ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
                 break;
             case 5:
                 ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
@@ -257,9 +262,9 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                 ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
                 ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(playActionListener);
                 ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(playActionListener);
-                //((Button)findViewById(R.id.blackBtn)).setOnClickListener(playActionListener);
-                //((Button)findViewById(R.id.orangeBtn)).setOnClickListener(playActionListener);
-                //((Button)findViewById(R.id.whiteBtn)).setOnClickListener(playActionListener);
+                ((Button)findViewById(R.id.blackBtn)).setOnClickListener(playActionListener);
+                ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(playActionListener);
+                ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(playActionListener);
                 break;
             case 7:
                 //10 buttona
@@ -368,6 +373,20 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         }.start();
     }
 
+    private void setPointsIncrement(){
+        switch (mode){
+            case 1:
+                pointsIncrement = 5;
+                break;
+            case 3:
+                pointsIncrement = 15;
+                break;
+            case 5:
+                pointsIncrement = 25;
+                break;
+        }
+    }
+
     View.OnClickListener playActionListener = new View.OnClickListener() {
         public void onClick(View v) {
             Button button = (Button) v;
@@ -379,6 +398,9 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
 
             if (colorName.equalsIgnoreCase(action)) {
                 ++score;
+                if(score % 20 == 0){
+                    printPoints();
+                }
                 textView2.setText("Score\n" + String.valueOf(score));
                 changeText();
             } else {
@@ -478,15 +500,28 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     }
 
     private void addPoints(){
-        int points = getPoints(getApplicationContext());
-        int modeBonus = (mode / 2) * 10;
-        if(score >= 30 && score < 60){
-            points = points + 10 + modeBonus;
-        }else if(score >= 60){
-            points = points + 20 + modeBonus;
-        }
+        int temp = getPoints(getApplicationContext());
+        temp += points;
 
-        setPoints(getApplicationContext(), points);
+        setPoints(getApplicationContext(), temp);
+    }
+
+    private void printPoints(){
+        int i = 0;
+
+        if(score > 100){
+            i = 5;
+        }
+        TextView textView4 = findViewById(R.id.textView4);
+        fadeInAnimation(textView4, 1500);
+        if(rewarded == true){
+            textView4.setText("+" + String.valueOf(pointsIncrement + i) + " points");
+        }else{
+            textView4.setText("+" + String.valueOf(pointsIncrement + i) + " points");
+        }
+        fadeOutAnimation(textView4, 1500);
+
+        points += pointsIncrement + i;
     }
 
     private void rewardAlertDialog(){
@@ -528,10 +563,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
-        if(mode < 5){
-            finishUpdate(mode, score, getApplicationContext());
-        }
-
+        finishUpdate(mode, score, getApplicationContext());
         addPoints();
 
         if(s.equalsIgnoreCase("time's up")){
@@ -553,7 +585,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(s);
-        builder.setMessage("You scored " + score + ".");
+        builder.setMessage("You scored " + score + " and earned " + points + " points.");
 
         // add a button
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {

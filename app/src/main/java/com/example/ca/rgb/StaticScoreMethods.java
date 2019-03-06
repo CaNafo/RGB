@@ -25,24 +25,33 @@ public class StaticScoreMethods {
         int myScore = 0;
         switch (mode) {
             case 1:
-                //timeattack
+                //timeattack 3 buttona
                 settings = context.getSharedPreferences("timeAttack", 0);
                 myScore = settings.getInt("timeAttack", 0);
                 break;
             case 2:
-                //classic
+                //classic 3 buttona
                 settings = context.getSharedPreferences("classic", 0);
                 myScore = settings.getInt("classic", 0);
                 break;
             case 3:
-                //timeattack hard
+                //timeattack 5 buttona
                 settings = context.getSharedPreferences("timeattackHard", 0);
                 myScore = settings.getInt("timeattackHard", 0);
                 break;
             case 4:
-                //classic hard
+                //classic 5 buttona
                 settings = context.getSharedPreferences("classicHard", 0);
                 myScore = settings.getInt("classicHard", 0);
+                break;
+            case 5:
+                //timeattack 8 buttona
+                break;
+            case 6:
+                //classic 8 buttona
+                break;
+            case 7:
+                //8 buttona novi mod
                 break;
         }
         // Get from the SharedPreferences

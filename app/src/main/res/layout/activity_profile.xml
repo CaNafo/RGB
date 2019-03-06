@@ -72,14 +72,14 @@
                     android:src="@drawable/starholder" />
 
                 <ImageView
-                    android:id="@+id/mgStar4"
+                    android:id="@+id/imgStar4"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/starholder" />
 
                 <ImageView
-                    android:id="@+id/mgStar5"
+                    android:id="@+id/imgStar5"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"

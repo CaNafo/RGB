@@ -2,6 +2,7 @@ package com.example.ca.rgb;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.google.android.gms.ads.MobileAds;
 import static com.example.ca.rgb.MenuActivity.mp;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getPoints;
+import static com.example.ca.rgb.StaticMethods.getStars;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
@@ -31,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
+
+        setStars();
 
         ((TextView)findViewById(R.id.pointsTxt)).setText(String.valueOf(getPoints(getApplicationContext())));
 
@@ -50,6 +54,55 @@ public class ProfileActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         String defaultInputText = getResources().getString(R.string.ad_id_banner);
         MobileAds.initialize(this, defaultInputText);
+    }
+
+    private void setStars(){
+        int temp = getStars(getApplicationContext());
+
+        switch (temp){
+            case 0:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.starholder);
+                break;
+            case 1:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.starholder);
+                break;
+            case 2:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.starholder);
+                break;
+            case 3:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.starholder);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.starholder);
+                break;
+            case 4:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.starholder);
+                break;
+            case 5:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.star);
+                break;
+        }
     }
 
     View.OnClickListener editNameOnClickListener = new View.OnClickListener() {

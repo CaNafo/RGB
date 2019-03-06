@@ -8,6 +8,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 
 public class StaticMethods {
     public static void fadeInAnimation(final View view, long animationDuration) {
@@ -103,5 +104,60 @@ public class StaticMethods {
         SharedPreferences.Editor editorMS = pointsPreferences.edit();
         editorMS.putInt("Points", points);
         editorMS.apply();
+    }
+
+    public static void switchButton(Button b, String color){
+        switch (color){
+            case "red":
+                b.setBackgroundResource(R.drawable.buttonred);
+                b.setTag("red");
+                break;
+            case "green":
+                b.setBackgroundResource(R.drawable.buttongreen);
+                b.setTag("green");
+                break;
+            case "blue":
+                b.setBackgroundResource(R.drawable.buttonblue);
+                b.setTag("blue");
+                break;
+            case "purple":
+                b.setBackgroundResource(R.drawable.buttonpurple);
+                b.setTag("purple");
+                break;
+            case "yellow":
+                b.setBackgroundResource(R.drawable.buttonyellow);
+                b.setTag("yellow");
+                break;
+            case "black":
+                b.setBackgroundResource(R.drawable.buttonblack);
+                b.setTag("black");
+                break;
+            case "orange":
+                b.setBackgroundResource(R.drawable.buttonorange);
+                b.setTag("orange");
+                break;
+            case "white":
+                b.setBackgroundResource(R.drawable.buttonwhite);
+                b.setTag("white");
+                break;
+        }
+    }
+
+    public static int getStars(Context context){
+        int points = getPoints(context);
+
+        if(points >= 2 && points <= 60){
+            return 1;
+        }else if(points > 60 && points <= 120){
+            return 2;
+        }else if(points > 120 && points <= 240){
+            return 3;
+        }else if(points > 240 && points <= 480){
+            return 4;
+        }else if(points > 480){
+            return 5;
+        }
+
+        return 0;
     }
 }

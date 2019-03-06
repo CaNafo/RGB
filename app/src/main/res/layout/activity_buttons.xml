@@ -64,11 +64,11 @@
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/tenButtons"
+            android:id="@+id/eightHardButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="10btns"
-            android:text="10 Colors"
+            android:tag="8btnHard"
+            android:text="8 Colors Hard"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonRed"

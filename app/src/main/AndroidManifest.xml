@@ -42,6 +42,9 @@
             android:name=".PlayActivityClassic"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".PlayActivityEightHard"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ScoreActivity"
             android:screenOrientation="portrait" />
 

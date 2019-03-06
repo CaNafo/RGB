@@ -23,6 +23,10 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static com.example.ca.rgb.StaticMethods.getPoints;
@@ -32,21 +36,22 @@ import static com.example.ca.rgb.StaticMethods.fadeOutAnimation;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getSound;
 import static com.example.ca.rgb.StaticMethods.setPoints;
+import static com.example.ca.rgb.StaticMethods.switchButton;
 import static com.example.ca.rgb.StaticScoreMethods.finishUpdate;
 
-public class PlayActivityClassic extends AppCompatActivity {
+public class PlayActivityEightHard extends AppCompatActivity {
     private int score = 0;
     private CountDownTimer countDownTimer;
     private CountDownTimer countDownTimer2;
     private CountDownTimer countDownTimer3;
     private boolean started = false;
     private boolean rewarded = false;
-    private int mode = -1;
     private int time = 0;
-    private int points = 0;
-    private int pointsIncrement = 0;
-    private int speed = 6000;
+    private int speed = 2000;
     private int lives = 3;
+    private int points = 0;
+    private int pointsIncrement = 2;
+    private List<String> listColors = Arrays.asList("red", "green", "blue", "purple", "yellow", "black", "orange", "white");
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
     private RewardedVideoAd mRewardedVideoAd;
@@ -61,12 +66,6 @@ public class PlayActivityClassic extends AppCompatActivity {
         }
 
         initializeAds();
-
-        Bundle b = getIntent().getExtras();
-        if (b != null)
-            mode = b.getInt("mode");
-
-        setPointsIncrement();
 
         btnVisibility();
 
@@ -206,6 +205,7 @@ public class PlayActivityClassic extends AppCompatActivity {
             public void onFinish() {
                 textView4.setText("");
                 enableButtons();
+                tempTimer(speed);
                 countDownTimer2.start();
             }
         }.start();
@@ -221,7 +221,7 @@ public class PlayActivityClassic extends AppCompatActivity {
         score = 0;
         time = 0;
         points = 0;
-        speed = 6000;
+        speed = 2000;
         lives = 3;
         started = false;
         rewarded = false;
@@ -242,41 +242,14 @@ public class PlayActivityClassic extends AppCompatActivity {
     }
 
     private void enableButtons(){
-        switch (mode){
-            case 2:
-                ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.greenBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(null);
-                ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(null);
-                ((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
-                ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
-                ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
-                break;
-            case 4:
-                ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.greenBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
-                ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
-                ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
-                break;
-            case 6:
-                ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.greenBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.blackBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(playActionListener);
-                ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(playActionListener);
-                break;
-            case 8:
-                //10 buttona
-                break;
-        }
+        ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.greenBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.blackBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(playActionListener);
     }
 
     private void startGame() {
@@ -292,6 +265,14 @@ public class PlayActivityClassic extends AppCompatActivity {
                 ++time;
                 textView3.setText("Time\n" + String.valueOf(time));
 
+                if(time % 10 == 0){
+                    changeButtons();
+                }
+
+                if(time % 5 == 0){
+                    printPoints();
+                }
+
                 setSpeed();
             }
 
@@ -304,34 +285,10 @@ public class PlayActivityClassic extends AppCompatActivity {
     }
 
     private void setSpeed(){
-        if(score < 10){
-            speed = 6000;
-        }else if(score >= 10 && score < 20){
-            speed = 5000;
-        }else if(score >= 20 && score < 30){
-            speed = 4000;
-        }else if(score >= 30 && score < 40){
-            speed = 3000;
-        }else if(score >= 40 && score < 50){
+        if(score < 50){
             speed = 2000;
-        }else if(score >= 50 && score < 100){
-            speed = 1000;
         }else{
-            speed = 700;
-        }
-    }
-
-    private void setPointsIncrement(){
-        switch (mode){
-            case 2:
-                pointsIncrement = 5;
-                break;
-            case 4:
-                pointsIncrement = 15;
-                break;
-            case 6:
-                pointsIncrement = 25;
-                break;
+            speed = 1000;
         }
     }
 
@@ -345,7 +302,7 @@ public class PlayActivityClassic extends AppCompatActivity {
             @Override
             public void onFinish() {
                 if(getSound(getApplicationContext()) == 1){
-                    MediaPlayer mp = MediaPlayer.create(PlayActivityClassic.this, R.raw.error);
+                    MediaPlayer mp = MediaPlayer.create(PlayActivityEightHard.this, R.raw.error);
                     mp.start();
                 }
                 --lives;
@@ -356,32 +313,11 @@ public class PlayActivityClassic extends AppCompatActivity {
     }
 
     private void btnVisibility() {
-        switch(mode){
-            case 2:
-                ((Button)findViewById(R.id.purpleBtn)).setVisibility(View.GONE);
-                ((Button)findViewById(R.id.yellowBtn)).setVisibility(View.GONE);
-                ((Button)findViewById(R.id.blackBtn)).setVisibility(View.GONE);
-                ((Button)findViewById(R.id.orangeBtn)).setVisibility(View.GONE);
-                ((Button)findViewById(R.id.whiteBtn)).setVisibility(View.GONE);
-                break;
-            case 4:
-                ((Button)findViewById(R.id.purpleBtn)).setVisibility(View.VISIBLE);
-                ((Button)findViewById(R.id.yellowBtn)).setVisibility(View.VISIBLE);
-                ((Button)findViewById(R.id.blackBtn)).setVisibility(View.GONE);
-                ((Button)findViewById(R.id.orangeBtn)).setVisibility(View.GONE);
-                ((Button)findViewById(R.id.whiteBtn)).setVisibility(View.GONE);
-                break;
-            case 6:
-                ((Button)findViewById(R.id.purpleBtn)).setVisibility(View.VISIBLE);
-                ((Button)findViewById(R.id.yellowBtn)).setVisibility(View.VISIBLE);
-                ((Button)findViewById(R.id.blackBtn)).setVisibility(View.VISIBLE);
-                ((Button)findViewById(R.id.orangeBtn)).setVisibility(View.VISIBLE);
-                ((Button)findViewById(R.id.whiteBtn)).setVisibility(View.VISIBLE);
-                break;
-            case 8:
-                //ako zatreba 10 buttona
-                break;
-        }
+        ((Button)findViewById(R.id.purpleBtn)).setVisibility(View.VISIBLE);
+        ((Button)findViewById(R.id.yellowBtn)).setVisibility(View.VISIBLE);
+        ((Button)findViewById(R.id.blackBtn)).setVisibility(View.VISIBLE);
+        ((Button)findViewById(R.id.orangeBtn)).setVisibility(View.VISIBLE);
+        ((Button)findViewById(R.id.whiteBtn)).setVisibility(View.VISIBLE);
     }
 
     private void livesVisibility() {
@@ -405,16 +341,13 @@ public class PlayActivityClassic extends AppCompatActivity {
 
             if (colorName.equalsIgnoreCase(action)) {
                 ++score;
-                if(score % 30 == 0){
-                    printPoints();
-                }
                 textView2.setText("Score\n" + String.valueOf(score));
                 countDownTimer3.cancel();
                 tempTimer(speed);
                 changeText();
             } else {
                 if(getSound(getApplicationContext()) == 1){
-                    MediaPlayer mp = MediaPlayer.create(PlayActivityClassic.this, R.raw.error);
+                    MediaPlayer mp = MediaPlayer.create(PlayActivityEightHard.this, R.raw.error);
                     mp.start();
                 }
                 --lives;
@@ -427,13 +360,7 @@ public class PlayActivityClassic extends AppCompatActivity {
         int random = new Random().nextInt(50);
         int random2 = new Random().nextInt(50);
 
-        int numOfColors = 3;
-
-        if (mode == 4 ) {
-            numOfColors = 5;
-        }else if(mode == 6){
-            numOfColors = 8;
-        }
+        int numOfColors = 8;
 
         random = random % numOfColors;
         random2 = random2 % numOfColors;
@@ -498,6 +425,19 @@ public class PlayActivityClassic extends AppCompatActivity {
         }
     }
 
+    private void changeButtons(){
+        Collections.shuffle(listColors);
+
+        switchButton((Button)findViewById(R.id.redBtn), listColors.get(0));
+        switchButton((Button)findViewById(R.id.greenBtn), listColors.get(1));
+        switchButton((Button)findViewById(R.id.blueBtn), listColors.get(2));
+        switchButton((Button)findViewById(R.id.purpleBtn), listColors.get(3));
+        switchButton((Button)findViewById(R.id.yellowBtn), listColors.get(4));
+        switchButton((Button)findViewById(R.id.blackBtn), listColors.get(5));
+        switchButton((Button)findViewById(R.id.orangeBtn), listColors.get(6));
+        switchButton((Button)findViewById(R.id.whiteBtn), listColors.get(7));
+    }
+
     private void lostLife() {
         if (lives == 0) {
             disableButtons();
@@ -531,16 +471,16 @@ public class PlayActivityClassic extends AppCompatActivity {
         int i = 0;
 
         if(score > 100){
-            i = 5;
+            i = 2;
         }
         TextView textView4 = findViewById(R.id.textView4);
-        fadeInAnimation(textView4, 1500);
+        fadeInAnimation(textView4, 1000);
         if(rewarded == true){
             textView4.setText("+" + String.valueOf(pointsIncrement + i) + " points");
         }else{
             textView4.setText("+" + String.valueOf(pointsIncrement + i) + " points");
         }
-        fadeOutAnimation(textView4, 1500);
+        fadeOutAnimation(textView4, 1000);
 
         points += pointsIncrement + i;
     }
@@ -584,7 +524,8 @@ public class PlayActivityClassic extends AppCompatActivity {
     }
 
     public void showAlertDialogButtonClicked(String s) {
-        finishUpdate(mode, score, getApplicationContext());
+        finishUpdate(7, score, getApplicationContext());
+
         addPoints();
 
         int r = new Random().nextInt(100);
@@ -614,11 +555,7 @@ public class PlayActivityClassic extends AppCompatActivity {
         builder.setNegativeButton("Change Mode", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(PlayActivityClassic.this, ModeActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("mode", mode);
-
-                intent.putExtras(b);
+                Intent intent = new Intent(PlayActivityEightHard.this, ButtonsActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -640,11 +577,7 @@ public class PlayActivityClassic extends AppCompatActivity {
             showAlertDialogButtonClicked("GAME OVER");
         } else {
             countDownTimer.cancel();
-            Intent intent = new Intent(PlayActivityClassic.this, ModeActivity.class);
-            Bundle b = new Bundle();
-            b.putInt("mode", mode);
-
-            intent.putExtras(b);
+            Intent intent = new Intent(PlayActivityEightHard.this, ButtonsActivity.class);
             finish();
             startActivity(intent);
         }
