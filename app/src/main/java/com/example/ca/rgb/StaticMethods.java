@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.Switch;
 
 public class StaticMethods {
     public static void fadeInAnimation(final View view, long animationDuration) {
@@ -165,5 +166,30 @@ public class StaticMethods {
         }
 
         return 0;
+    }
+
+    public static String getRanking(Context context){
+        int stars = getStars(context);
+        String ret = "";
+
+        switch(stars){
+            case 1:
+                ret = "Newbee";
+                break;
+            case 2:
+                ret = "Casual";
+                break;
+            case 3:
+                ret = "Regular";
+                break;
+            case 4:
+                ret = "Experienced";
+                break;
+            case 5:
+                ret = "Professional";
+                break;
+        }
+
+        return ret;
     }
 }

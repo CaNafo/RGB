@@ -13,9 +13,12 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import org.w3c.dom.Text;
+
 import static com.example.ca.rgb.MenuActivity.mp;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getPoints;
+import static com.example.ca.rgb.StaticMethods.getRanking;
 import static com.example.ca.rgb.StaticMethods.getStars;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -36,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         setStars();
 
         ((TextView)findViewById(R.id.pointsTxt)).setText(String.valueOf(getPoints(getApplicationContext())));
+        ((TextView)findViewById(R.id.rankTxt7)).setText(getRanking(getApplicationContext()));
 
         textView = findViewById(R.id.scoreTxtt);
         textView.setOnClickListener(editNameOnClickListener);
