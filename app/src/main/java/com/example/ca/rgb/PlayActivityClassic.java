@@ -41,6 +41,8 @@ public class PlayActivityClassic extends AppCompatActivity {
     private CountDownTimer countDownTimer3;
     private boolean started = false;
     private boolean rewarded = false;
+    private boolean gameOver = false;
+    private boolean dialogShowed = false;
     private int mode = -1;
     private int time = 0;
     private int points = 0;
@@ -225,6 +227,8 @@ public class PlayActivityClassic extends AppCompatActivity {
         lives = 3;
         started = false;
         rewarded = false;
+        gameOver = false;
+        dialogShowed = false;
         ((TextView) findViewById(R.id.textView)).setText("");
         ((TextView) findViewById(R.id.textView2)).setText("");
         ((TextView) findViewById(R.id.textView3)).setText("");
@@ -501,6 +505,7 @@ public class PlayActivityClassic extends AppCompatActivity {
     private void lostLife() {
         if (lives == 0) {
             disableButtons();
+            gameOver = true;
             countDownTimer2.cancel();
             countDownTimer3.cancel();
             scaleView(((ImageView) findViewById(R.id.imageView1)), 1, 0);
@@ -628,6 +633,7 @@ public class PlayActivityClassic extends AppCompatActivity {
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         if (this.hasWindowFocus()) {
+            dialogShowed = true;
             dialog.show();
         }
     }
@@ -663,6 +669,10 @@ public class PlayActivityClassic extends AppCompatActivity {
         super.onResume();
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
+        }
+
+        if(gameOver == true && dialogShowed == false){
+            showAlertDialogButtonClicked("GAME OVER");
         }
     }
 }

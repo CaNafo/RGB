@@ -46,6 +46,8 @@ public class PlayActivityEightHard extends AppCompatActivity {
     private CountDownTimer countDownTimer3;
     private boolean started = false;
     private boolean rewarded = false;
+    private boolean gameOver = false;
+    private boolean dialogShowed = false;
     private int time = 0;
     private int speed = 2000;
     private int lives = 3;
@@ -225,6 +227,8 @@ public class PlayActivityEightHard extends AppCompatActivity {
         lives = 3;
         started = false;
         rewarded = false;
+        gameOver = false;
+        dialogShowed = false;
         ((TextView) findViewById(R.id.textView)).setText("");
         ((TextView) findViewById(R.id.textView2)).setText("");
         ((TextView) findViewById(R.id.textView3)).setText("");
@@ -441,6 +445,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
     private void lostLife() {
         if (lives == 0) {
             disableButtons();
+            gameOver = true;
             countDownTimer2.cancel();
             countDownTimer3.cancel();
             scaleView(((ImageView) findViewById(R.id.imageView1)), 1, 0);
@@ -565,6 +570,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         if (this.hasWindowFocus()) {
+            dialogShowed = true;
             dialog.show();
         }
     }
@@ -596,6 +602,10 @@ public class PlayActivityEightHard extends AppCompatActivity {
         super.onResume();
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
+        }
+
+        if(gameOver == true && dialogShowed == false){
+            showAlertDialogButtonClicked("GAME OVER");
         }
     }
 }

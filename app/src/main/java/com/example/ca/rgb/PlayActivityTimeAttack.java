@@ -43,6 +43,8 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     private CountDownTimer countDownTimer3;
     private boolean started = false;
     private boolean rewarded = false;
+    private boolean gameOver = false;
+    private boolean dialogShowed = false;
     private String rewardedString = "GAME OVER";
     private int mode = -1;
     private AdView mAdView;
@@ -218,6 +220,8 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         points = 0;
         started = false;
         rewarded = false;
+        gameOver = false;
+        dialogShowed = false;
         ((TextView) findViewById(R.id.textView)).setText("");
         ((TextView) findViewById(R.id.textView2)).setText("");
         ((TextView) findViewById(R.id.textView3)).setText("");
@@ -303,6 +307,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
             @Override
             public void onFinish() {
                 disableButtons();
+                gameOver = true;
                 rewardedString = "Time's up";
                 rewardAlertDialog();
             }
@@ -612,6 +617,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         if (this.hasWindowFocus()) {
+            dialogShowed = true;
             dialog.show();
         }
     }
@@ -651,6 +657,10 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         super.onResume();
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
+        }
+
+        if(gameOver == true && dialogShowed == false){
+            showAlertDialogButtonClicked("GAME OVER");
         }
     }
 
