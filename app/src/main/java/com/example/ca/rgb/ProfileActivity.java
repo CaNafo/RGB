@@ -32,6 +32,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         setAvatar();
 
+        Button back = findViewById(R.id.backBtn);
+        back.setOnClickListener(backListener);
+
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
@@ -118,6 +121,8 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        avatarProfile = findViewById(R.id.avatarProfile);
+        avatarProfile.setImageDrawable(null);
         setAvatar();
         TextView textView = findViewById(R.id.scoreTxtt);
         SharedPreferences settings = getApplicationContext().getSharedPreferences("name",0);
@@ -174,4 +179,11 @@ public class ProfileActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    View.OnClickListener backListener  = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 }
