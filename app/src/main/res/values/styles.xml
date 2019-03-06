@@ -110,7 +110,8 @@
     </style>
 
     <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:textColor">#f3f3f3</item>
-        <item name="android:textColorPrimary">#f3f3f3</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">@color/green</item>
     </style>
 </resources>

@@ -1,7 +1,9 @@
 package com.example.ca.rgb;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,17 +48,17 @@ public class ButtonsActivity extends AppCompatActivity {
 
         if(stars < 5){
             ((Button)findViewById(R.id.eightHardButtons)).setBackgroundColor(Color.parseColor("gray"));
-            ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(null);
+            ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(infoActionListener);
         }
 
         if(stars < 3){
             ((Button)findViewById(R.id.eightButtons)).setBackgroundColor(Color.parseColor("gray"));
-            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(null);
+            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(infoActionListener);
         }
 
         if(stars < 2){
             ((Button)findViewById(R.id.fiveButtons)).setBackgroundColor(Color.parseColor("gray"));
-            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(null);
+            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(infoActionListener);
         }
     }
 
@@ -97,6 +99,50 @@ public class ButtonsActivity extends AppCompatActivity {
             }
         }
     };
+
+    View.OnClickListener infoActionListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Button button = (Button)v;
+            String action = String.valueOf(button.getTag());
+            String s;
+
+            switch (action){
+                case "5btns":
+                    s = "You need 2 stars to play this mode.";
+                    showAlertDialogButtonClicked(s);
+                    break;
+                case "8btns":
+                    s = "You need 3 stars to play this mode.";
+                    showAlertDialogButtonClicked(s);
+                    break;
+                case "8btnHard":
+                    s = "You need 5 stars to play this mode.";
+                    showAlertDialogButtonClicked(s);
+                    break;
+            }
+        }
+    };
+
+    public void showAlertDialogButtonClicked(String s) {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle("Info");
+        builder.setMessage(s);
+
+        // add a button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.setCancelable(false);
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        if (this.hasWindowFocus()) {
+            dialog.show();
+        }
+    }
 
     @Override
     public void onBackPressed() {
