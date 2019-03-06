@@ -43,6 +43,8 @@ public class UserActivity extends AppCompatActivity {
         String avatar = settings.getString("avatar", "avatar1");
         tempAvatar = avatar;
 
+        setChecked(avatar);
+
         ImageView avatar1 = findViewById(R.id.avatar1);
         avatar1.setOnClickListener(imageOnClickListener);
         ImageView avatar2 = findViewById(R.id.avatar2);
@@ -82,6 +84,56 @@ public class UserActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         String defaultInputText = getResources().getString(R.string.ad_id_banner);
         MobileAds.initialize(this, defaultInputText);
+    }
+
+    private void setChecked(String a){
+        int c = Character.getNumericValue(a.charAt(a.length() - 1));
+
+        switch (c){
+            case 1:
+                ((ImageView)findViewById(R.id.avatar1)).setImageResource(R.drawable.avatar1_small_checked);
+                break;
+            case 2:
+                ((ImageView)findViewById(R.id.avatar2)).setImageResource(R.drawable.avatar2_small_checked);
+                break;
+            case 3:
+                ((ImageView)findViewById(R.id.avatar3)).setImageResource(R.drawable.avatar3_small_checked);
+                break;
+            case 4:
+                ((ImageView)findViewById(R.id.avatar4)).setImageResource(R.drawable.avatar4_small_checked);
+                break;
+            case 5:
+                ((ImageView)findViewById(R.id.avatar5)).setImageResource(R.drawable.avatar5_small_checked);
+                break;
+            case 6:
+                ((ImageView)findViewById(R.id.avatar6)).setImageResource(R.drawable.avatar6_small_checked);
+                break;
+            case 7:
+                ((ImageView)findViewById(R.id.avatar7)).setImageResource(R.drawable.avatar7_small_checked);
+                break;
+            case 8:
+                ((ImageView)findViewById(R.id.avatar8)).setImageResource(R.drawable.avatar8_small_checked);
+                break;
+            case 9:
+                ((ImageView)findViewById(R.id.avatar9)).setImageResource(R.drawable.avatar9_small_checked);
+                break;
+            case 10:
+                ((ImageView)findViewById(R.id.avatar10)).setImageResource(R.drawable.avatar1a_small_checked);
+                break;
+        }
+    }
+
+    private void resetAvatars(){
+        ((ImageView)findViewById(R.id.avatar1)).setImageResource(R.drawable.avatar1_small);
+        ((ImageView)findViewById(R.id.avatar2)).setImageResource(R.drawable.avatar2_small);
+        ((ImageView)findViewById(R.id.avatar3)).setImageResource(R.drawable.avatar3_small);
+        ((ImageView)findViewById(R.id.avatar4)).setImageResource(R.drawable.avatar4_small);
+        ((ImageView)findViewById(R.id.avatar5)).setImageResource(R.drawable.avatar5_small);
+        ((ImageView)findViewById(R.id.avatar6)).setImageResource(R.drawable.avatar6_small);
+        ((ImageView)findViewById(R.id.avatar7)).setImageResource(R.drawable.avatar7_small);
+        ((ImageView)findViewById(R.id.avatar8)).setImageResource(R.drawable.avatar8_small);
+        ((ImageView)findViewById(R.id.avatar9)).setImageResource(R.drawable.avatar9_small);
+        ((ImageView)findViewById(R.id.avatar10)).setImageResource(R.drawable.avatar1a_small);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -277,6 +329,8 @@ public class UserActivity extends AppCompatActivity {
                         tempAvatar = "avatar10";
                         break;
                 }
+                resetAvatars();
+                setChecked(tempAvatar);
         }
     };
 }
