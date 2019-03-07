@@ -8,139 +8,149 @@
     android:background="@mipmap/background"
     tools:context=".MenuActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal|center_vertical">
-
-        <Button
-            android:id="@+id/profileBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/avatar1_small"
-            android:gravity="bottom|center"
-            android:shadowColor="#000000"
-            android:shadowRadius="4"
-            android:tag="profileBtn"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:id="@+id/space"
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-
-        <Button
-            android:id="@+id/playBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="playBtn"
-            android:text="Play"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonGreen"
-            app:layout_constraintBottom_toTopOf="@+id/scoreBtn"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-
-        <Button
-            android:id="@+id/settingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="settingsBtn"
-            android:text="Settings"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonPurple"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="25dp" />
+
             <Button
-                android:id="@+id/rankBtn"
+                android:id="@+id/profileBtn"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/avatar1_small"
+                android:gravity="bottom|center"
+                android:shadowColor="#000000"
+                android:shadowRadius="4"
+                android:tag="profileBtn"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.v4.widget.Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/playBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:soundEffectsEnabled="false"
-                android:tag="rankBtn"
-                android:text="Top Players"
-                android:layout_marginLeft="20dp"
+                android:tag="playBtn"
+                android:text="Play"
                 android:textColor="@android:color/white"
-                android:theme="@style/MyButtonBlue"
-                ads:layout_constraintBottom_toTopOf="parent"
-                ads:layout_constraintStart_toStartOf="parent" />
-            <ImageView
-                android:id="@+id/rankBtnLock"
-                android:src="@drawable/locked2"
-                android:layout_marginLeft="-20dp"
-                android:translationZ="10dp"
+                android:theme="@style/MyButtonGreen"
+                app:layout_constraintBottom_toTopOf="@+id/scoreBtn"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.v4.widget.Space
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-            />
+                android:layout_height="10dp" />
+
+
+            <Button
+                android:id="@+id/settingsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:soundEffectsEnabled="false"
+                android:tag="settingsBtn"
+                android:text="Settings"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonPurple"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/rankBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:soundEffectsEnabled="false"
+                    android:tag="rankBtn"
+                    android:text="Top Players"
+                    android:textColor="@android:color/white"
+                    android:theme="@style/MyButtonBlue"
+                    ads:layout_constraintBottom_toTopOf="parent"
+                    ads:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/rankBtnLock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="-20dp"
+                    android:src="@drawable/locked2"
+                    android:translationZ="10dp" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+
+            <Button
+                android:id="@+id/helpBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:soundEffectsEnabled="false"
+                android:tag="helpBtn"
+                android:text="Help"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonYellow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/exitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:soundEffectsEnabled="false"
+                android:tag="exitBtn"
+                android:text="Exit"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonRed"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <!-- view for AdMob Banner Ad -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/ad_id_banner"></com.google.android.gms.ads.AdView>
+
         </LinearLayout>
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-
-        <Button
-            android:id="@+id/helpBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="helpBtn"
-            android:text="Help"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonYellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/exitBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="exitBtn"
-            android:text="Exit"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonRed"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        <!-- view for AdMob Banner Ad -->
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="19dp" />
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/ad_id_banner"></com.google.android.gms.ads.AdView>
-
-    </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

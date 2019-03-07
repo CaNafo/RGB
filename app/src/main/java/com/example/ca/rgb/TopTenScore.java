@@ -230,7 +230,7 @@ public class TopTenScore extends AppCompatActivity {
                                     avatarImg.setImageResource(R.drawable.avatar1_small);
                                     break;
                             }
-                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(45, 45));
+                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(40, 40));
 
                             //image.addView(avatarImg);
 
