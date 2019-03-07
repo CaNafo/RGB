@@ -37,6 +37,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:ems="10"
+            android:maxLength="10"
+            android:imeOptions="actionDone"
             android:hint="Enter your name here"
             android:inputType="textPersonName"
             android:textSize="24dp"
