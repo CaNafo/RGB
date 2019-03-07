@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.example.ca.rgb.StaticMethods.getPoints;
+import static com.example.ca.rgb.StaticMethods.isConnectedToNetwork;
 import static com.example.ca.rgb.StaticMethods.scaleView;
 import static com.example.ca.rgb.StaticMethods.fadeInAnimation;
 import static com.example.ca.rgb.StaticMethods.fadeOutAnimation;
@@ -438,7 +439,11 @@ public class PlayActivityEightHard extends AppCompatActivity {
             if(rewarded){
                 showAlertDialogButtonClicked("GAME OVER");
             }else{
-                rewardAlertDialog();
+                if(isConnectedToNetwork(getApplicationContext())){
+                    rewardAlertDialog();
+                }else{
+                    showAlertDialogButtonClicked("GAME OVER");
+                }
             }
         } else if (lives == 1) {
             scaleView(((ImageView) findViewById(R.id.imageView2)), 1, 0);
