@@ -153,15 +153,15 @@ public class StaticMethods {
     public static int getStars(Context context) {
         int points = getPoints(context);
 
-        if (points > 10 && points <= 100) {
+        if (points >= 10 && points < 100) {
             return 1;
-        } else if (points > 100 && points <= 400) {
+        } else if (points >= 100 && points < 400) {
             return 2;
-        } else if (points > 400 && points <= 700) {
+        } else if (points >= 400 && points < 700) {
             return 3;
-        } else if (points > 700 && points <= 1000) {
+        } else if (points >= 700 && points < 1000) {
             return 4;
-        } else if (points > 1000) {
+        } else if (points >= 1000) {
             return 5;
         }
 
@@ -204,19 +204,19 @@ public class StaticMethods {
 
         switch (stars){
             case 0:
-                right = "11";
+                right = "10";
                 break;
             case 1:
-                right = "101";
+                right = "100";
                 break;
             case 2:
-                right = "401";
+                right = "400";
                 break;
             case 3:
-                right = "701";
+                right = "700";
                 break;
             case 4:
-                right = "1001";
+                right = "1000";
                 break;
         }
 
