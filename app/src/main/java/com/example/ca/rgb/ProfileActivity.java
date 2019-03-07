@@ -112,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void setAvatar() {
         avatarProfile = findViewById(R.id.avatarProfile);
         SharedPreferences settings = getApplicationContext().getSharedPreferences("avatar", 0);
-        String avatar = settings.getString("avatar", "");
+        String avatar = settings.getString("avatar", "avatar1");
 
         switch (avatar){
             case "avatar1":
