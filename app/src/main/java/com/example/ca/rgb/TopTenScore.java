@@ -257,17 +257,18 @@ public class TopTenScore extends AppCompatActivity {
                             int points = Integer.parseInt(Jasonobject.getString("points"));
                             int stars = 0;
 
-                            if (points >= 2 && points <= 200) {
+                            if (points >= 10 && points < 100) {
                                 stars = 1;
-                            } else if (points > 200 && points <= 400) {
+                            } else if (points >= 100 && points < 400) {
                                 stars = 2;
-                            } else if (points > 400 && points <= 700) {
+                            } else if (points >= 400 && points < 700) {
                                 stars = 3;
-                            } else if (points > 700 && points <= 1000) {
+                            } else if (points >= 700 && points < 1000) {
                                 stars = 4;
-                            } else if (points > 1000) {
+                            } else if (points >= 1000) {
                                 stars = 5;
                             }
+
                             String ret = "";
 
                             switch (stars) {
