@@ -25,6 +25,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import java.util.Random;
 
 import static com.example.ca.rgb.StaticMethods.getPoints;
+import static com.example.ca.rgb.StaticMethods.isConnectedToNetwork;
 import static com.example.ca.rgb.StaticMethods.scaleView;
 import static com.example.ca.rgb.StaticMethods.fadeInAnimation;
 import static com.example.ca.rgb.StaticMethods.fadeOutAnimation;
@@ -298,7 +299,11 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                 gameOver = true;
                 timesUp = true;
                 rewardedString = "Time's up";
-                rewardAlertDialog();
+                if(isConnectedToNetwork(getApplicationContext())){
+                    rewardAlertDialog();
+                }else{
+                    showAlertDialogButtonClicked("Time's up.");
+                }
             }
         }.start();
     }
@@ -341,9 +346,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     private void setBonusTime(){
         TextView textView4 = findViewById(R.id.textView4);
         fadeInAnimation(textView4, 1500);
-        if(rewarded == true){
-            textView4.setText("+" + String.valueOf(bonusTime/1000) + " seconds");
-        }else{
+        if(!rewarded){
             textView4.setText("+" + String.valueOf(bonusTime/1000 - 10) + " seconds");
         }
         fadeOutAnimation(textView4, 1500);
@@ -361,7 +364,12 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                     showAlertDialogButtonClicked("Time's up");
                 }else{
                     rewardedString = "Time's up";
-                    rewardAlertDialog();
+                    if(isConnectedToNetwork(getApplicationContext())){
+                        rewardAlertDialog();
+                    }else{
+                        disableButtons();
+                        showAlertDialogButtonClicked("Time's up");
+                    }
                 }
                 timesUp = true;
             }
@@ -413,7 +421,11 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                     showAlertDialogButtonClicked("GAME OVER");
                 }else{
                     rewardedString = "GAME OVER";
-                    rewardAlertDialog();
+                    if(isConnectedToNetwork(getApplicationContext())){
+                        rewardAlertDialog();
+                    }else{
+                        showAlertDialogButtonClicked("GAME OVER");
+                    }
                 }
             }
         }
