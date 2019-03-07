@@ -3,12 +3,14 @@ package com.example.ca.rgb;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.StateSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 
@@ -44,6 +46,14 @@ public class ButtonsActivity extends AppCompatActivity {
     private void setButtons(){
         int stars = getStars(getApplicationContext());
 
+        float dip = 10f;
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dip,
+                r.getDisplayMetrics()
+        );
+
         findViewById(R.id.threeButtons).setOnClickListener(modeActionListener);
         findViewById(R.id.fiveButtons).setOnClickListener(modeActionListener);
         findViewById(R.id.eightButtons).setOnClickListener(modeActionListener);
@@ -54,7 +64,7 @@ public class ButtonsActivity extends AppCompatActivity {
             findViewById(R.id.eightHardButtons).setOnClickListener(infoActionListener);
         }else{
             findViewById(R.id.eightHardButtonsLock).setVisibility(View.GONE);
-            findViewById(R.id.eightHardButtons).setTranslationY(-20);
+            findViewById(R.id.eightHardButtons).setTranslationX(-px);
         }
 
         if(stars < 3){
@@ -62,7 +72,7 @@ public class ButtonsActivity extends AppCompatActivity {
             findViewById(R.id.eightButtons).setOnClickListener(infoActionListener);
         }else{
             findViewById(R.id.eightButtonsLock).setVisibility(View.GONE);
-            findViewById(R.id.eightButtons).layout(0,0,0,0);
+            findViewById(R.id.eightButtons).setTranslationX(-px);
         }
 
         if(stars < 2){
@@ -70,7 +80,7 @@ public class ButtonsActivity extends AppCompatActivity {
             findViewById(R.id.fiveButtons).setOnClickListener(infoActionListener);
         }else{
             findViewById(R.id.fiveButtonsLock).setVisibility(View.GONE);
-            findViewById(R.id.fiveButtons).setTranslationY(-20);
+            findViewById(R.id.fiveButtons).setTranslationX(-px);
         }
     }
 

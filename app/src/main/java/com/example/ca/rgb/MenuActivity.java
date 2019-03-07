@@ -4,6 +4,7 @@ package com.example.ca.rgb;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
@@ -71,12 +73,7 @@ public class MenuActivity extends AppCompatActivity {
         exitBtn.setOnClickListener(menuActionListener);
         helpBtn.setOnClickListener(menuActionListener);
         settingsBtn.setOnClickListener(menuActionListener);
-
-        if(getStars(getApplicationContext()) == 0){
-            rankBtn.setBackgroundResource(R.drawable.avatar6_big);
-        }else{
-            //rankBtn.setBackgroundResource(android.R.color.transparent);
-        }
+        setTopPlayersBtn();
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -86,6 +83,23 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
+    private void setTopPlayersBtn(){
+        int stars = getStars(getApplicationContext());
+        findViewById(R.id.rankBtnLock).setOnClickListener(menuActionListener);
+
+        float dip = 10f;
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dip,
+                r.getDisplayMetrics()
+        );
+
+        if(stars != 0){
+           findViewById(R.id.rankBtnLock).setVisibility(View.GONE);
+           findViewById(R.id.rankBtn).setTranslationX(-px);
+        }
+    }
 
     View.OnClickListener menuActionListener = new View.OnClickListener() {
 
@@ -203,5 +217,6 @@ public class MenuActivity extends AppCompatActivity {
         }
         String myName = getName(getApplicationContext());
         profileButton.setText(myName);
+        setTopPlayersBtn();
     }
 }
