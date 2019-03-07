@@ -204,7 +204,7 @@ public class StaticMethods {
 
         switch (stars){
             case 0:
-                right = "2";
+                right = "10";
                 break;
             case 1:
                 right = "200";
