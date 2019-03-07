@@ -132,9 +132,17 @@ public class ButtonsActivity extends AppCompatActivity {
         builder.setMessage(s);
 
         // add a button
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Stats", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(new Intent(ButtonsActivity.this, ProfileActivity.class));
+            }
+        });
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
 

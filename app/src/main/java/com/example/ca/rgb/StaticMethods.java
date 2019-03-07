@@ -195,4 +195,37 @@ public class StaticMethods {
 
         return ret;
     }
+
+    public static String retPoints(Context context){
+        String ret = "";
+        int stars = getStars(context);
+        String left = String.valueOf(getPoints(context));
+        String right = "";
+
+        switch (stars){
+            case 0:
+                right = "2";
+                break;
+            case 1:
+                right = "200";
+                break;
+            case 2:
+                right = "400";
+                break;
+            case 3:
+                right = "700";
+                break;
+            case 4:
+                right = "1000";
+                break;
+        }
+
+        if(stars != 5){
+            ret = left + "/" + right;
+        }else{
+            ret = left;
+        }
+
+        return ret;
+    }
 }

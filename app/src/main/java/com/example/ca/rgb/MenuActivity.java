@@ -1,14 +1,18 @@
 package com.example.ca.rgb;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,6 +23,7 @@ import com.google.android.gms.ads.MobileAds;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getName;
 import static com.example.ca.rgb.StaticMethods.getSound;
+import static com.example.ca.rgb.StaticMethods.getStars;
 import static com.example.ca.rgb.StaticMethods.setMusic;
 import static com.example.ca.rgb.StaticMethods.setSound;
 
@@ -69,6 +74,12 @@ public class MenuActivity extends AppCompatActivity {
         helpBtn.setOnClickListener(menuActionListener);
         settingsBtn.setOnClickListener(menuActionListener);
 
+        if(getStars(getApplicationContext()) == 0){
+            rankBtn.setBackgroundResource(R.drawable.avatar6_big);
+        }else{
+            //rankBtn.setBackgroundResource(android.R.color.transparent);
+        }
+
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -93,7 +104,11 @@ public class MenuActivity extends AppCompatActivity {
                     startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
                     break;
                 case "rankBtn":
-                    startActivity(new Intent(MenuActivity.this, TopTenScore.class));
+                    if(getStars(getApplicationContext()) == 0){
+                        showAlertDialogButtonClicked("You need 1 star to see this score.");
+                    }else{
+                        startActivity(new Intent(MenuActivity.this, TopTenScore.class));
+                    }
                     break;
                 case "settingsBtn":
                     startActivity(new Intent(MenuActivity.this, SettingsActivity.class));
@@ -108,6 +123,26 @@ public class MenuActivity extends AppCompatActivity {
         }
     };
 
+    public void showAlertDialogButtonClicked(String s) {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle("Info");
+        builder.setMessage(s);
+
+        // add a button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.setCancelable(false);
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        if (this.hasWindowFocus()) {
+            dialog.show();
+        }
+    }
 
     @Override
     public void onBackPressed() {

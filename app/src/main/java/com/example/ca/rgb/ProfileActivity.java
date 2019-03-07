@@ -20,6 +20,7 @@ import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getPoints;
 import static com.example.ca.rgb.StaticMethods.getRanking;
 import static com.example.ca.rgb.StaticMethods.getStars;
+import static com.example.ca.rgb.StaticMethods.retPoints;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView textView;
@@ -32,16 +33,13 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         setAvatar();
 
-        Button back = findViewById(R.id.backBtn);
-        back.setOnClickListener(backListener);
-
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
 
         setStars();
 
-        ((TextView)findViewById(R.id.pointsTxt)).setText(String.valueOf(getPoints(getApplicationContext())));
+        ((TextView)findViewById(R.id.pointsTxt)).setText(retPoints(getApplicationContext()));
         ((TextView)findViewById(R.id.rankTxt7)).setText(getRanking(getApplicationContext()));
 
         textView = findViewById(R.id.scoreTxtt);
