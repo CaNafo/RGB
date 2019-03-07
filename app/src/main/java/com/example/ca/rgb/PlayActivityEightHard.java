@@ -479,7 +479,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
     private void rewardAlertDialog(){
         // setup the alert builder
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Reward");
+        builder.setTitle("GAME OVER");
         builder.setMessage("Watch video and continue playing.");
 
         // add a button
@@ -521,7 +521,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
 
         int r = new Random().nextInt(100);
 
-        if(r < 15){
+        if(r < 15 && !rewarded){
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             } else {

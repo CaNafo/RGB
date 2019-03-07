@@ -45,6 +45,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     private boolean rewarded = false;
     private boolean gameOver = false;
     private boolean dialogShowed = false;
+    private boolean timesUp = false;
     private String rewardedString = "GAME OVER";
     private int mode = -1;
     private AdView mAdView;
@@ -275,7 +276,6 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 textView3.setText("Time\n" + String.valueOf(l / 1000));
-
                 if(l/1000 == 10){
                     if(score >= 25 && score < 30){
                         bonusTime = 15000;
@@ -296,6 +296,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
             public void onFinish() {
                 disableButtons();
                 gameOver = true;
+                timesUp = true;
                 rewardedString = "Time's up";
                 rewardAlertDialog();
             }
@@ -346,7 +347,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
             textView4.setText("+" + String.valueOf(bonusTime/1000 - 10) + " seconds");
         }
         fadeOutAnimation(textView4, 1500);
-
+        timesUp = false;
         countDownTimer3 = new CountDownTimer(bonusTime + 1000, 1000) {
             @Override
             public void onTick(long l) {
@@ -362,6 +363,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                     rewardedString = "Time's up";
                     rewardAlertDialog();
                 }
+                timesUp = true;
             }
         }.start();
     }
@@ -520,7 +522,11 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
     private void rewardAlertDialog(){
         // setup the alert builder
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Reward");
+        if(timesUp){
+            builder.setTitle("Time's up");
+        }else {
+            builder.setTitle("GAME OVER");
+        }
         builder.setMessage("Watch video and play 10 more seconds.");
 
         // add a button
@@ -566,7 +572,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         }else{
             int r = new Random().nextInt(100);
 
-            if(r < 15){
+            if(r < 15 && !rewarded){
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 } else {
@@ -588,6 +594,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("mode", mode);
                 intent.putExtras(b);
+                finish();
                 startActivity(intent);
             }
         });

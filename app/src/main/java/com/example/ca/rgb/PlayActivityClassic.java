@@ -539,7 +539,7 @@ public class PlayActivityClassic extends AppCompatActivity {
     private void rewardAlertDialog(){
         // setup the alert builder
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Reward");
+        builder.setTitle("GAME OVER");
         builder.setMessage("Watch video and continue playing.");
 
         // add a button
@@ -580,7 +580,7 @@ public class PlayActivityClassic extends AppCompatActivity {
 
         int r = new Random().nextInt(100);
 
-        if(r < 15){
+        if(r < 15 && !rewarded){
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             } else {
@@ -601,6 +601,7 @@ public class PlayActivityClassic extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putInt("mode", mode);
                 intent.putExtras(b);
+                finish();
                 startActivity(intent);
             }
         });

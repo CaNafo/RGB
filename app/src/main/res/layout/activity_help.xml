@@ -168,7 +168,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:theme="@style/HelpBonus"
-                android:text="Casual - 200+ XP Points"/>
+                android:text="Casual - 100+ XP Points"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
