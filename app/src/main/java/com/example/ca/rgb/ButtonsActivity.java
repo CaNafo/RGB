@@ -2,11 +2,13 @@ package com.example.ca.rgb;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.StateSet;
 import android.view.View;
 import android.widget.Button;
 
@@ -42,24 +44,33 @@ public class ButtonsActivity extends AppCompatActivity {
     private void setButtons(){
         int stars = getStars(getApplicationContext());
 
-        ((Button)findViewById(R.id.threeButtons)).setOnClickListener(modeActionListener);
-        ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(modeActionListener);
-        ((Button)findViewById(R.id.eightButtons)).setOnClickListener(modeActionListener);
-        ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(modeActionListener);
+        findViewById(R.id.threeButtons).setOnClickListener(modeActionListener);
+        findViewById(R.id.fiveButtons).setOnClickListener(modeActionListener);
+        findViewById(R.id.eightButtons).setOnClickListener(modeActionListener);
+        findViewById(R.id.eightHardButtons).setOnClickListener(modeActionListener);
 
         if(stars < 5){
-            ((Button)findViewById(R.id.eightHardButtons)).setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.gray));
-            ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(infoActionListener);
+            findViewById(R.id.eightHardButtonsLock).setVisibility(View.VISIBLE);
+            findViewById(R.id.eightHardButtons).setOnClickListener(infoActionListener);
+        }else{
+            findViewById(R.id.eightHardButtonsLock).setVisibility(View.GONE);
+            findViewById(R.id.eightHardButtons).setTranslationY(-20);
         }
 
         if(stars < 3){
-            ((Button)findViewById(R.id.eightButtons)).setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.gray));
-            ((Button)findViewById(R.id.eightButtons)).setOnClickListener(infoActionListener);
+            findViewById(R.id.eightButtonsLock).setVisibility(View.VISIBLE);
+            findViewById(R.id.eightButtons).setOnClickListener(infoActionListener);
+        }else{
+            findViewById(R.id.eightButtonsLock).setVisibility(View.GONE);
+            findViewById(R.id.eightButtons).layout(0,0,0,0);
         }
 
         if(stars < 2){
-            ((Button)findViewById(R.id.fiveButtons)).setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.gray));
-            ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(infoActionListener);
+            findViewById(R.id.fiveButtonsLock).setVisibility(View.VISIBLE);
+            findViewById(R.id.fiveButtons).setOnClickListener(infoActionListener);
+        }else{
+            findViewById(R.id.fiveButtonsLock).setVisibility(View.GONE);
+            findViewById(R.id.fiveButtons).setTranslationY(-20);
         }
     }
 

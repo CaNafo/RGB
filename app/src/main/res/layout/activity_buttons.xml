@@ -30,50 +30,97 @@
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
 
-
-        <Button
-            android:id="@+id/fiveButtons"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="5btns"
-            android:text="5 Colors"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonBlue"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/fiveButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="5btns"
+                android:text="5 Colors"
+                android:layout_marginLeft="20dp"
+                android:soundEffectsEnabled="false"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonBlue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+            <ImageView
+                android:id="@+id/fiveButtonsLock"
+                android:src="@drawable/locked2"
+                android:layout_marginLeft="-20dp"
+                android:translationZ="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
 
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
 
-        <Button
-            android:id="@+id/eightButtons"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="8btns"
-            android:text="8 Colors"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonYellow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/eightButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="8btns"
+                android:text="8 Colors"
+                android:layout_marginLeft="20dp"
+                android:soundEffectsEnabled="false"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonYellow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+            <ImageView
+                android:id="@+id/eightButtonsLock"
+                android:src="@drawable/locked2"
+                android:layout_marginLeft="-20dp"
+                android:translationZ="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
 
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
 
-        <Button
-            android:id="@+id/eightHardButtons"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="8btnHard"
-            android:text="8 Colors Hard"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonRed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/eightHardButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="8btnHard"
+                android:text="8 Colors Hard"
+                android:layout_marginLeft="20dp"
+                android:soundEffectsEnabled="false"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonRed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/threeButtons" />
+            <ImageView
+                android:id="@+id/eightHardButtonsLock"
+                android:src="@drawable/locked2"
+                android:layout_marginLeft="-20dp"
+                android:translationZ="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
 
         <Space
             android:layout_width="match_parent"
