@@ -83,35 +83,49 @@ public class ScoreActivity extends AppCompatActivity {
         Button refreshBtn = findViewById(R.id.refreshBtn);
         refreshBtn.setOnClickListener(refreshListener);
 
+        settings = getApplicationContext().getSharedPreferences("name", 0);
+        String myName = settings.getString("name", "");
+
+        settings = getApplicationContext().getSharedPreferences("avatar", 0);
+        String avatar = settings.getString("avatar", "");
+
+        settings = getApplicationContext().getSharedPreferences("ID", 0);
+        int id = settings.getInt("ID", 0);
+
         Bundle b = getIntent().getExtras();
         if (b != null)
             buttonMode = b.getInt("mode");
 
         if (buttonMode == 1 || buttonMode == 2) {
             offlineLoad("timeAttack");
-            getRetrofitObject("timeAttack");
             getUserPosition("timeAttack");
+            addNewScore(myName,avatar,id);
+            getRetrofitObject("timeAttack");
         } else if (buttonMode == 3 || buttonMode == 4) {
             offlineLoad("timeattackHard");
-            getRetrofitObject("timeattackHard");
             getUserPosition("timeattackHard");
+            addNewScore(myName,avatar,id);
+            getRetrofitObject("timeattackHard");
         } else if (buttonMode == 5 || buttonMode == 6) {
             offlineLoad("timeAttack8");
-            getRetrofitObject("timeAttack8");
             getUserPosition("timeAttack8");
+            addNewScore(myName,avatar,id);
+            getRetrofitObject("timeAttack8");
         } else if (buttonMode == 7 || buttonMode == 8) {
             tittleTxt.setText("Top 10 players");
             nextBtn.setVisibility(View.INVISIBLE);
             previousBtn.setVisibility(View.INVISIBLE);
             offlineLoad("8Hard");
-            getRetrofitObject("8Hard");
             getUserPosition("8Hard");
+            addNewScore(myName,avatar,id);
+            getRetrofitObject("8Hard");
         }
 
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
         String defaultInputText = getResources().getString(R.string.ad_id_banner);
         MobileAds.initialize(this, defaultInputText);
     }
@@ -239,7 +253,7 @@ public class ScoreActivity extends AppCompatActivity {
                         TextView noumberTxt = new TextView(noumber.getContext());
                         noumberTxt.setText("No.");
                         noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
-                        noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                        noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
                         noumberTxt.setTypeface(null, Typeface.BOLD);
                         noumberTxt.setGravity(Gravity.CENTER);
                         noumber.addView(noumberTxt);
@@ -249,7 +263,7 @@ public class ScoreActivity extends AppCompatActivity {
                         TextView nameTxt = new TextView(name.getContext());
                         nameTxt.setText("Name");
                         nameTxt.setTextColor(Color.parseColor("#FFFFFF"));
-                        nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                        nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
                         nameTxt.setTypeface(null, Typeface.BOLD);
                         nameTxt.setGravity(Gravity.CENTER);
                         name.addView(nameTxt);
@@ -259,7 +273,7 @@ public class ScoreActivity extends AppCompatActivity {
                         scoreTxt.setText("Score");
                         scoreTxt.setTextColor(Color.parseColor("#FFFFFF"));
                         scoreTxt.setTypeface(null, Typeface.BOLD);
-                        scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+                        scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
                         scoreTxt.setGravity(Gravity.CENTER);
                         score.addView(scoreTxt);
 
@@ -268,7 +282,7 @@ public class ScoreActivity extends AppCompatActivity {
 
                             noumberTxt = new TextView(noumber.getContext());
                             noumberTxt.setText((i + 1) + ".");
-                            noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+                            noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                             noumberTxt.setGravity(Gravity.CENTER);
                             noumberTxt.setTypeface(null, Typeface.BOLD);
                             noumber.addView(noumberTxt);
@@ -318,7 +332,7 @@ public class ScoreActivity extends AppCompatActivity {
 
                             nameTxt = new TextView(name.getContext());
                             nameTxt.setText((Jasonobject.getString("name")));
-                            nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+                            nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                             nameTxt.setGravity(Gravity.CENTER);
                             nameTxt.setTypeface(null, Typeface.BOLD);
 
@@ -331,7 +345,7 @@ public class ScoreActivity extends AppCompatActivity {
 
                             scoreTxt = new TextView(score.getContext());
                             scoreTxt.setText(Jasonobject.getString(jsonMode));
-                            scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+                            scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
                             scoreTxt.setGravity(Gravity.CENTER);
                             scoreTxt.setTypeface(null, Typeface.BOLD);
                             score.addView(scoreTxt);
@@ -572,10 +586,7 @@ public class ScoreActivity extends AppCompatActivity {
                                 // Apply the edits!
                                 editor.apply();
 
-                                addNewScore("DefaultUser",avatar);
-
                             } else {
-                                addNewScore(myName,avatar);
                             }
                         }
 
@@ -596,10 +607,10 @@ public class ScoreActivity extends AppCompatActivity {
         });
     }
 
-    private void addNewScore(String name, String avatar) {
+    private void addNewScore(String name, String avatar, int id) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name,avatar);
+        call = api.setQuery(id,name,avatar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

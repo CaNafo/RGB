@@ -207,7 +207,7 @@ public class UserActivity extends AppCompatActivity {
                             settings = getApplicationContext().getSharedPreferences("avatar", 0);
                             String avatar = settings.getString("avatar", "");
 
-                            addNewScore(textView.getText().toString(),avatar);
+                            addNewScore(textView.getText().toString(),avatar, ID);
                         }
 
                     } catch (JSONException e) {
@@ -226,10 +226,10 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
-    private void addNewScore(String name, String avatar) {
+    private void addNewScore(String name, String avatar, int id) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(name,avatar);
+        call = api.setQuery(id,name,avatar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

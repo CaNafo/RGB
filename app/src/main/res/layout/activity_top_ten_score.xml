@@ -55,27 +55,10 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/previousBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/previous"
-                        android:textSize="14dp"
-                        android:theme="@style/PrevNext"
-                        tools:text="Previous" />
-
                     <android.support.v4.widget.Space
                         android:layout_width="100dp"
                         android:layout_height="wrap_content" />
 
-                    <Button
-                        android:id="@+id/nextBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Next"
-                        android:textSize="14dp"
-                        android:theme="@style/PrevNext"
-                        tools:text="Next" />
                 </LinearLayout>
 
                 <android.support.v4.widget.Space

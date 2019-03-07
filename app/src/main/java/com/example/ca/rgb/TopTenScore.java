@@ -52,6 +52,16 @@ public class TopTenScore extends AppCompatActivity {
 
         addNewTopRank();
 
+        TextView textView = findViewById(R.id.myScoreTxt);
+
+        settings = getApplicationContext().getSharedPreferences("Points",0);
+        int myScore = settings.getInt("Points",0);
+
+        settings = getApplicationContext().getSharedPreferences("name",0);
+        String myName = settings.getString("name","");
+
+        textView.setText("Name:  " + myName + ",    Points:  " + myScore);
+
         readScore();
         getUserPosition();
         updateRank();
@@ -373,7 +383,7 @@ public class TopTenScore extends AppCompatActivity {
                             int myScore = settings.getInt("Points", 0);
 
                             if (!(myName.length() > 0)) {
-                                textView.setText("Position:  " + Jasonobject.get("position") + " ,    Name:  " + myName + ",    Score:  " + myScore);
+                                textView.setText("Position:  " + Jasonobject.get("position") + " ,    Name:  " + myName + ",    Points:  " + myScore);
 
                                 settings = getApplicationContext().getSharedPreferences("name", 0);
                                 SharedPreferences.Editor editor = settings.edit();
@@ -382,7 +392,7 @@ public class TopTenScore extends AppCompatActivity {
                                 // Apply the edits!
                                 editor.apply();
                             } else {
-                                textView.setText("Position:  " + Jasonobject.get("position") + " ,    Name:  " + myName + ",    Score:  " + myScore);
+                                textView.setText("Position:  " + Jasonobject.get("position") + " ,    Name:  " + myName + ",    Points:  " + myScore);
                             }
                         }
 
