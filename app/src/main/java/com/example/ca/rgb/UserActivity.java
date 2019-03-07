@@ -169,6 +169,10 @@ public class UserActivity extends AppCompatActivity {
                 updateName(myID,textView.getText().toString(), tempAvatar);
             }
 
+            settings = getApplicationContext().getSharedPreferences("ID", 0);
+            myID = settings.getInt("ID", 0);
+
+            addNewScore(textView.getText().toString(),tempAvatar,myID);
             finish();
         }
     };
