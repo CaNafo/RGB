@@ -586,7 +586,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(s);
-        builder.setMessage("You scored " + score + " and earned " + points + " points.");
+        builder.setMessage("You scored " + score + " and earned " + points + " XP.");
 
         // add a button
         builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
