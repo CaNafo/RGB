@@ -18,16 +18,17 @@
             android:id="@+id/profileBtn"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:text=""
+            android:background="@drawable/avatar1_small"
+            android:gravity="bottom|center"
             android:shadowColor="#000000"
             android:shadowRadius="4"
-            android:textStyle="bold"
+            android:tag="profileBtn"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="17dp"
-            android:gravity="bottom|center"
-            android:background="@drawable/avatar1_small"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v4.widget.Space
             android:id="@+id/space"

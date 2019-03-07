@@ -3,6 +3,7 @@ package com.example.ca.rgb;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,17 +48,17 @@ public class ButtonsActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(modeActionListener);
 
         if(stars < 5){
-            ((Button)findViewById(R.id.eightHardButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.eightHardButtons)).setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.gray));
             ((Button)findViewById(R.id.eightHardButtons)).setOnClickListener(infoActionListener);
         }
 
         if(stars < 3){
-            ((Button)findViewById(R.id.eightButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.eightButtons)).setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.gray));
             ((Button)findViewById(R.id.eightButtons)).setOnClickListener(infoActionListener);
         }
 
         if(stars < 2){
-            ((Button)findViewById(R.id.fiveButtons)).setBackgroundColor(Color.parseColor("gray"));
+            ((Button)findViewById(R.id.fiveButtons)).setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.gray));
             ((Button)findViewById(R.id.fiveButtons)).setOnClickListener(infoActionListener);
         }
     }
@@ -74,29 +75,29 @@ public class ButtonsActivity extends AppCompatActivity {
                     b = new Bundle();
                     b.putInt("mode", 1); //Your id
                     intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                     break;
                 case "5btns":
                     b = new Bundle();
                     b.putInt("mode", 3); //Your id
                     intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                     break;
                 case "8btns":
                     b = new Bundle();
                     b.putInt("mode", 5); //Your id
                     intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                     break;
                 case "8btnHard":
                     b = new Bundle();
                     b.putInt("mode", 7); //Your id
                     intent.putExtras(b); //Put your id to your next Intent
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                     break;
             }
         }

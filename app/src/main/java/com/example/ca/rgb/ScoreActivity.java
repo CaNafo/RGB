@@ -3,6 +3,7 @@ package com.example.ca.rgb;
 import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIgetPosition;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -858,6 +859,11 @@ public class ScoreActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Bundle b = new Bundle();
+        b.putInt("mode", buttonMode);
+        Intent intent = new Intent(ScoreActivity.this, ModeActivity.class);
+        intent.putExtras(b);
         finish();
+        startActivity(intent);
     }
 }

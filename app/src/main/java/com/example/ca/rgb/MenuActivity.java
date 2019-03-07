@@ -40,10 +40,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        profileButton = findViewById(R.id.profileBtn);
-        profileButton.setOnClickListener(profileOnClickListener);
-
-
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
 
@@ -56,6 +52,7 @@ public class MenuActivity extends AppCompatActivity {
             setSound(getApplicationContext(), 1);
         }
 
+        profileButton = findViewById(R.id.profileBtn);
         Button playBtn = findViewById(R.id.playBtn);
         Button rankBtn = findViewById(R.id.rankBtn);
         Button exitBtn = findViewById(R.id.exitBtn);
@@ -68,6 +65,7 @@ public class MenuActivity extends AppCompatActivity {
         if (!(myName.length() > 0))
             startActivity(new Intent(MenuActivity.this, UserActivity.class));
 
+        profileButton.setOnClickListener(menuActionListener);
         playBtn.setOnClickListener(menuActionListener);
         rankBtn.setOnClickListener(menuActionListener);
         exitBtn.setOnClickListener(menuActionListener);
@@ -96,10 +94,10 @@ public class MenuActivity extends AppCompatActivity {
         public void onClick(View v) {
             Button button = (Button) v;
             String action = String.valueOf(button.getTag());
-            String s = "";
-            SharedPreferences settings;
-            SharedPreferences.Editor editor;
             switch (action) {
+                case "profileBtn":
+                    startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
+                    break;
                 case "playBtn":
                     startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
                     break;
@@ -144,38 +142,6 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        mp.stop();
-        finish();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (getMusic(getApplicationContext()) == 1) {
-            mp.pause();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setAvatar();
-        if (getMusic(getApplicationContext()) == 1) {
-            mp.start();
-        }
-        String myName = getName(getApplicationContext());
-        profileButton.setText(myName);
-    }
-
-    View.OnClickListener profileOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
-        }
-    };
-
     private void setAvatar() {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("avatar", 0);
         String avatar = settings.getString("avatar", "avatar1");
@@ -212,5 +178,30 @@ public class MenuActivity extends AppCompatActivity {
                 profileButton.setBackgroundResource(R.drawable.avatar1a_big);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        mp.stop();
+        finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (getMusic(getApplicationContext()) == 1) {
+            mp.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setAvatar();
+        if (getMusic(getApplicationContext()) == 1) {
+            mp.start();
+        }
+        String myName = getName(getApplicationContext());
+        profileButton.setText(myName);
     }
 }

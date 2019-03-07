@@ -52,7 +52,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
     private int speed = 2000;
     private int lives = 3;
     private int points = 0;
-    private int pointsIncrement = 2;
+    private int pointsIncrement = 10;
     private List<String> listColors = Arrays.asList("red", "green", "blue", "purple", "yellow", "black", "orange", "white");
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
@@ -462,7 +462,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
         int i = 0;
 
         if(score > 100){
-            i = 2;
+            i = 5;
         }
         TextView textView4 = findViewById(R.id.textView4);
         fadeInAnimation(textView4, 1000);

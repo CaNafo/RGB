@@ -40,11 +40,11 @@ public class ModeActivity extends AppCompatActivity {
             timeAttackBtn.setOnClickListener(null);
             timeAttackBtn.setVisibility(View.GONE);
             classicBtn.setOnClickListener(hardActionListener);
-            scoreBtn.setOnClickListener(scoreOnClickListener);
+            scoreBtn.setOnClickListener(hardActionListener);
         }else{
             timeAttackBtn.setOnClickListener(modeActionListener);
             classicBtn.setOnClickListener(modeActionListener);
-            scoreBtn.setOnClickListener(scoreOnClickListener);
+            scoreBtn.setOnClickListener(modeActionListener);
         }
 
         mAdView = findViewById(R.id.adView);
@@ -98,7 +98,12 @@ public class ModeActivity extends AppCompatActivity {
                     startActivity(intentClassic);
                     break;
                 case "score":
-                    //ovde ubaci skor
+                    Intent intentScore = new Intent(ModeActivity.this, ScoreActivity.class);
+                    b = new Bundle();
+                    b.putInt("mode", mode); //Your id
+                    intentScore.putExtras(b); //Put your id to your next Intent
+                    finish();
+                    startActivity(intentScore);
                     break;
             }
         }
@@ -116,7 +121,12 @@ public class ModeActivity extends AppCompatActivity {
                     startActivity(intentClassic);
                     break;
                 case "score":
-                    //ovde ubaci skor
+                    Intent intentScore = new Intent(ModeActivity.this, ScoreActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt("mode", mode); //Your id
+                    intentScore.putExtras(b); //Put your id to your next Intent
+                    finish();
+                    startActivity(intentScore);
                     break;
             }
         }
@@ -143,15 +153,4 @@ public class ModeActivity extends AppCompatActivity {
             MenuActivity.mp.start();
         }
     }
-
-    View.OnClickListener scoreOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intentScore = new Intent(ModeActivity.this, ScoreActivity.class);
-            Bundle b = new Bundle();
-            b.putInt("mode", mode); //Your id
-            intentScore.putExtras(b); //Put your id to your next Intent
-            startActivity(intentScore);
-        }
-    };
 }

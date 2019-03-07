@@ -109,36 +109,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener editNameOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(ProfileActivity.this, UserActivity.class));
-        }
-    };
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        avatarProfile = findViewById(R.id.avatarProfile);
-        avatarProfile.setImageDrawable(null);
-        setAvatar();
-        TextView textView = findViewById(R.id.scoreTxtt);
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("name",0);
-        String myName = settings.getString("name","");
-        textView.setText(myName);
-        if(getMusic(getApplicationContext()) == 1){
-            mp.start();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(getMusic(getApplicationContext()) == 1){
-            mp.pause();
-        }
-    }
-
     private void setAvatar() {
         avatarProfile = findViewById(R.id.avatarProfile);
         SharedPreferences settings = getApplicationContext().getSharedPreferences("avatar", 0);
@@ -178,10 +148,33 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener backListener  = new View.OnClickListener() {
+    View.OnClickListener editNameOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            finish();
+            startActivity(new Intent(ProfileActivity.this, UserActivity.class));
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        avatarProfile = findViewById(R.id.avatarProfile);
+        avatarProfile.setImageDrawable(null);
+        setAvatar();
+        TextView textView = findViewById(R.id.scoreTxtt);
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("name",0);
+        String myName = settings.getString("name","");
+        textView.setText(myName);
+        if(getMusic(getApplicationContext()) == 1){
+            mp.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(getMusic(getApplicationContext()) == 1){
+            mp.pause();
+        }
+    }
 }

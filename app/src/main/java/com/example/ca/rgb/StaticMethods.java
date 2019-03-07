@@ -153,7 +153,7 @@ public class StaticMethods {
     public static int getStars(Context context) {
         int points = getPoints(context);
 
-        if (points >= 2 && points <= 200) {
+        if (points > 10 && points <= 200) {
             return 1;
         } else if (points > 200 && points <= 400) {
             return 2;
@@ -189,7 +189,7 @@ public class StaticMethods {
                 ret = "Professional";
                 break;
             default:
-                ret = "Beginer";
+                ret = "Beginner";
                 break;
         }
 

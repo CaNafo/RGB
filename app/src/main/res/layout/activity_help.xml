@@ -29,10 +29,22 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:theme="@style/Help"
-                android:text="It's a simple game with 3 buttons(5 in hard mode). You'll get color name and you have to tap button with that color."/>
+                android:text="It's a simple game with 3 buttons. As you gain more XP points, you wil unlock 5 and 8 button modes. You'll get color name and you have to tap button with that color."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/HelpTitle"
+                android:text="Buttons:"/>
             <android.support.v4.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="When you start you only have option to play with 3 buttons. Later on when you play for some time and gain enough XP points you will be able to play TimeAttack and Classic mode with 5 or 8 buttons. And when you get to the top you will unlock 8 button hard mode."/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,15 +59,92 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:theme="@style/Help"
-                android:text="Timer is set to 30 seconds, and you have to get as many points as you can before it reaches 0. One mistake and it's GAME OVER."/>
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                android:text="Timer is set to 30 seconds, and you have to get as many XP points as you can before it reaches 0. One mistake and it's GAME OVER."/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/HelpTitle"
                 android:text="Classic Mode:"/>
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="In classic mode you start with 3 lives. Color name will change if you're too slow or you tap wrong button you will lose 1 life. In the beginning color name changes every 6 seconds. The longer you play, the faster it will change."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/HelpTitle"
+                android:text="8 Button Hard Mode:"/>
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="You start out with 8 buttons in their usual order, but every 10 seconds they will randomly change places. Same as in classic mode, you have 3 lifes, and color name changes but more frequently than in classic mode."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/HelpTitle"
+                android:text="XP Points:"/>
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="TimeAttack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="For every 20 points you will gain 5/15/25 XP depending with how many buttons you play. If you pass 100 you will gain 10/20/30 XP for every 20 points."/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Classic"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="Just like in TimeAttack you get same amount of XP, only difference is that you gain XP for every 30 points."/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="8 Button Hard"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/Help"
+                android:text="You get 10 XP every 5 seconds, if you pass 100 you get 15 XP every 5 seconds."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/HelpTitle"
+                android:text="Ranking System:"/>
             <android.support.v4.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
@@ -64,9 +153,43 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:theme="@style/Help"
-                android:text="In classic mode you start with 3 lives. Color name will change if you're too slow or you tap wrong button you will lose 1 life. In the beginning color name changes every 8 seconds. The longer you play, the faster it will change."/>
-
+                android:theme="@style/HelpBonus"
+                android:text="Beginner - 0-10 XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Newbee - 10+ XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Casual - 200+ XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Regular - 400+ XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Experienced - 700+ XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Professional - 1000+ XP Points"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
