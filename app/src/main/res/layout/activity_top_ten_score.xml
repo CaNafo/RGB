@@ -136,7 +136,7 @@
 
                                     <Space
                                         android:layout_width="8dp"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="2dp"
                                         android:layout_weight="1" />
 
                                     <LinearLayout
@@ -170,7 +170,7 @@
 
                                     <Space
                                         android:layout_width="8dp"
-                                        android:layout_height="wrap_content" />
+                                        android:layout_height="2dp" />
 
                                     <LinearLayout
                                         android:id="@+id/scoreLayout"
@@ -196,7 +196,7 @@
                                     </LinearLayout>
 
                                     <Space
-                                        android:layout_width="2dp"
+                                        android:layout_width="5dp"
                                         android:layout_height="2dp" />
 
                                     <LinearLayout

@@ -326,7 +326,7 @@ public class ScoreActivity extends AppCompatActivity {
                                         avatarImg.setImageResource(R.drawable.avatar1_small);
                                         break;
                             }
-                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(40, 40));
+                            avatarImg.setLayoutParams(new LinearLayout.LayoutParams(24, 24));
 
                             //image.addView(avatarImg);
 

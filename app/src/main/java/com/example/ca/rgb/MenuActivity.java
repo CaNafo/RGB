@@ -42,6 +42,13 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("Points", 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putInt("Points", 150365);
+        // Apply the edits!
+        editor.apply();
+
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
 
