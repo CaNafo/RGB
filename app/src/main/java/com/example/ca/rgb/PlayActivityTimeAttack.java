@@ -565,18 +565,20 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
         finishUpdate(mode, score, getApplicationContext());
         addPoints();
 
-        if(s.equalsIgnoreCase("time's up")){
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            }
-        }else{
-            int r = new Random().nextInt(100);
-
-            if(r < 15 && !rewarded){
+        if(!rewarded){
+            if(s.equalsIgnoreCase("time's up")){
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
-                } else {
+                }
+            }else{
+                int r = new Random().nextInt(100);
 
+                if(r < 15){
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+
+                    }
                 }
             }
         }
