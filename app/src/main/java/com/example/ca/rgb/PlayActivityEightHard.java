@@ -257,6 +257,13 @@ public class PlayActivityEightHard extends AppCompatActivity {
                 ++time;
                 textView3.setText("Time\n" + String.valueOf(time));
 
+                if(time % 10 == 9 ){
+                    if(getSound(getApplicationContext()) == 1){
+                        MediaPlayer mp = MediaPlayer.create(PlayActivityEightHard.this, R.raw.shuffle);
+                        mp.start();
+                    }
+                }
+
                 if(time % 10 == 0){
                     changeButtons();
                 }
