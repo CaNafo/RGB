@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -222,25 +223,25 @@ public class PlayActivityEightHard extends AppCompatActivity {
     }
 
     private void disableButtons(){
-        ((Button)findViewById(R.id.redBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.greenBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.blueBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.blackBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(null);
-        ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(null);
+        ((Button)findViewById(R.id.redBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.greenBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.blueBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.purpleBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.yellowBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.blackBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.orangeBtn)).setOnTouchListener(null);
+        ((Button)findViewById(R.id.whiteBtn)).setOnTouchListener(null);
     }
 
     private void enableButtons(){
-        ((Button)findViewById(R.id.redBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.greenBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.blueBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.purpleBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.yellowBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.blackBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.orangeBtn)).setOnClickListener(playActionListener);
-        ((Button)findViewById(R.id.whiteBtn)).setOnClickListener(playActionListener);
+        ((Button)findViewById(R.id.redBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.greenBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.blueBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.purpleBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.yellowBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.blackBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.orangeBtn)).setOnTouchListener(playTouchListener);
+        ((Button)findViewById(R.id.whiteBtn)).setOnTouchListener(playTouchListener);
     }
 
     private void startGame() {
@@ -321,29 +322,34 @@ public class PlayActivityEightHard extends AppCompatActivity {
         scaleView((ImageView) findViewById(R.id.imageView3), 0, 1);
     }
 
-    View.OnClickListener playActionListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            Button button = (Button) v;
-            TextView textView = findViewById(R.id.textView);
-            TextView textView2 = findViewById(R.id.textView2);
+    View.OnTouchListener playTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                Button button = (Button) view;
+                TextView textView = findViewById(R.id.textView);
+                TextView textView2 = findViewById(R.id.textView2);
 
-            String colorName = String.valueOf(textView.getText());
-            String action = String.valueOf(button.getTag());
+                String colorName = String.valueOf(textView.getText());
+                String action = String.valueOf(button.getTag());
 
-            if (colorName.equalsIgnoreCase(action)) {
-                ++score;
-                textView2.setText("Score\n" + String.valueOf(score));
-                countDownTimer3.cancel();
-                tempTimer(speed);
-                changeText();
-            } else {
-                if(getSound(getApplicationContext()) == 1){
-                    MediaPlayer mp = MediaPlayer.create(PlayActivityEightHard.this, R.raw.error);
-                    mp.start();
+                if (colorName.equalsIgnoreCase(action)) {
+                    ++score;
+                    textView2.setText("Score\n" + String.valueOf(score));
+                    countDownTimer3.cancel();
+                    tempTimer(speed);
+                    changeText();
+                } else {
+                    if(getSound(getApplicationContext()) == 1){
+                        MediaPlayer mp = MediaPlayer.create(PlayActivityEightHard.this, R.raw.error);
+                        mp.start();
+                    }
+                    --lives;
+                    lostLife();
                 }
-                --lives;
-                lostLife();
             }
+
+            return false;
         }
     };
 
