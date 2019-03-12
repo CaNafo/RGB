@@ -42,6 +42,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
 
