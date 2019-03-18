@@ -67,7 +67,7 @@ public class ModeActivity extends AppCompatActivity {
             s = "8 Colors";
         }else if(mode == 7){
             mode = 7;
-            s = "8 Buttons Hard";
+            s = "8 Colors HARD";
         }
 
         ((TextView)findViewById(R.id.textView7)).setText(s);
