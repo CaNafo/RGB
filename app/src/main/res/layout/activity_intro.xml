@@ -6,54 +6,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background"
-    tools:context=".SettingsActivity">
-
+    tools:context="com.example.ca.rgb.IntroActivity">
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal|center_vertical">
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/HelpTitle"
+            android:text="How To Play"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
         <Button
-            android:id="@+id/musicBtn"
+            android:id="@+id/closeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="musicBtn"
+            android:tag="closeBtn"
+            android:text="Close"
             android:soundEffectsEnabled="false"
             android:textColor="@android:color/white"
             android:theme="@style/MyButtonRed"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/soundBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="soundBtn"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-        <Button
-            android:id="@+id/profileSettingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="profileSettingsBtn"
-            android:text="Profile"
-            android:soundEffectsEnabled="false"
-            android:textColor="@android:color/white"
-            android:theme="@style/MyButtonYellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- view for AdMob Banner Ad -->
         <Space

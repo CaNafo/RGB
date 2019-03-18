@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -581,9 +582,25 @@ public class PlayActivityClassic extends AppCompatActivity {
 
         builder.setCancelable(false);
         // create and show the alert dialog
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         if (this.hasWindowFocus()) {
             dialog.show();
+
+            // Initially disable the button
+            ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
+
+            CountDownTimer cdt = new CountDownTimer(1500, 1500) {
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    // Initially disable the button
+                    ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(true);
+                }
+            }.start();
         }
     }
 
@@ -593,7 +610,7 @@ public class PlayActivityClassic extends AppCompatActivity {
 
         int r = new Random().nextInt(100);
 
-        if(r < 15 && !rewarded){
+        if(r < 21){
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             } else {

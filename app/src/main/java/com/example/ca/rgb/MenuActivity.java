@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -24,9 +25,11 @@ import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getName;
+import static com.example.ca.rgb.StaticMethods.getPlayIntro;
 import static com.example.ca.rgb.StaticMethods.getSound;
 import static com.example.ca.rgb.StaticMethods.getStars;
 import static com.example.ca.rgb.StaticMethods.setMusic;
+import static com.example.ca.rgb.StaticMethods.setPlayIntro;
 import static com.example.ca.rgb.StaticMethods.setSound;
 
 
@@ -42,6 +45,10 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+<<<<<<< HEAD
+=======
+        AppRater.app_launched(this);
+>>>>>>> 6c2ee79d987f20630573e25a7461ef05ab9e5750
 
         mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
@@ -114,7 +121,13 @@ public class MenuActivity extends AppCompatActivity {
                     startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
                     break;
                 case "playBtn":
-                    startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
+                    if(getPlayIntro(getApplicationContext()) == 0){
+                        setPlayIntro(getApplicationContext(), 1);
+                        startActivity(new Intent(MenuActivity.this, IntroActivity.class));
+                    }else{
+                        startActivity(new Intent(MenuActivity.this, ButtonsActivity.class));
+                    }
+
                     break;
                 case "rankBtn":
                     if(getStars(getApplicationContext()) == 0){

@@ -82,6 +82,18 @@ public class StaticMethods {
         return sound;
     }
 
+    public static int getProfileFirst(Context context) {
+        SharedPreferences profileFirst = context.getSharedPreferences("ProfileFirst", 0);
+        int pF = profileFirst.getInt("ProfileFirst", 0);
+        return pF;
+    }
+
+    public static int getPlayIntro(Context context) {
+        SharedPreferences playIntro = context.getSharedPreferences("PlayIntro", 0);
+        int pI = playIntro.getInt("PlayIntro", 0);
+        return pI;
+    }
+
     public static String getName(Context context) {
         SharedPreferences namePreference = context.getSharedPreferences("name", 0);
         String name = namePreference.getString("name", "");
@@ -106,6 +118,20 @@ public class StaticMethods {
         SharedPreferences.Editor editorMS = MusicSound.edit();
         editorMS.putInt("Sound", sound);
         editorMS.apply();
+    }
+
+    public static void setProfileFirst(Context context, int pF) {
+        SharedPreferences profileFirst = context.getSharedPreferences("ProfileFirst", 0);
+        SharedPreferences.Editor editorPF = profileFirst.edit();
+        editorPF.putInt("ProfileFirst", pF);
+        editorPF.apply();
+    }
+
+    public static void setPlayIntro(Context context, int pI) {
+        SharedPreferences playIntro = context.getSharedPreferences("PlayIntro", 0);
+        SharedPreferences.Editor editorPI = playIntro.edit();
+        editorPI.putInt("PlayIntro", pI);
+        editorPI.apply();
     }
 
     public static void setPoints(Context context, int points) {

@@ -226,6 +226,22 @@
                 android:layout_marginRight="5dp"
                 android:theme="@style/HelpBonus"
                 android:text="35+ equals 15 more seconds"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <Button
+                android:id="@+id/introBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="introBtn"
+                android:text="How To Play"
+                android:soundEffectsEnabled="false"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
