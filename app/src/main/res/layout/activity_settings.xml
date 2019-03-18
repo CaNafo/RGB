@@ -39,6 +39,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/profileSettingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="profileSettingsBtn"
+            android:text="Profile"
+            android:soundEffectsEnabled="false"
+            android:textColor="@android:color/white"
+            android:theme="@style/MyButtonYellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <!-- view for AdMob Banner Ad -->
         <Space
             android:layout_width="match_parent"

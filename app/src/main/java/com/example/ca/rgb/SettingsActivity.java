@@ -1,9 +1,11 @@
 package com.example.ca.rgb;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +17,10 @@ import com.google.android.gms.ads.MobileAds;
 
 import static com.example.ca.rgb.MenuActivity.mp;
 import static com.example.ca.rgb.StaticMethods.getMusic;
+import static com.example.ca.rgb.StaticMethods.getProfileFirst;
 import static com.example.ca.rgb.StaticMethods.getSound;
 import static com.example.ca.rgb.StaticMethods.setMusic;
+import static com.example.ca.rgb.StaticMethods.setProfileFirst;
 import static com.example.ca.rgb.StaticMethods.setSound;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -43,9 +47,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         Button musicBtn = findViewById(R.id.musicBtn);
         Button soundBtn = findViewById(R.id.soundBtn);
+        Button profileSettingsBtn = findViewById(R.id.profileSettingsBtn);
 
         musicBtn.setOnClickListener(menuActionListener);
         soundBtn.setOnClickListener(menuActionListener);
+        profileSettingsBtn.setOnClickListener(menuActionListener);
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -91,9 +97,41 @@ public class SettingsActivity extends AppCompatActivity {
                         button.setText("Sound: ON");
                     }
                     break;
+                case "profileSettingsBtn":
+                    if(getProfileFirst(getApplicationContext()) == 1){
+                        finish();
+                        startActivity(new Intent(SettingsActivity.this, ProfileActivity.class));
+                    }else{
+                        setProfileFirst(getApplicationContext(), 1);
+                        showAlertDialogButtonClicked();
+                    }
+                    break;
             }
         }
     };
+
+    public void showAlertDialogButtonClicked() {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle("Info");
+        builder.setMessage("To check your profile you can simply click on your avatar in Main Menu.");
+
+        // add a button
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(new Intent(SettingsActivity.this, ProfileActivity.class));
+            }
+        });
+
+        builder.setCancelable(false);
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        if (this.hasWindowFocus()) {
+            dialog.show();
+        }
+    }
 
     @Override
     public void onBackPressed() {
