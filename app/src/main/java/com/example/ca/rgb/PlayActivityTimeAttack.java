@@ -27,7 +27,6 @@ import java.util.Random;
 
 import static com.example.ca.rgb.StaticMethods.getPoints;
 import static com.example.ca.rgb.StaticMethods.isConnectedToNetwork;
-import static com.example.ca.rgb.StaticMethods.scaleView;
 import static com.example.ca.rgb.StaticMethods.fadeInAnimation;
 import static com.example.ca.rgb.StaticMethods.fadeOutAnimation;
 import static com.example.ca.rgb.StaticMethods.getMusic;
