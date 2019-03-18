@@ -13,6 +13,13 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.example.ca.rgb.Interfaces.APIaddTopRank;
+import com.example.ca.rgb.RetrofitPoziv.RetrofitAddTopRank;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class StaticMethods {
     public static void fadeInAnimation(final View view, long animationDuration) {
         Animation fadeIn = new AlphaAnimation(0, 1);
@@ -268,5 +275,48 @@ public class StaticMethods {
         }
 
         return isConnected;
+    }
+
+    public static void addNewTopRank(Context context){
+        APIaddTopRank api = RetrofitAddTopRank.getApi();
+        Call<String> call;
+
+        SharedPreferences settings = context.getApplicationContext().getSharedPreferences("ID",0);
+        int ID = settings.getInt("ID",0);
+
+        settings = context.getApplicationContext().getSharedPreferences("Points",0);
+        int points = settings.getInt("Points",0);
+
+        settings = context.getApplicationContext().getSharedPreferences("name",0);
+        String name = settings.getString("name","");
+
+        settings = context.getApplicationContext().getSharedPreferences("avatar",0);
+        String avatar = settings.getString("avatar","");
+
+
+        call = api.setQuery(ID,name,avatar,points);
+
+
+        settings = context.getApplicationContext().getSharedPreferences("firstTime", 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putInt("firstTime", 1);
+        // Apply the edits!
+        editor.apply();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }

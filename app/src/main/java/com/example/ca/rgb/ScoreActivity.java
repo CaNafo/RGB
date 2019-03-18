@@ -56,7 +56,6 @@ public class ScoreActivity extends AppCompatActivity {
     TextView tittleTxt;
     private AdView mAdView;
     Button nextBtn;
-    Button previousBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,16 +68,13 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         tittleTxt = findViewById(R.id.titleTxt);
-        tittleTxt.setText("Top 10 Time Attack players");
+        tittleTxt.setText("Best Time Attack players");
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myScore = settings.getInt("ID", 0);
 
         nextBtn = findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(nextListener);
-
-        previousBtn = findViewById(R.id.previousBtn);
-        previousBtn.setOnClickListener(backListener);
 
         Button refreshBtn = findViewById(R.id.refreshBtn);
         refreshBtn.setOnClickListener(refreshListener);
@@ -112,9 +108,8 @@ public class ScoreActivity extends AppCompatActivity {
             addNewScore(myName,avatar,id);
             getRetrofitObject("timeAttack8");
         } else if (buttonMode == 7 || buttonMode == 8) {
-            tittleTxt.setText("Top 10 players");
+            tittleTxt.setText("Best players");
             nextBtn.setVisibility(View.INVISIBLE);
-            previousBtn.setVisibility(View.INVISIBLE);
             offlineLoad("8Hard");
             getUserPosition("8Hard");
             addNewScore(myName,avatar,id);
@@ -195,9 +190,9 @@ public class ScoreActivity extends AppCompatActivity {
         score.removeAllViews();
 
         TextView noumberTxt = new TextView(noumber.getContext());
-        noumberTxt.setText("1.");
+        noumberTxt.setText("No.");
         noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
-        noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
         noumberTxt.setTypeface(null, Typeface.BOLD);
         noumberTxt.setGravity(Gravity.CENTER);
         noumber.addView(noumberTxt);
@@ -205,7 +200,7 @@ public class ScoreActivity extends AppCompatActivity {
         TextView nameTxt = new TextView(name.getContext());
         nameTxt.setText("Loading...");
         nameTxt.setTextColor(Color.parseColor("#FFFFFF"));
-        nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
         nameTxt.setTypeface(null, Typeface.BOLD);
         nameTxt.setGravity(Gravity.CENTER);
         name.addView(nameTxt);
@@ -215,7 +210,7 @@ public class ScoreActivity extends AppCompatActivity {
         scoreTxt.setText("Loading...");
         scoreTxt.setTextColor(Color.parseColor("#FFFFFF"));
         scoreTxt.setTypeface(null, Typeface.BOLD);
-        scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
         scoreTxt.setGravity(Gravity.CENTER);
         score.addView(scoreTxt);
     }
@@ -636,10 +631,11 @@ public class ScoreActivity extends AppCompatActivity {
                 mode = 1;
             else
                 mode++;
-
+        nextBtn.setText("Go to Time Attack");
+        nextBtn.setOnClickListener(backListener);
             switch (mode) {
                 case 1:
-                    tittleTxt.setText("Top 10 Time Attack players");
+                    tittleTxt.setText("Best Time Attack players");
                     if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("timeAttack");
                         getRetrofitObject("timeAttack");
@@ -653,16 +649,15 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        tittleTxt.setText("Top 10 players");
+                        tittleTxt.setText("Best players");
                         nextBtn.setVisibility(View.INVISIBLE);
-                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
                     }
                     break;
                 case 2:
-                    tittleTxt.setText("Top 10 Classic players");
+                    tittleTxt.setText("Best Classic players");
                     if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("classic");
                         getRetrofitObject("classic");
@@ -677,9 +672,8 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("classic8");
                         getUserPosition("classic8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        tittleTxt.setText("Top 10 players");
+                        tittleTxt.setText("Best players");
                         nextBtn.setVisibility(View.INVISIBLE);
-                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
@@ -701,9 +695,11 @@ public class ScoreActivity extends AppCompatActivity {
                 else
                     mode--;
             }
+            nextBtn.setText("Go to Classic");
+            nextBtn.setOnClickListener(nextListener);
             switch (mode) {
                 case 1:
-                    tittleTxt.setText("Top 10 Time Attack players");
+                    tittleTxt.setText("Best Time Attack players");
                     if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("timeAttack");
                         getRetrofitObject("timeAttack");
@@ -718,16 +714,15 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        tittleTxt.setText("Top 10 players");
+                        tittleTxt.setText("Best players");
                         nextBtn.setVisibility(View.INVISIBLE);
-                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
                     }
                     break;
                 case 2:
-                    tittleTxt.setText("Top 10 Classic players");
+                    tittleTxt.setText("Best Classic players");
                     if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("classic");
                         getRetrofitObject("classic");
@@ -742,9 +737,8 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("classic8");
                         getUserPosition("classic8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        tittleTxt.setText("Top 10 players");
+                        tittleTxt.setText("Best players");
                         nextBtn.setVisibility(View.INVISIBLE);
-                        previousBtn.setVisibility(View.INVISIBLE);
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");
@@ -798,7 +792,7 @@ public class ScoreActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
-                        tittleTxt.setText("Top 10 Time Attack players");
+                        tittleTxt.setText("Best Time Attack players");
                         if (buttonMode == 1 || buttonMode == 2) {
                             offlineLoad("timeAttack");
                             getRetrofitObject("timeAttack");
@@ -813,7 +807,7 @@ public class ScoreActivity extends AppCompatActivity {
                             getRetrofitObject("timeAttack8");
                             getUserPosition("timeAttack8");
                         } else if (buttonMode == 7 || buttonMode == 8) {
-                            tittleTxt.setText("Top 10");
+                            tittleTxt.setText("Best players");
                             offlineLoad("8Hard");
                             getRetrofitObject("8Hard");
                             getUserPosition("8Hard");
@@ -826,7 +820,7 @@ public class ScoreActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    tittleTxt.setText("Top 10 Time Attack players");
+                    tittleTxt.setText("Best Time Attack players");
                     if (buttonMode == 1 || buttonMode == 2) {
                         offlineLoad("timeAttack");
                         getRetrofitObject("timeAttack");
@@ -841,7 +835,7 @@ public class ScoreActivity extends AppCompatActivity {
                         getRetrofitObject("timeAttack8");
                         getUserPosition("timeAttack8");
                     } else if (buttonMode == 7 || buttonMode == 8) {
-                        tittleTxt.setText("Top 10");
+                        tittleTxt.setText("Best players");
                         offlineLoad("8Hard");
                         getRetrofitObject("8Hard");
                         getUserPosition("8Hard");

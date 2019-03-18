@@ -34,6 +34,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.example.ca.rgb.MenuActivity.mp;
+import static com.example.ca.rgb.StaticMethods.addNewTopRank;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 
 public class TopTenScore extends AppCompatActivity {
@@ -49,8 +50,7 @@ public class TopTenScore extends AppCompatActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("firstTime",0);
         int firstTime = settings.getInt("firstTime",0);
 
-
-        addNewTopRank();
+        addNewTopRank(getApplicationContext());
 
         TextView textView = findViewById(R.id.myScoreTxt);
 
@@ -62,56 +62,12 @@ public class TopTenScore extends AppCompatActivity {
 
         textView.setText("Name:  " + myName + ",    Points:  " + myScore);
 
+        updateRank();
         readScore();
         getUserPosition();
-        updateRank();
         if (getMusic(getApplicationContext()) == 1) {
             mp.start();
         }
-    }
-
-
-    private void addNewTopRank(){
-        APIaddTopRank api = RetrofitAddTopRank.getApi();
-        Call<String> call;
-
-        SharedPreferences settings = getApplicationContext().getSharedPreferences("ID",0);
-        int ID = settings.getInt("ID",0);
-
-        settings = getApplicationContext().getSharedPreferences("Points",0);
-        int points = settings.getInt("Points",0);
-
-        settings = getApplicationContext().getSharedPreferences("name",0);
-        String name = settings.getString("name","");
-
-        settings = getApplicationContext().getSharedPreferences("avatar",0);
-        String avatar = settings.getString("avatar","");
-
-
-        call = api.setQuery(ID,name,avatar,points);
-
-
-        settings = getApplicationContext().getSharedPreferences("firstTime", 0);
-        SharedPreferences.Editor editor = settings.edit();
-
-        editor.putInt("firstTime", 1);
-        // Apply the edits!
-        editor.apply();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
     }
 
     void readScore() {
@@ -437,7 +393,7 @@ public class TopTenScore extends AppCompatActivity {
     View.OnClickListener refreshOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            addNewTopRank();
+            addNewTopRank(getApplicationContext());
             readScore();
         }
     };

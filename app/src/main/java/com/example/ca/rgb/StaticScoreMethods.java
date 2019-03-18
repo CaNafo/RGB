@@ -19,8 +19,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import static com.example.ca.rgb.StaticMethods.addNewTopRank;
+
 public class StaticScoreMethods {
     public static void finishUpdate(int mode, int score, Context context) {
+        addNewTopRank(context);
         SharedPreferences settings;
         int myScore = 0;
         switch (mode) {
@@ -78,15 +81,13 @@ public class StaticScoreMethods {
 
                 addNewScore(myName,avatar, myID);
             }
-            setID(context);
+            //setID(context);
             settings = context.getSharedPreferences("name", 0);
             SharedPreferences.Editor editor = settings.edit();
 
             editor.putString("name", "DefaultUser");
             // Apply the edits!
             editor.apply();
-
-            myName = "DefaultUser";
         }
 
         if (myScore < score) {
