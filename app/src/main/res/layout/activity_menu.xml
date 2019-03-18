@@ -89,7 +89,7 @@
                     android:layout_marginLeft="20dp"
                     android:soundEffectsEnabled="false"
                     android:tag="rankBtn"
-                    android:text="Top Players"
+                    android:text="Top 10 Players "
                     android:textColor="@android:color/white"
                     android:theme="@style/MyButtonBlue"
                     ads:layout_constraintBottom_toTopOf="parent"

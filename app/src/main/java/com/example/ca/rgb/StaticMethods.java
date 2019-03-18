@@ -146,6 +146,7 @@ public class StaticMethods {
         SharedPreferences.Editor editorMS = pointsPreferences.edit();
         editorMS.putInt("Points", points);
         editorMS.apply();
+        addNewTopRank(context);
     }
 
     public static void switchButton(Button b, String color) {

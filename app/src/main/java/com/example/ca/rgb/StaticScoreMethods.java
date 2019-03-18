@@ -23,7 +23,6 @@ import static com.example.ca.rgb.StaticMethods.addNewTopRank;
 
 public class StaticScoreMethods {
     public static void finishUpdate(int mode, int score, Context context) {
-        addNewTopRank(context);
         SharedPreferences settings;
         int myScore = 0;
         switch (mode) {
