@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setAvatar();
-
+        avatarProfile.setOnClickListener(editNameOnClickListener);
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }
