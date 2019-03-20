@@ -560,7 +560,12 @@ public class PlayActivityClassic extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                adReward();
+                //adReward();
+                rewarded = true;
+                lives = 1;
+                gameOver = false;
+                scaleView(((ImageView)findViewById(R.id.imageView1)), 0, 1);
+                continueReward();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
