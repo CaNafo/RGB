@@ -11,10 +11,14 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
-import android.widget.Switch;
 
 import com.example.ca.rgb.Interfaces.APIaddTopRank;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitAddTopRank;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -107,6 +111,12 @@ public class StaticMethods {
         return name;
     }
 
+    public static String getAvatar(Context context) {
+        SharedPreferences settings = context.getSharedPreferences("avatar", 0);
+        String avatar = settings.getString("avatar", "avatar1");
+        return avatar;
+    }
+
     public static int getPoints(Context context) {
         SharedPreferences pointsPreferences = context.getSharedPreferences("Points", 0);
         int sound = pointsPreferences.getInt("Points", 0);
@@ -125,6 +135,13 @@ public class StaticMethods {
         SharedPreferences.Editor editorMS = MusicSound.edit();
         editorMS.putInt("Sound", sound);
         editorMS.apply();
+    }
+
+    public static void setAvatar(Context context, String avatar) {
+        SharedPreferences Avatar = context.getSharedPreferences("avatar", 0);
+        SharedPreferences.Editor editorA = Avatar.edit();
+        editorA.putString("avatar", avatar);
+        editorA.apply();
     }
 
     public static void setProfileFirst(Context context, int pF) {
@@ -197,8 +214,12 @@ public class StaticMethods {
             return 3;
         } else if (points >= 700 && points < 1000) {
             return 4;
-        } else if (points >= 1000) {
+        } else if (points >= 1000 && points < 3000) {
             return 5;
+        } else if (points >= 3000 && points < 5000) {
+            return 6;
+        } else if (points >= 5000) {
+            return 7;
         }
 
         return 0;
@@ -222,7 +243,13 @@ public class StaticMethods {
                 ret = "Experienced";
                 break;
             case 5:
+                ret = "Talented";
+                break;
+            case 6:
                 ret = "Professional";
+                break;
+            case 7:
+                ret = "Insane";
                 break;
             default:
                 ret = "Beginner";
@@ -254,9 +281,15 @@ public class StaticMethods {
             case 4:
                 right = "1000";
                 break;
+            case 5:
+                right = "3000";
+                break;
+            case 6:
+                right = "5000";
+                break;
         }
 
-        if(stars != 5){
+        if(stars != 7){
             ret = left + "/" + right;
         }else{
             ret = left;
@@ -319,5 +352,22 @@ public class StaticMethods {
 
             }
         });
+    }
+
+    public static boolean checkRewardDate(){
+        // Get Current Date Time
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        String getCurrentDateTime = sdf.format(c.getTime());
+        String getMyTime="04/18/2019";
+
+        if (getCurrentDateTime.compareTo(getMyTime) < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

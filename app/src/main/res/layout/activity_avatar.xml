@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    tools:context="com.example.ca.rgb.AvatarActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose your avatar"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Choose your avatar" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/avatar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:tag="avatar1"
+                    android:src="@drawable/avatar1_small" />
+
+                <ImageView
+                    android:id="@+id/avatar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:tag="avatar2"
+                    android:src="@drawable/avatar2_small" />
+
+                <ImageView
+                    android:id="@+id/avatar3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:tag="avatar3"
+                    android:src="@drawable/avatar3_small" />
+
+                <ImageView
+                    android:id="@+id/avatar4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:tag="avatar4"
+                    android:src="@drawable/avatar4_small" />
+
+                <ImageView
+                    android:id="@+id/avatar5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:tag="avatar5"
+                    android:src="@drawable/avatar5_small" />
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/avatar6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar6"
+                    android:src="@drawable/avatar6_small" />
+
+
+                <ImageView
+                    android:id="@+id/avatar7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar7"
+                    android:src="@drawable/avatar7_small" />
+
+                <ImageView
+                    android:id="@+id/avatar8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar8"
+                    android:src="@drawable/avatar8_small" />
+
+                <ImageView
+                    android:id="@+id/avatar9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar9"
+                    android:src="@drawable/avatar9_small" />
+
+                <ImageView
+                    android:id="@+id/avatar10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar10"
+                    android:src="@drawable/avatar1a_small" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/avatar11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar11"
+                    android:src="@drawable/avatar1b_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar12"
+                    android:src="@drawable/avatar1c_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar13"
+                    android:src="@drawable/avatar1d_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar14"
+                    android:src="@drawable/avatar1e_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar15"
+                    android:src="@drawable/avatar1f_small_locked" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/avatar16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar16"
+                    android:src="@drawable/avatar1g_small_locked" />
+
+
+                <ImageView
+                    android:id="@+id/avatar17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar17"
+                    android:src="@drawable/avatar1h_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar18"
+                    android:src="@drawable/avatar1i_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar19"
+                    android:src="@drawable/avatar1j_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar20"
+                    android:src="@drawable/avatar1k_small_locked" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/avatar21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar21"
+                    android:src="@drawable/avatar1k_small_locked" />
+
+
+                <ImageView
+                    android:id="@+id/avatar22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar22"
+                    android:src="@drawable/avatar1l_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar23"
+                    android:src="@drawable/avatar1m_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar24"
+                    android:src="@drawable/avatar1n_small_locked" />
+
+                <ImageView
+                    android:id="@+id/avatar25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:tag="avatar25"
+                    android:src="@drawable/avatar1p_small_locked" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="22dp" />
+
+            <Button
+                android:id="@+id/okBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="@android:color/black"
+                android:shadowRadius="3"
+                android:text="Confirm"
+                android:soundEffectsEnabled="false"
+                android:textColor="@android:color/white"
+                android:theme="@style/MyButtonGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scoreTxtt"
+                tools:text="Confirm" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/ad_id_banner"></com.google.android.gms.ads.AdView>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

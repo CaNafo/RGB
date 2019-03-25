@@ -106,6 +106,20 @@ public class ProfileActivity extends AppCompatActivity {
                 ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.star);
                 ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.star);
                 break;
+            case 6:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.star);
+                break;
+            case 7:
+                ((ImageView)findViewById(R.id.imgStar1)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar2)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar3)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar4)).setImageResource(R.drawable.star);
+                ((ImageView)findViewById(R.id.imgStar5)).setImageResource(R.drawable.star);
+                break;
         }
     }
 
@@ -137,13 +151,58 @@ public class ProfileActivity extends AppCompatActivity {
                 avatarProfile.setImageResource(R.drawable.avatar7_big);
                 break;
             case "avatar8":
-                avatarProfile.setBackgroundResource(R.drawable.avatar8_big);
+                avatarProfile.setImageResource(R.drawable.avatar8_big);
                 break;
             case "avatar9":
-                avatarProfile.setBackgroundResource(R.drawable.avatar9_big);
+                avatarProfile.setImageResource(R.drawable.avatar9_big);
                 break;
             case "avatar10":
-                avatarProfile.setBackgroundResource(R.drawable.avatar1a_big);
+                avatarProfile.setImageResource(R.drawable.avatar1a_big);
+                break;
+            case "avatar11":
+                avatarProfile.setImageResource(R.drawable.avatar1b_big);
+                break;
+            case "avatar12":
+                avatarProfile.setImageResource(R.drawable.avatar1c_big);
+                break;
+            case "avatar13":
+                avatarProfile.setImageResource(R.drawable.avatar1d_big);
+                break;
+            case "avatar14":
+                avatarProfile.setImageResource(R.drawable.avatar1e_big);
+                break;
+            case "avatar15":
+                avatarProfile.setImageResource(R.drawable.avatar1f_big);
+                break;
+            case "avatar16":
+                avatarProfile.setImageResource(R.drawable.avatar1g_big);
+                break;
+            case "avatar17":
+                avatarProfile.setImageResource(R.drawable.avatar1h_big);
+                break;
+            case "avatar18":
+                avatarProfile.setImageResource(R.drawable.avatar1i_big);
+                break;
+            case "avatar19":
+                avatarProfile.setImageResource(R.drawable.avatar1j_big);
+                break;
+            case "avatar20":
+                avatarProfile.setImageResource(R.drawable.avatar1k_big);
+                break;
+            case "avatar21":
+                avatarProfile.setImageResource(R.drawable.avatar1l_big);
+                break;
+            case "avatar22":
+                avatarProfile.setImageResource(R.drawable.avatar1m_big);
+                break;
+            case "avatar23":
+                avatarProfile.setImageResource(R.drawable.avatar1n_big);
+                break;
+            case "avatar24":
+                avatarProfile.setImageResource(R.drawable.avatar1o_big);
+                break;
+            case "avatar25":
+                avatarProfile.setImageResource(R.drawable.avatar1p_big);
                 break;
         }
     }
@@ -151,7 +210,7 @@ public class ProfileActivity extends AppCompatActivity {
     View.OnClickListener editNameOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(ProfileActivity.this, UserActivity.class));
+            startActivity(new Intent(ProfileActivity.this, User2Activity.class));
         }
     };
 
