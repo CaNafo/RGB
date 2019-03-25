@@ -189,7 +189,21 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:theme="@style/HelpBonus"
-                android:text="Professional - 1000+ XP Points"/>
+                android:text="Talented - 1000+ XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Professional - 3000+ XP Points"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:theme="@style/HelpBonus"
+                android:text="Insane - 5000+ XP Points"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
