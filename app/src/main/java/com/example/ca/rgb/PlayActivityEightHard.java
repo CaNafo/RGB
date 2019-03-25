@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static com.example.ca.rgb.StaticMethods.checkRewardDate;
 import static com.example.ca.rgb.StaticMethods.getPoints;
 import static com.example.ca.rgb.StaticMethods.isConnectedToNetwork;
 import static com.example.ca.rgb.StaticMethods.scaleView;
@@ -450,7 +451,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
             if(rewarded){
                 showAlertDialogButtonClicked("GAME OVER");
             }else{
-                if(isConnectedToNetwork(getApplicationContext())){
+                if(isConnectedToNetwork(getApplicationContext()) && checkRewardDate()){
                     rewardAlertDialog();
                 }else{
                     showAlertDialogButtonClicked("GAME OVER");
@@ -504,10 +505,7 @@ public class PlayActivityEightHard extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //adReward();
                 rewarded = true;
-                lives = 1;
-                gameOver = false;
-                scaleView(((ImageView)findViewById(R.id.imageView1)), 0, 1);
-                continueReward();
+                adReward();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

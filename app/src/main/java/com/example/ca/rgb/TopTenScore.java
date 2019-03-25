@@ -181,6 +181,51 @@ public class TopTenScore extends AppCompatActivity {
                                 case "avatar10":
                                     avatarImg.setImageResource(R.drawable.avatar1a_small);
                                     break;
+                                case "avatar11":
+                                    avatarImg.setImageResource(R.drawable.avatar1b_small);
+                                    break;
+                                case "avatar12":
+                                    avatarImg.setImageResource(R.drawable.avatar1c_small);
+                                    break;
+                                case "avatar13":
+                                    avatarImg.setImageResource(R.drawable.avatar1d_small);
+                                    break;
+                                case "avatar14":
+                                    avatarImg.setImageResource(R.drawable.avatar1e_small);
+                                    break;
+                                case "avatar15":
+                                    avatarImg.setImageResource(R.drawable.avatar1f_small);
+                                    break;
+                                case "avatar16":
+                                    avatarImg.setImageResource(R.drawable.avatar1g_small);
+                                    break;
+                                case "avatar17":
+                                    avatarImg.setImageResource(R.drawable.avatar1h_small);
+                                    break;
+                                case "avatar18":
+                                    avatarImg.setImageResource(R.drawable.avatar1i_small);
+                                    break;
+                                case "avatar19":
+                                    avatarImg.setImageResource(R.drawable.avatar1j_small);
+                                    break;
+                                case "avatar20":
+                                    avatarImg.setImageResource(R.drawable.avatar1k_small);
+                                    break;
+                                case "avatar21":
+                                    avatarImg.setImageResource(R.drawable.avatar1l_small);
+                                    break;
+                                case "avatar22":
+                                    avatarImg.setImageResource(R.drawable.avatar1m_small);
+                                    break;
+                                case "avatar23":
+                                    avatarImg.setImageResource(R.drawable.avatar1n_small);
+                                    break;
+                                case "avatar24":
+                                    avatarImg.setImageResource(R.drawable.avatar1o_small);
+                                    break;
+                                case "avatar25":
+                                    avatarImg.setImageResource(R.drawable.avatar1p_small);
+                                    break;
 
                                 default:
                                     avatarImg.setImageResource(R.drawable.avatar1_small);

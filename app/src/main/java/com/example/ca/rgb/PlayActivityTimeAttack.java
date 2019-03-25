@@ -25,6 +25,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.util.Random;
 
+import static com.example.ca.rgb.StaticMethods.checkRewardDate;
 import static com.example.ca.rgb.StaticMethods.getPoints;
 import static com.example.ca.rgb.StaticMethods.isConnectedToNetwork;
 import static com.example.ca.rgb.StaticMethods.fadeInAnimation;
@@ -299,7 +300,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                 gameOver = true;
                 timesUp = true;
                 rewardedString = "Time's up";
-                if(isConnectedToNetwork(getApplicationContext())){
+                if(isConnectedToNetwork(getApplicationContext()) && checkRewardDate()){
                     rewardAlertDialog();
                 }else{
                     showAlertDialogButtonClicked("Time's up.");
@@ -364,7 +365,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                     showAlertDialogButtonClicked("Time's up");
                 }else{
                     rewardedString = "Time's up";
-                    if(isConnectedToNetwork(getApplicationContext())){
+                    if(isConnectedToNetwork(getApplicationContext()) && checkRewardDate()){
                         rewardAlertDialog();
                     }else{
                         disableButtons();
@@ -423,7 +424,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
                         showAlertDialogButtonClicked("GAME OVER");
                     }else{
                         rewardedString = "GAME OVER";
-                        if(isConnectedToNetwork(getApplicationContext())){
+                        if(isConnectedToNetwork(getApplicationContext()) && checkRewardDate()){
                             rewardAlertDialog();
                         }else{
                             showAlertDialogButtonClicked("GAME OVER");
@@ -552,7 +553,7 @@ public class PlayActivityTimeAttack extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //adReward();
                 rewarded = true;
-                continueReward();
+                adReward();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

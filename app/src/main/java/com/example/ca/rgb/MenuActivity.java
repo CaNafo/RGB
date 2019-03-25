@@ -202,6 +202,51 @@ public class MenuActivity extends AppCompatActivity {
             case "avatar10":
                 profileButton.setBackgroundResource(R.drawable.avatar1a_big);
                 break;
+            case "avatar11":
+                profileButton.setBackgroundResource(R.drawable.avatar1b_big);
+                break;
+            case "avatar12":
+                profileButton.setBackgroundResource(R.drawable.avatar1c_big);
+                break;
+            case "avatar13":
+                profileButton.setBackgroundResource(R.drawable.avatar1d_big);
+                break;
+            case "avatar14":
+                profileButton.setBackgroundResource(R.drawable.avatar1e_big);
+                break;
+            case "avatar15":
+                profileButton.setBackgroundResource(R.drawable.avatar1f_big);
+                break;
+            case "avatar16":
+                profileButton.setBackgroundResource(R.drawable.avatar1g_big);
+                break;
+            case "avatar17":
+                profileButton.setBackgroundResource(R.drawable.avatar1h_big);
+                break;
+            case "avatar18":
+                profileButton.setBackgroundResource(R.drawable.avatar1i_big);
+                break;
+            case "avatar19":
+                profileButton.setBackgroundResource(R.drawable.avatar1j_big);
+                break;
+            case "avatar20":
+                profileButton.setBackgroundResource(R.drawable.avatar1k_big);
+                break;
+            case "avatar21":
+                profileButton.setBackgroundResource(R.drawable.avatar1l_big);
+                break;
+            case "avatar22":
+                profileButton.setBackgroundResource(R.drawable.avatar1m_big);
+                break;
+            case "avatar23":
+                profileButton.setBackgroundResource(R.drawable.avatar1n_big);
+                break;
+            case "avatar24":
+                profileButton.setBackgroundResource(R.drawable.avatar1o_big);
+                break;
+            case "avatar25":
+                profileButton.setBackgroundResource(R.drawable.avatar1p_big);
+                break;
         }
     }
 
