@@ -13,7 +13,12 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 
 import com.example.ca.rgb.Interfaces.APIaddTopRank;
+import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.RetrofitPoziv.RetrofitAddTopRank;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,6 +28,8 @@ import java.util.Date;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class StaticMethods {
     public static void fadeInAnimation(final View view, long animationDuration) {
@@ -318,6 +325,12 @@ public class StaticMethods {
         SharedPreferences settings = context.getApplicationContext().getSharedPreferences("ID",0);
         int ID = settings.getInt("ID",0);
 
+        if(ID == 0){
+            setID(context);
+            settings = context.getApplicationContext().getSharedPreferences("ID", 0);
+            ID = settings.getInt("ID", 0);
+        }
+
         settings = context.getApplicationContext().getSharedPreferences("Points",0);
         int points = settings.getInt("Points",0);
 
@@ -369,5 +382,53 @@ public class StaticMethods {
         {
             return true;
         }
+    }
+
+    static void setID(Context context) {
+        final Context context1 = context;
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .baseUrl(DomainName.getIstance())
+                .build();
+
+        APIgetID scalarService = retrofit.create(APIgetID.class);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/getID.php");
+        stringCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    String responseString = response.body();
+                    try {
+                        JSONObject object = new JSONObject(responseString);
+                        JSONArray Jarray = object.getJSONArray("data");
+                        for (int i = 0; i < Jarray.length(); i++) {
+                            JSONObject Jasonobject = Jarray.getJSONObject(i);
+
+                            int ID = Integer.parseInt(Jasonobject.get("ID").toString());
+                            ID++;
+
+                            SharedPreferences settings = context1.getApplicationContext().getSharedPreferences("ID", 0);
+                            SharedPreferences.Editor editor = settings.edit();
+
+                            editor.putInt("ID", ID);
+                            // Apply the edits!
+                            editor.apply();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    // todo: do something with the response string
+                } else {
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }
