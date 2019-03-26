@@ -3,6 +3,7 @@ package com.example.ca.rgb;
 import com.example.ca.rgb.Interfaces.APIgetID;
 import com.example.ca.rgb.Interfaces.APIgetPosition;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -57,6 +58,9 @@ public class ScoreActivity extends AppCompatActivity {
     private AdView mAdView;
     Button nextBtn;
 
+    static JSONObject object;
+    public static JSONArray Jarray = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -95,25 +99,57 @@ public class ScoreActivity extends AppCompatActivity {
         if (buttonMode == 1 || buttonMode == 2) {
             offlineLoad("timeAttack");
             getUserPosition("timeAttack");
-            addNewScore(myName,avatar,id);
-            getRetrofitObject("timeAttack");
+            addNewScore(myName, avatar, id);
+            if(Jarray != null){
+                if(Jarray.length() > 0){
+                    fillScore("timeAttack");
+                }else{
+                    getRetrofitObject("timeAttack");
+                }
+            }else{
+                getRetrofitObject("timeAttack");
+            }
         } else if (buttonMode == 3 || buttonMode == 4) {
             offlineLoad("timeattackHard");
             getUserPosition("timeattackHard");
-            addNewScore(myName,avatar,id);
-            getRetrofitObject("timeattackHard");
+            addNewScore(myName, avatar, id);
+            if(Jarray != null){
+                if(Jarray.length() > 0){
+                    fillScore("timeattackHard");
+                }else{
+                    getRetrofitObject("timeattackHard");
+                }
+            }else{
+                getRetrofitObject("timeattackHard");
+            }
         } else if (buttonMode == 5 || buttonMode == 6) {
             offlineLoad("timeAttack8");
             getUserPosition("timeAttack8");
-            addNewScore(myName,avatar,id);
-            getRetrofitObject("timeAttack8");
+            addNewScore(myName, avatar, id);
+            if(Jarray != null){
+                if(Jarray.length() > 0){
+                    fillScore("timeAttack8");
+                }else{
+                    getRetrofitObject("timeAttack8");
+                }
+            }else{
+                getRetrofitObject("timeAttack8");
+            }
         } else if (buttonMode == 7 || buttonMode == 8) {
             tittleTxt.setText("Best players");
             nextBtn.setVisibility(View.INVISIBLE);
             offlineLoad("8Hard");
             getUserPosition("8Hard");
-            addNewScore(myName,avatar,id);
-            getRetrofitObject("8Hard");
+            addNewScore(myName, avatar, id);
+            if(Jarray != null){
+                if(Jarray.length() > 0){
+                    fillScore("8Hard");
+                }else{
+                    getRetrofitObject("8Hard");
+                }
+            }else{
+                getRetrofitObject("8Hard");
+            }
         }
 
 
@@ -190,7 +226,7 @@ public class ScoreActivity extends AppCompatActivity {
         score.removeAllViews();
 
         TextView noumberTxt = new TextView(noumber.getContext());
-        noumberTxt.setText("No.");
+       noumberTxt.setText("No.");
         noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
         noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
         noumberTxt.setTypeface(null, Typeface.BOLD);
@@ -246,31 +282,31 @@ public class ScoreActivity extends AppCompatActivity {
                         score.removeAllViews();
 
                         TextView noumberTxt = new TextView(noumber.getContext());
-                        noumberTxt.setText("No.");
+                        /*noumberTxt.setText("No.");
                         noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
                         noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
                         noumberTxt.setTypeface(null, Typeface.BOLD);
                         noumberTxt.setGravity(Gravity.CENTER);
-                        noumber.addView(noumberTxt);
+                        noumber.addView(noumberTxt);*/
 
-                        ImageView avatarImg ;
+                        ImageView avatarImg;
 
                         TextView nameTxt = new TextView(name.getContext());
-                        nameTxt.setText("Name");
+                        /*nameTxt.setText("Name");
                         nameTxt.setTextColor(Color.parseColor("#FFFFFF"));
                         nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
                         nameTxt.setTypeface(null, Typeface.BOLD);
                         nameTxt.setGravity(Gravity.CENTER);
-                        name.addView(nameTxt);
+                        name.addView(nameTxt);*/
 
 
                         TextView scoreTxt = new TextView(score.getContext());
-                        scoreTxt.setText("Score");
+                       /* scoreTxt.setText("Score");
                         scoreTxt.setTextColor(Color.parseColor("#FFFFFF"));
                         scoreTxt.setTypeface(null, Typeface.BOLD);
                         scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
                         scoreTxt.setGravity(Gravity.CENTER);
-                        score.addView(scoreTxt);
+                        score.addView(scoreTxt);*/
 
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
@@ -285,7 +321,7 @@ public class ScoreActivity extends AppCompatActivity {
                             avatarImg = new ImageView(image.getContext());
                             String avatar = Jasonobject.getString("avatar");
 
-                            switch (avatar){
+                            switch (avatar) {
                                 case "avatar1":
                                     avatarImg.setImageResource(R.drawable.avatar1_small);
                                     break;
@@ -317,9 +353,9 @@ public class ScoreActivity extends AppCompatActivity {
                                     avatarImg.setImageResource(R.drawable.avatar1a_small);
                                     break;
 
-                                    default:
-                                        avatarImg.setImageResource(R.drawable.avatar1_small);
-                                        break;
+                                default:
+                                    avatarImg.setImageResource(R.drawable.avatar1_small);
+                                    break;
                             }
                             avatarImg.setLayoutParams(new LinearLayout.LayoutParams(24, 24));
 
@@ -369,38 +405,6 @@ public class ScoreActivity extends AppCompatActivity {
         SharedPreferences settings = getApplicationContext().getSharedPreferences("ID", 0);
         int myID = settings.getInt("ID", 0);
 
-        int myScore = 0;
-        switch (mode) {
-            case "timeAttack":
-                settings = getApplicationContext().getSharedPreferences("timeAttack", 0);
-                myScore = settings.getInt("timeAttack", 0);
-                break;
-            case "classic":
-                settings = getApplicationContext().getSharedPreferences("classic", 0);
-                myScore = settings.getInt("classic", 0);
-                break;
-            case "timeattackHard":
-                settings = getApplicationContext().getSharedPreferences("timeattackHard", 0);
-                myScore = settings.getInt("timeattackHard", 0);
-                break;
-            case "classicHard":
-                settings = getApplicationContext().getSharedPreferences("classicHard", 0);
-                myScore = settings.getInt("classicHard", 0);
-                break;
-            case "timeAttack8":
-                settings = getApplicationContext().getSharedPreferences("timeAttack8", 0);
-                myScore = settings.getInt("timeAttack8", 0);
-                break;
-            case "classic8":
-                settings = getApplicationContext().getSharedPreferences("classic8", 0);
-                myScore = settings.getInt("classic8", 0);
-                break;
-            case "8Hard":
-                settings = getApplicationContext().getSharedPreferences("8Hard", 0);
-                myScore = settings.getInt("8Hard", 0);
-                break;
-
-        }
 
         settings = getApplicationContext().getSharedPreferences("name", 0);
         String myName = settings.getString("name", "");
@@ -428,9 +432,8 @@ public class ScoreActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     String responseString = response.body();
                     try {
-
-                        JSONObject object = new JSONObject(responseString);
-                        JSONArray Jarray = object.getJSONArray("data");
+                        object = new JSONObject(responseString);
+                        Jarray = object.getJSONArray("data");
                         for (int i = 0; i < Jarray.length(); i++) {
                             JSONObject Jasonobject = Jarray.getJSONObject(i);
 
@@ -605,7 +608,7 @@ public class ScoreActivity extends AppCompatActivity {
     private void addNewScore(String name, String avatar, int id) {
         APIservisi api = RetrofitCall.getApi();
         Call<String> call;
-        call = api.setQuery(id,name,avatar);
+        call = api.setQuery(id, name, avatar);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -631,8 +634,8 @@ public class ScoreActivity extends AppCompatActivity {
                 mode = 1;
             else
                 mode++;
-        nextBtn.setText("Go to Time Attack");
-        nextBtn.setOnClickListener(backListener);
+            nextBtn.setText("Go to Time Attack");
+            nextBtn.setOnClickListener(backListener);
             switch (mode) {
                 case 1:
                     tittleTxt.setText("Best Time Attack players");
@@ -870,5 +873,161 @@ public class ScoreActivity extends AppCompatActivity {
         intent.putExtras(b);
         finish();
         startActivity(intent);
+    }
+
+    public void tryReadScore(String mode) {
+        final String jsonMode = mode;
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .baseUrl(DomainName.getIstance())
+                .build();
+
+        APIogovor scalarService = retrofit.create(APIogovor.class);
+        Call<String> stringCall = scalarService.getStringResponse("/RGB/score_read.php", mode);
+        stringCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    responseString = response.body();
+                    try {
+                        object = new JSONObject(responseString);
+                        Jarray = object.getJSONArray("data");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    // todo: do something with the response string
+                } else {
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    void fillScore(String mode) {
+        try {
+            LinearLayout noumber = findViewById(R.id.numberLayout);
+            noumber.removeAllViews();
+
+            LinearLayout name = findViewById(R.id.nameLayout);
+            name.removeAllViews();
+
+            LinearLayout image = findViewById(R.id.imageLayout);
+            image.removeAllViews();
+
+            LinearLayout score = findViewById(R.id.scoreLayout);
+            score.removeAllViews();
+
+            TextView noumberTxt = new TextView(noumber.getContext());
+            /*noumberTxt.setText("No.");
+            noumberTxt.setTextColor(Color.parseColor("#FFFFFF"));
+            noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+            noumberTxt.setTypeface(null, Typeface.BOLD);
+            noumberTxt.setGravity(Gravity.CENTER);
+            noumber.addView(noumberTxt);*/
+
+            ImageView avatarImg;
+
+            TextView nameTxt = new TextView(name.getContext());
+            /*nameTxt.setText("Name");
+            nameTxt.setTextColor(Color.parseColor("#FFFFFF"));
+            nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+            nameTxt.setTypeface(null, Typeface.BOLD);
+            nameTxt.setGravity(Gravity.CENTER);
+            name.addView(nameTxt);*/
+
+
+            TextView scoreTxt = new TextView(score.getContext());
+          /*  scoreTxt.setText("Score");
+            scoreTxt.setTextColor(Color.parseColor("#FFFFFF"));
+            scoreTxt.setTypeface(null, Typeface.BOLD);
+            scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+            scoreTxt.setGravity(Gravity.CENTER);
+            score.addView(scoreTxt);*/
+
+            for (int i = 0; i < Jarray.length(); i++) {
+                JSONObject Jasonobject = Jarray.getJSONObject(i);
+
+                noumberTxt = new TextView(noumber.getContext());
+                noumberTxt.setText((i + 1) + ".");
+                noumberTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+                noumberTxt.setGravity(Gravity.CENTER);
+                noumberTxt.setTypeface(null, Typeface.BOLD);
+                noumber.addView(noumberTxt);
+
+                avatarImg = new ImageView(image.getContext());
+                String avatar = Jasonobject.getString("avatar");
+
+                switch (avatar) {
+                    case "avatar1":
+                        avatarImg.setImageResource(R.drawable.avatar1_small);
+                        break;
+                    case "avatar2":
+                        avatarImg.setImageResource(R.drawable.avatar2_small);
+                        break;
+                    case "avatar3":
+                        avatarImg.setImageResource(R.drawable.avatar3_small);
+                        break;
+                    case "avatar4":
+                        avatarImg.setImageResource(R.drawable.avatar4_small);
+                        break;
+                    case "avatar5":
+                        avatarImg.setImageResource(R.drawable.avatar5_small);
+                        break;
+                    case "avatar6":
+                        avatarImg.setImageResource(R.drawable.avatar6_small);
+                        break;
+                    case "avatar7":
+                        avatarImg.setImageResource(R.drawable.avatar7_small);
+                        break;
+                    case "avatar8":
+                        avatarImg.setImageResource(R.drawable.avatar8_small);
+                        break;
+                    case "avatar9":
+                        avatarImg.setImageResource(R.drawable.avatar9_small);
+                        break;
+                    case "avatar10":
+                        avatarImg.setImageResource(R.drawable.avatar1a_small);
+                        break;
+
+                    default:
+                        avatarImg.setImageResource(R.drawable.avatar1_small);
+                        break;
+                }
+                avatarImg.setLayoutParams(new LinearLayout.LayoutParams(24, 24));
+
+                //image.addView(avatarImg);
+
+                nameTxt = new TextView(name.getContext());
+                nameTxt.setText((Jasonobject.getString("name")));
+                nameTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+                nameTxt.setGravity(Gravity.CENTER);
+                nameTxt.setTypeface(null, Typeface.BOLD);
+
+                LinearLayout nameLinear = new LinearLayout(name.getContext());
+                nameLinear.setOrientation(LinearLayout.HORIZONTAL);
+                nameLinear.addView(avatarImg);
+                nameLinear.addView(nameTxt);
+
+                name.addView(nameLinear);
+
+                scoreTxt = new TextView(score.getContext());
+                scoreTxt.setText(Jasonobject.getString(mode));
+                scoreTxt.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+                scoreTxt.setGravity(Gravity.CENTER);
+                scoreTxt.setTypeface(null, Typeface.BOLD);
+                score.addView(scoreTxt);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

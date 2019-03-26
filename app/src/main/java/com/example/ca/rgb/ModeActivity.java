@@ -56,17 +56,22 @@ public class ModeActivity extends AppCompatActivity {
 
     private void setTitle(){
         String s = "3 Colors";
-
+        ScoreActivity scoreActivity = new ScoreActivity();
+        scoreActivity.Jarray = null;
         if(mode == 1 || mode == 2){
             mode = 1;
+            scoreActivity.tryReadScore("timeAttack");
         }else if(mode == 3 || mode == 4){
             mode = 3;
+            scoreActivity.tryReadScore("timeattackHard");
             s = "5 Colors";
         }else if(mode == 5 || mode == 6){
             mode = 5;
+            scoreActivity.tryReadScore("timeAttack8");
             s = "8 Colors";
         }else if(mode == 7){
             mode = 7;
+            scoreActivity.tryReadScore("8Hard");
             s = "8 Colors HARD";
         }
 
@@ -149,6 +154,22 @@ public class ModeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        ScoreActivity scoreActivity = new ScoreActivity();
+        scoreActivity.Jarray = null;
+        if(mode == 1 || mode == 2){
+            mode = 1;
+            scoreActivity.tryReadScore("timeAttack");
+        }else if(mode == 3 || mode == 4){
+            mode = 3;
+            scoreActivity.tryReadScore("timeattackHard");
+        }else if(mode == 5 || mode == 6){
+            mode = 5;
+            scoreActivity.tryReadScore("timeAttack8");
+        }else if(mode == 7){
+            mode = 7;
+            scoreActivity.tryReadScore("8Hard");
+        }
         if(getMusic(getApplicationContext()) == 1){
             MenuActivity.mp.start();
         }

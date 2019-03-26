@@ -133,14 +133,16 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="37dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
                         android:layout_gravity="center"
+                        android:fadeScrollbars="false"
                         android:gravity="center">
 
-                        <ScrollView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -149,7 +151,6 @@
                                 tools:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/numberLayout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -165,7 +166,7 @@
                                         android:paddingEnd="25dp"
                                         android:paddingRight="25dp"
                                         android:text="No."
-                                        android:textSize="24sp"
+                                        android:textSize="24dp"
                                         android:textStyle="bold"
                                         android:theme="@style/Score" />
                                 </LinearLayout>
@@ -176,13 +177,11 @@
                                     android:layout_weight="1" />
 
                                 <LinearLayout
-                                    android:id="@+id/imageLayout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:orientation="vertical" />
 
                                 <LinearLayout
-                                    android:id="@+id/nameLayout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -205,11 +204,10 @@
                                 </LinearLayout>
 
                                 <Space
-                                    android:layout_width="8dp"
+                                    android:layout_width="15dp"
                                     android:layout_height="wrap_content" />
 
                                 <LinearLayout
-                                    android:id="@+id/scoreLayout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -225,12 +223,107 @@
                                         android:paddingEnd="25dp"
                                         android:paddingRight="25dp"
                                         android:text="Score"
-                                        android:textSize="24sp"
+                                        android:textSize="24dp"
                                         android:textStyle="bold"
                                         android:theme="@style/Score" />
                                 </LinearLayout>
                             </LinearLayout>
-                        </ScrollView>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="245dp"
+                                android:fadeScrollbars="false"
+                                android:verticalScrollbarPosition="right"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    tools:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:id="@+id/numberLayout"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:foregroundGravity="center"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/numberTxt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:paddingEnd="25dp"
+                                            android:paddingRight="25dp"
+                                            android:textSize="24dp"
+                                            android:textStyle="bold"
+                                            android:theme="@style/Score" />
+                                    </LinearLayout>
+
+                                    <Space
+                                        android:layout_width="8dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1" />
+
+                                    <LinearLayout
+                                        android:id="@+id/imageLayout"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical" />
+
+                                    <LinearLayout
+                                        android:id="@+id/nameLayout"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:foregroundGravity="center"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/nameTxt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:paddingEnd="25dp"
+                                            android:paddingRight="25dp"
+                                            android:textSize="24sp"
+                                            android:textStyle="bold"
+                                            android:theme="@style/Score" />
+
+                                    </LinearLayout>
+
+                                    <Space
+                                        android:layout_width="8dp"
+                                        android:layout_height="wrap_content" />
+
+                                    <LinearLayout
+                                        android:id="@+id/scoreLayout"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:foregroundGravity="center"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/scoreTxt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:paddingEnd="25dp"
+                                            android:paddingRight="25dp"
+                                            android:textSize="24dp"
+                                            android:textStyle="bold"
+                                            android:theme="@style/Score" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </ScrollView>
+
+                        </LinearLayout>
 
                     </TableRow>
                 </TableLayout>

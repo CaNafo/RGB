@@ -23,6 +23,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import static com.example.ca.rgb.StaticMethods.addNewTopRank;
 import static com.example.ca.rgb.StaticMethods.getMusic;
 import static com.example.ca.rgb.StaticMethods.getName;
 import static com.example.ca.rgb.StaticMethods.getPlayIntro;
@@ -44,6 +45,12 @@ public class MenuActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+
+        TopTenScore topTenScore = new TopTenScore();
+        topTenScore.tryJsonArray = null;
+        addNewTopRank(getApplicationContext());
+        topTenScore.tryReadScore();
 
         AppRater.app_launched(this);
 
@@ -267,6 +274,10 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        TopTenScore topTenScore = new TopTenScore();
+        topTenScore.tryJsonArray = null;
+        addNewTopRank(getApplicationContext());
+        topTenScore.tryReadScore();
         setAvatar();
         if (getMusic(getApplicationContext()) == 1) {
             mp.start();
