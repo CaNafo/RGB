@@ -1,6 +1,8 @@
 package com.example.ca.rgb;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.google.android.gms.ads.MobileAds;
 import static com.example.ca.rgb.StaticMethods.getAvatar;
 import static com.example.ca.rgb.StaticMethods.getRanking;
 import static com.example.ca.rgb.StaticMethods.setAvatar;
+import static com.example.ca.rgb.StaticMethods.setPoints;
 
 public class AvatarActivity extends AppCompatActivity {
     private AdView mAdView;
@@ -51,7 +54,22 @@ public class AvatarActivity extends AppCompatActivity {
         findViewById(R.id.avatar7).setOnClickListener(imageOnClickListener);
         findViewById(R.id.avatar8).setOnClickListener(imageOnClickListener);
         findViewById(R.id.avatar9).setOnClickListener(imageOnClickListener);
-        findViewById(R.id.avatar10).setOnClickListener(imageOnClickListener);
+        findViewById(R.id.avatar10).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar11).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar12).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar13).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar14).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar15).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar16).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar17).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar18).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar19).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar20).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar21).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar22).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar23).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar24).setOnClickListener(imageOnClickListener2);
+        findViewById(R.id.avatar25).setOnClickListener(imageOnClickListener2);
 
         String temp = getRanking(getApplicationContext());
 
@@ -315,6 +333,91 @@ public class AvatarActivity extends AppCompatActivity {
             setChecked(tempAvatar);
         }
     };
+
+    View.OnClickListener imageOnClickListener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ImageView imageView = (ImageView)v;
+
+            switch (imageView.getTag().toString()){
+                case "avatar11":
+                    showAlertDialogButtonClicked("You have to be Talented to unlock this avatar.");
+                    break;
+                case "avatar12":
+                    showAlertDialogButtonClicked("You have to be Talented to unlock this avatar.");
+                    break;
+                case "avatar13":
+                    showAlertDialogButtonClicked("You have to be Talented to unlock this avatar.");
+                    break;
+                case "avatar14":
+                    showAlertDialogButtonClicked("You have to be Talented to unlock this avatar.");
+                    break;
+                case "avatar15":
+                    showAlertDialogButtonClicked("You have to be Talented to unlock this avatar.");
+                    break;
+                case "avatar16":
+                    showAlertDialogButtonClicked("You have to be Professional to unlock this avatar.");
+                    break;
+                case "avatar17":
+                    showAlertDialogButtonClicked("You have to be Professional to unlock this avatar.");
+                    break;
+                case "avatar18":
+                    showAlertDialogButtonClicked("You have to be Professional to unlock this avatar.");
+                    break;
+                case "avatar19":
+                    showAlertDialogButtonClicked("You have to be Professional to unlock this avatar.");
+                    break;
+                case "avatar20":
+                    showAlertDialogButtonClicked("You have to be Professional to unlock this avatar.");
+                    break;
+                case "avatar21":
+                    showAlertDialogButtonClicked("You have to be Insane to unlock this avatar.");
+                    break;
+                case "avatar22":
+                    showAlertDialogButtonClicked("You have to be Insane to unlock this avatar.");
+                    break;
+                case "avatar23":
+                    showAlertDialogButtonClicked("You have to be Insane to unlock this avatar.");
+                    break;
+                case "avatar24":
+                    showAlertDialogButtonClicked("You have to be Insane to unlock this avatar.");
+                    break;
+                case "avatar25":
+                    showAlertDialogButtonClicked("You have to be Insane to unlock this avatar.");
+                    break;
+            }
+
+        }
+    };
+
+    public void showAlertDialogButtonClicked(String s) {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle("Info");
+        builder.setMessage(s);
+
+        // add a button
+        builder.setPositiveButton("Stats", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                startActivity(new Intent(AvatarActivity.this, ProfileActivity.class));
+            }
+        });
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.setCancelable(false);
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        if (this.hasWindowFocus()) {
+            dialog.show();
+        }
+    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
