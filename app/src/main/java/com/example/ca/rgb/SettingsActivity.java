@@ -93,7 +93,7 @@ public class SettingsActivity extends AppCompatActivity {
                         setSound(getApplicationContext(), 2);
                         button.setText("Sound: OFF");
                     }else{
-                        setSound(getApplicationContext(), 2);
+                        setSound(getApplicationContext(), 1);
                         button.setText("Sound: ON");
                     }
                     break;
