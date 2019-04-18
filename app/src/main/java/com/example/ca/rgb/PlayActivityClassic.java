@@ -191,7 +191,6 @@ public class PlayActivityClassic extends AppCompatActivity {
 
         @Override
         public void onRewardedVideoCompleted() {
-
         }
     };
 
@@ -562,7 +561,6 @@ public class PlayActivityClassic extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //adReward();
-                rewarded = true;
                 adReward();
             }
         });
